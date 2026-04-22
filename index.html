@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driving Theory Practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center py-10">
+    <div class="w-full max-w-2xl mx-auto px-4">
+
+        <!-- ===== SCREEN 1: Load / Start ===== -->
+        <div id="screen-load" class="bg-white rounded-2xl shadow-md p-8">
+            <h1 class="text-2xl font-bold text-center text-gray-800 mb-1">Driving Theory Practice</h1>
+            <p class="text-center text-sm text-gray-400 mb-8">Lithuanian learner driver exam preparation</p>
+
+            <!-- CSV file input -->
+            <div class="mb-5">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Load question bank (.csv)
+                </label>
+                <input
+                    type="file"
+                    id="csv-input"
+                    accept=".csv"
+                    class="block w-full text-sm text-gray-500
+                           file:mr-4 file:py-2 file:px-4
+                           file:rounded-lg file:border-0
+                           file:text-sm file:font-medium
+                           file:bg-blue-50 file:text-blue-700
+                           hover:file:bg-blue-100
+                           border border-gray-200 rounded-xl p-2 cursor-pointer"
+                >
+            </div>
+
+            <!-- Load status message (shown after file picked) -->
+            <div id="load-status" class="hidden mb-5 text-sm rounded-xl px-4 py-3"></div>
+
+            <!-- Timer toggle -->
+            <div class="mb-6 flex items-center gap-3">
+                <input type="checkbox" id="timer-toggle" class="w-4 h-4 accent-blue-600 cursor-pointer">
+                <label for="timer-toggle" class="text-sm text-gray-700 cursor-pointer">
+                    Enable timer
+                </label>
+            </div>
+
+            <!-- Start button (disabled until CSV is loaded) -->
+            <button
+                id="start-btn"
+                disabled
+                class="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-xl
+                       disabled:opacity-40 disabled:cursor-not-allowed
+                       hover:bg-blue-700 transition-colors"
+            >
+                Start Session
+            </button>
+
+            <!-- Keyboard hint -->
+            <p class="text-center text-xs text-gray-400 mt-4">
+                Tip: use keys <kbd class="bg-gray-100 px-1 rounded">A</kbd>
+                <kbd class="bg-gray-100 px-1 rounded">B</kbd>
+                <kbd class="bg-gray-100 px-1 rounded">C</kbd>
+                <kbd class="bg-gray-100 px-1 rounded">D</kbd> to answer,
+                <kbd class="bg-gray-100 px-1 rounded">Enter</kbd> to continue
+            </p>
+        </div>
+
+        <!-- ===== SCREEN 2: Quiz ===== -->
+        <div id="screen-quiz" class="hidden bg-white rounded-2xl shadow-md p-8">
+
+            <!-- Header row: progress, timer, score -->
+            <div class="flex justify-between items-center mb-5">
+                <span id="question-progress" class="text-sm text-gray-500 font-medium">
+                    Question 1 of 30
+                </span>
+                <span id="timer-display" class="hidden text-sm font-mono text-gray-600 bg-gray-100 px-3 py-1 rounded-lg">
+                    0:00
+                </span>
+                <span id="score-display" class="text-sm font-semibold text-blue-600">
+                    Score: 0
+                </span>
+            </div>
+
+            <!-- Difficulty badge -->
+            <div class="mb-4">
+                <span id="difficulty-badge" class="text-xs font-semibold px-2 py-1 rounded-full"></span>
+            </div>
+
+            <!-- Question image (hidden when no picture) -->
+            <div id="question-image-container" class="hidden mb-5 text-center">
+                <img
+                    id="question-image"
+                    src=""
+                    alt="Question illustration"
+                    class="max-h-52 rounded-xl mx-auto border border-gray-100"
+                >
+            </div>
+
+            <!-- Question text -->
+            <p id="question-text" class="text-gray-800 font-medium text-base leading-relaxed mb-6"></p>
+
+            <!-- Answer option buttons -->
+            <div id="answer-buttons" class="space-y-3"></div>
+
+            <!-- Feedback area (shown after answering) -->
+            <div id="feedback-area" class="hidden mt-6 border-t border-gray-100 pt-5">
+                <p id="feedback-message" class="font-semibold text-base mb-2"></p>
+                <p id="explanation-text" class="text-sm text-gray-600 leading-relaxed mb-5"></p>
+                <button
+                    id="next-btn"
+                    class="w-full py-3 px-6 bg-gray-800 text-white font-semibold rounded-xl
+                           hover:bg-gray-900 transition-colors"
+                >
+                    Next Question →
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== SCREEN 3: Results ===== -->
+        <div id="screen-results" class="hidden bg-white rounded-2xl shadow-md p-8">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-1">Session Complete</h2>
+            <p class="text-center text-sm text-gray-400 mb-8">Here is how you did</p>
+
+            <!-- Results content injected by JavaScript -->
+            <div id="results-content"></div>
+
+            <button
+                id="restart-btn"
+                class="mt-8 w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-xl
+                       hover:bg-blue-700 transition-colors"
+            >
+                Start New Session
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Load order matters: csv and session have no dependencies,
+         ui uses state from app, app ties everything together -->
+    <script src="src/csv.js"></script>
+    <script src="src/session.js"></script>
+    <script src="src/ui.js"></script>
+    <script src="src/app.js"></script>
+</body>
+</html>

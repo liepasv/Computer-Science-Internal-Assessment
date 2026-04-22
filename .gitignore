@@ -1,0 +1,18 @@
+# Claude Code files
+CLAUDE.md
+.claude/
+
+# macOS system files
+.DS_Store
+**/.DS_Store
+
+# Node (in case npm is used in future)
+node_modules/
+
+# Editor temp files
+*.swp
+*.swo
+.vscode/
+
+# Windows thumbnail cache
+Thumbs.db
