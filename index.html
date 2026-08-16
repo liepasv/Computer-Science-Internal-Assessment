@@ -32,15 +32,73 @@
                 <datalist id="profile-list"></datalist>
             </div>
 
-            <!-- CSV file input -->
+            <!-- Question source: the bank shipped with the app, or the
+                 user's own CSV together with their own images -->
             <div class="mb-5">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Questions</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="mode-builtin" class="py-2.5 px-4 text-sm font-medium rounded-xl border transition-colors">
+                        Built-in bank
+                    </button>
+                    <button id="mode-custom" class="py-2.5 px-4 text-sm font-medium rounded-xl border transition-colors">
+                        My own questions
+                    </button>
+                </div>
+            </div>
+
+            <!-- Panel: built-in bank (loaded automatically on start-up) -->
+            <div id="source-builtin" class="mb-5">
+                <div id="builtin-status" class="text-sm rounded-xl px-4 py-3 bg-gray-50 text-gray-500">
+                    Loading the built-in question bank…
+                </div>
+
+                <!-- Shown only if the automatic load fails, e.g. when the page
+                     was opened straight from disk instead of a local server -->
+                <div id="builtin-fallback" class="hidden mt-3">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Select database/db.csv manually
+                    </label>
+                    <input
+                        type="file"
+                        id="builtin-csv-input"
+                        accept=".csv"
+                        class="block w-full text-sm text-gray-500
+                               file:mr-4 file:py-2 file:px-4
+                               file:rounded-lg file:border-0
+                               file:text-sm file:font-medium
+                               file:bg-blue-50 file:text-blue-700
+                               hover:file:bg-blue-100
+                               border border-gray-200 rounded-xl p-2 cursor-pointer"
+                    >
+                </div>
+            </div>
+
+            <!-- Panel: the user's own questions -->
+            <div id="source-custom" class="hidden mb-5">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Load question bank (.csv)
+                    Question file (.csv)
                 </label>
                 <input
                     type="file"
-                    id="csv-input"
+                    id="custom-csv-input"
                     accept=".csv"
+                    class="block w-full text-sm text-gray-500 mb-4
+                           file:mr-4 file:py-2 file:px-4
+                           file:rounded-lg file:border-0
+                           file:text-sm file:font-medium
+                           file:bg-blue-50 file:text-blue-700
+                           hover:file:bg-blue-100
+                           border border-gray-200 rounded-xl p-2 cursor-pointer"
+                >
+
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Images <span class="font-normal text-gray-400">— optional, select them all at once</span>
+                </label>
+                <input
+                    type="file"
+                    id="custom-images-input"
+                    accept="image/*"
+                    multiple
                     class="block w-full text-sm text-gray-500
                            file:mr-4 file:py-2 file:px-4
                            file:rounded-lg file:border-0
@@ -49,9 +107,13 @@
                            hover:file:bg-blue-100
                            border border-gray-200 rounded-xl p-2 cursor-pointer"
                 >
+                <p class="text-xs text-gray-400 mt-2">
+                    The <code class="bg-gray-100 px-1 rounded">picture</code> column holds the file name
+                    (e.g. <code class="bg-gray-100 px-1 rounded">12.jpg</code>) or a full https:// link.
+                </p>
             </div>
 
-            <!-- Load status message (shown after file picked) -->
+            <!-- Load status message -->
             <div id="load-status" class="hidden mb-5 text-sm rounded-xl px-4 py-3"></div>
 
             <!-- Timer toggle -->
@@ -236,6 +298,7 @@
          app ties everything together -->
     <script src="src/csv.js"></script>
     <script src="src/storage.js"></script>
+    <script src="src/bank.js"></script>
     <script src="src/session.js"></script>
     <script src="src/ui.js"></script>
     <script src="src/history.js"></script>

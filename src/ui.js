@@ -38,8 +38,12 @@ function renderQuestion() {
     const imgContainer = document.getElementById("question-image-container");
     const img = document.getElementById("question-image");
 
-    if (q.picture && q.picture.length > 0) {
-        img.src = "assets/" + q.picture;
+    // Where the picture comes from depends on the bank: the app's own
+    // assets folder, a file the user picked, or a plain https:// link
+    const src = resolveImageSrc(q.picture, currentBank);
+
+    if (src) {
+        img.src = src;
         imgContainer.classList.remove("hidden");
         // If the image file is missing, hide the container so it doesn't show a broken icon
         img.onerror = function () {

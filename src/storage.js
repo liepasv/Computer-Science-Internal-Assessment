@@ -169,17 +169,30 @@ function isValidRecord(record) {
 // Builds per-question statistics from the whole history.
 // Statistics are always derived from the stored sessions rather than
 // counted separately, so the two can never disagree.
-// Returns { questionId: { qid, seen, wrong, text, difficulty } }
-function computeQuestionStats(history) {
+//
+// Question ids are only unique inside one bank: the built-in question 5
+// and a user's own question 5 are different questions. Counters are
+// therefore kept per bank, and a bank can be passed in to look at one
+// source on its own. Sessions saved before banks existed came from the
+// built-in bank, so that is what a missing value means.
+// Returns { key: { qid, bank, seen, wrong, text, difficulty } }
+function computeQuestionStats(history, bank) {
     const stats = {};
 
     history.forEach(function (session) {
+        const sessionBank = session.bank || BUILTIN_BANK;
+        if (bank && sessionBank !== bank) return;
+
         const answers = session.answers || [];
         answers.forEach(function (a) {
-            if (!stats[a.qid]) {
-                stats[a.qid] = { qid: a.qid, seen: 0, wrong: 0, text: "", difficulty: a.difficulty };
+            // A newline cannot occur in either part, so it is a safe joiner
+            const key = sessionBank + "\n" + a.qid;
+
+            if (!stats[key]) {
+                stats[key] = { qid: a.qid, bank: sessionBank, seen: 0, wrong: 0,
+                               text: "", difficulty: a.difficulty };
             }
-            const s = stats[a.qid];
+            const s = stats[key];
             s.seen++;
             if (!a.ok) {
                 s.wrong++;
@@ -195,8 +208,9 @@ function computeQuestionStats(history) {
 // Returns the questions answered incorrectly at least once, ordered so
 // the most frequently missed come first. This is both the "weak spots"
 // list and the pool for the "practice my mistakes" mode.
-function getWeakQuestions(history) {
-    const stats = computeQuestionStats(history);
+// Pass a bank to restrict the list to that source.
+function getWeakQuestions(history, bank) {
+    const stats = computeQuestionStats(history, bank);
 
     return Object.keys(stats)
         .map(function (qid) { return stats[qid]; })

@@ -58,6 +58,16 @@ function deltaColour(delta) {
 }
 
 
+// Looks a stored answer up in the bank that is loaded right now, but
+// only when it is the very bank the answer came from. Without this check
+// a user's own question 5 would be described using the built-in
+// question 5, which is a different question entirely.
+function questionFromBank(qid, bank) {
+    if ((bank || BUILTIN_BANK) !== currentBank) return null;
+    return findQuestionById(qid);
+}
+
+
 // ===== ENTRY POINT =====
 
 function showHistoryScreen() {
@@ -210,7 +220,8 @@ function renderProgressChart(history) {
 // ===== WEAKEST QUESTIONS =====
 
 function renderWeakQuestions(history) {
-    const weak = getWeakQuestions(history).slice(0, 8);
+    // Show the bank that is loaded now; with none loaded, show them all
+    const weak = getWeakQuestions(history, currentBank || null).slice(0, 8);
 
     if (weak.length === 0) {
         return '<p class="text-sm text-gray-400 py-3">No mistakes recorded yet — well done.</p>';
@@ -223,7 +234,7 @@ function renderWeakQuestions(history) {
 
         // Prefer the full text from the loaded bank; fall back to the
         // snippet stored with the mistake when no CSV is loaded
-        const question = findQuestionById(stat.qid);
+        const question = questionFromBank(stat.qid, stat.bank);
         const label = question ? question.text : (stat.text || "Question #" + stat.qid);
 
         rowsHTML +=
@@ -249,8 +260,8 @@ function renderDrillButton(history) {
     const available = countAvailableMistakes();
 
     if (available === 0) {
-        if (getWeakQuestions(history).length === 0) return "";
-        return '<p class="text-xs text-gray-400 mb-6">Load the question bank on the start screen to practise these again.</p>';
+        if (getWeakQuestions(history, currentBank || null).length === 0) return "";
+        return '<p class="text-xs text-gray-400 mb-6">Load the matching question bank on the start screen to practise these again.</p>';
     }
 
     return '<button id="history-drill-btn" class="w-full mb-6 py-2.5 px-6 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-colors">' +
@@ -273,6 +284,9 @@ function renderSessionList(history) {
                            session.score + "/" + session.maxScore + " pts"];
         if (session.timerEnabled) metaParts.push(formatTime(session.seconds || 0));
         if (session.mode === "mistakes") metaParts.push("mistakes drill");
+        // Name the source only when it is not the built-in bank, so the
+        // common case stays uncluttered
+        if ((session.bank || BUILTIN_BANK) !== BUILTIN_BANK) metaParts.push(bankLabel(session.bank));
 
         const deltaHTML = delta === null
             ? ""
@@ -315,7 +329,7 @@ function renderMistakes(session) {
     mistakes.forEach(function (answer) {
         // Everything is shown from the loaded bank when possible, because
         // stored snippets are shortened and hold no explanation or picture
-        const question = findQuestionById(answer.qid);
+        const question = questionFromBank(answer.qid, session.bank);
 
         const questionText = question ? question.text : (answer.text || "Question #" + answer.qid);
         const chosenText   = question ? question.options[answer.chosen - 1]  : answer.chosenText;
@@ -324,9 +338,12 @@ function renderMistakes(session) {
         const chosenLabel  = (letters[answer.chosen - 1]  || "?") + ". " + (chosenText  || "(answer not stored)");
         const correctLabel = (letters[answer.correct - 1] || "?") + ". " + (correctText || "(answer not stored)");
 
+        // A picture from a user's own bank is only available while the
+        // files they picked are still selected, so this can be empty
         let imageHTML = "";
-        if (question && question.picture && question.picture.length > 0) {
-            imageHTML = '<img src="assets/' + escapeHTML(question.picture) + '" alt="Question illustration" ' +
+        const imageSrc = question ? resolveImageSrc(question.picture, session.bank) : "";
+        if (imageSrc) {
+            imageHTML = '<img src="' + escapeHTML(imageSrc) + '" alt="Question illustration" ' +
                         'data-hide-on-error class="max-h-24 rounded-lg border border-gray-100 mb-2">';
         }
 
@@ -403,9 +420,10 @@ function hideBrokenImages(container) {
 // How many of the user's past mistakes can actually be practised right
 // now — a stored question id is only usable if the loaded CSV contains it
 function countAvailableMistakes() {
-    if (!questions || questions.length === 0) return 0;
+    if (!questions || questions.length === 0 || !currentBank) return 0;
 
-    const weak = getWeakQuestions(loadHistory(activeProfile));
+    // Only mistakes made on the bank that is loaded now can be repeated
+    const weak = getWeakQuestions(loadHistory(activeProfile), currentBank);
     let count = 0;
 
     weak.forEach(function (stat) {

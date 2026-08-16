@@ -36,6 +36,11 @@ let sessionAnswers = [];       // one record per answer, saved with the session
 let previousPercent = null;    // score of the session before this one, for the change line
 let saveFailed = false;        // true when the finished session could not be stored
 
+// ===== QUESTION SOURCE STATE =====
+
+let currentBank = null;              // BUILTIN_BANK, or "custom:<file name>"
+let customImages = new Map();        // picture file name -> blob URL, for custom banks
+
 // Difficulty labels and point values used throughout the app
 // Easy = 1 point, Medium = 2 points, Hard = 3 points
 const DIFFICULTY_NAMES  = { 1: "Easy", 2: "Medium", 3: "Hard" };
@@ -59,6 +64,10 @@ function initialiseApp() {
     }
 
     refreshStartScreen();
+
+    // Start on the built-in bank so the app is usable straight away.
+    // This also paints the selected state on the two source buttons.
+    setSource("builtin");
 }
 
 initialiseApp();
@@ -74,57 +83,66 @@ document.getElementById("profile-input").addEventListener("change", function (e)
     refreshStartScreen();
 });
 
-// Handle CSV file selection — parse it and report how many questions were loaded
-document.getElementById("csv-input").addEventListener("change", function (e) {
+// ===== QUESTION SOURCE =====
+
+// Switches between the built-in bank and the user's own questions.
+// Whatever was loaded is dropped, so a half-finished switch can never
+// leave the previous bank's questions on screen.
+function setSource(source) {
+    questions = [];
+    currentBank = null;
+    clearCustomImages();
+
+    document.getElementById("start-btn").disabled = true;
+    document.getElementById("load-status").classList.add("hidden");
+
+    const builtinPanel = document.getElementById("source-builtin");
+    const customPanel  = document.getElementById("source-custom");
+
+    const active   = "py-2.5 px-4 text-sm font-medium rounded-xl border transition-colors " +
+                     "bg-blue-600 text-white border-blue-600";
+    const inactive = "py-2.5 px-4 text-sm font-medium rounded-xl border transition-colors " +
+                     "bg-white text-gray-600 border-gray-200 hover:bg-gray-50";
+
+    if (source === "custom") {
+        builtinPanel.classList.add("hidden");
+        customPanel.classList.remove("hidden");
+        document.getElementById("mode-builtin").className = inactive;
+        document.getElementById("mode-custom").className = active;
+        refreshCustomBank();   // re-use files that are still selected
+    } else {
+        customPanel.classList.add("hidden");
+        builtinPanel.classList.remove("hidden");
+        document.getElementById("mode-builtin").className = active;
+        document.getElementById("mode-custom").className = inactive;
+        loadBuiltinBank();
+    }
+
+    refreshStartScreen();
+}
+
+document.getElementById("mode-builtin").addEventListener("click", function () {
+    setSource("builtin");
+});
+
+document.getElementById("mode-custom").addEventListener("click", function () {
+    setSource("custom");
+});
+
+// Fallback picker, used when the built-in bank could not be fetched
+document.getElementById("builtin-csv-input").addEventListener("change", function (e) {
     const file = e.target.files[0];
-    const statusEl = document.getElementById("load-status");
+    if (file) loadBankFromFile(file, BUILTIN_BANK, null);
+});
 
-    if (!file) return;
+// The user's own question file
+document.getElementById("custom-csv-input").addEventListener("change", refreshCustomBank);
 
-    const reader = new FileReader();
-
-    reader.onload = function (event) {
-        const result = parseCSV(event.target.result);
-
-        // Show an error if the file contained no valid questions
-        if (!result || result.questions.length === 0) {
-            statusEl.textContent = "No valid questions found. Please check the CSV file format.";
-            statusEl.className = "mb-5 text-sm rounded-xl px-4 py-3 bg-red-50 text-red-700";
-            statusEl.classList.remove("hidden");
-            document.getElementById("start-btn").disabled = true;
-            questions = [];
-            refreshStartScreen();   // no bank means no mistakes can be practised
-            return;
-        }
-
-        // Save the valid questions and report the count to the user
-        questions = result.questions;
-
-        let msg = "Loaded " + questions.length + " valid question" + (questions.length !== 1 ? "s" : "") + ".";
-        if (result.skipped > 0) {
-            msg += " Skipped " + result.skipped + " invalid row" + (result.skipped !== 1 ? "s" : "") + ".";
-        }
-
-        statusEl.textContent = msg;
-        statusEl.className = "mb-5 text-sm rounded-xl px-4 py-3 bg-green-50 text-green-700";
-        statusEl.classList.remove("hidden");
-
-        // Enable the Start button now that at least one question is loaded
-        document.getElementById("start-btn").disabled = false;
-
-        // Past mistakes can now be matched against the loaded questions
-        refreshStartScreen();
-    };
-
-    reader.onerror = function () {
-        const statusEl = document.getElementById("load-status");
-        statusEl.textContent = "Could not read the file. Please try again.";
-        statusEl.className = "mb-5 text-sm rounded-xl px-4 py-3 bg-red-50 text-red-700";
-        statusEl.classList.remove("hidden");
-    };
-
-    // Read the file as UTF-8 to support Lithuanian characters
-    reader.readAsText(file, "UTF-8");
+// The user's own images. The report is rebuilt because the questions may
+// already be loaded, in which case we can say what is still missing.
+document.getElementById("custom-images-input").addEventListener("change", function (e) {
+    setCustomImages(e.target.files);
+    refreshCustomBank();
 });
 
 // Start button — begin a new practice session over the whole bank.

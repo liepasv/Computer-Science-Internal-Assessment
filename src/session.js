@@ -56,10 +56,11 @@ function findQuestionById(qid) {
 }
 
 // Builds the question list for a "practise my mistakes" session.
-// getWeakQuestions returns the most frequently missed questions first,
-// and ids that are not in the loaded bank are skipped.
+// getWeakQuestions returns the most frequently missed questions first.
+// Only mistakes made on the bank that is loaded right now count, because
+// the same question id means something different in another bank.
 function buildMistakePool() {
-    const weak = getWeakQuestions(loadHistory(activeProfile));
+    const weak = getWeakQuestions(loadHistory(activeProfile), currentBank);
     const pool = [];
 
     weak.forEach(function (stat) {
@@ -157,6 +158,9 @@ function buildSessionRecord() {
         id: "s-" + Date.now() + "-" + Math.floor(Math.random() * 100000),
         date: new Date().toISOString(),
         profile: activeProfile,
+        // Which question source this was played on, so results from the
+        // built-in bank and a user's own questions stay apart
+        bank: currentBank || BUILTIN_BANK,
         mode: sessionMode,
         score: score,
         maxScore: maxScore,
