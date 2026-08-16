@@ -35,6 +35,7 @@ let sessionMode = "all";       // "all" = whole bank, "mistakes" = past mistakes
 let sessionAnswers = [];       // one record per answer, saved with the session
 let previousPercent = null;    // score of the session before this one, for the change line
 let saveFailed = false;        // true when the finished session could not be stored
+let sessionAbandoned = false;  // true when the user ended the session early
 
 // ===== QUESTION SOURCE STATE =====
 
@@ -159,6 +160,9 @@ document.getElementById("drill-btn").addEventListener("click", function () {
 // Next button — advance to the next question (or show results on the last one)
 document.getElementById("next-btn").addEventListener("click", nextQuestion);
 
+// End the session part-way through
+document.getElementById("quit-btn").addEventListener("click", quitSession);
+
 // Restart button — go back to the load screen without reloading the page
 document.getElementById("restart-btn").addEventListener("click", function () {
     // Stop any running timer before leaving the quiz screen
@@ -219,6 +223,13 @@ document.getElementById("clear-btn").addEventListener("click", function () {
 document.addEventListener("keydown", function (e) {
     // Only respond to keyboard when the quiz screen is visible
     if (document.getElementById("screen-quiz").classList.contains("hidden")) return;
+
+    // Escape ends the session; the confirmation makes an accidental
+    // press harmless
+    if (e.key === "Escape") {
+        quitSession();
+        return;
+    }
 
     const key = e.key.toUpperCase();
 

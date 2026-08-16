@@ -226,6 +226,7 @@ function getWeakQuestions(history, bank) {
 function summariseHistory(history) {
     const summary = {
         sessions: history.length,
+        completed: 0,
         best: 0,
         average: 0,
         last: 0,
@@ -237,19 +238,32 @@ function summariseHistory(history) {
 
     if (history.length === 0) return summary;
 
-    let percentSum = 0;
+    // Every session counts towards the running totals, because those
+    // answers really were given
     history.forEach(function (s) {
-        percentSum += s.percent;
-        if (s.percent > summary.best) summary.best = s.percent;
         summary.answered += s.total || 0;
         summary.correct  += s.correct || 0;
         summary.totalSeconds += s.seconds || 0;
     });
 
-    summary.average = Math.round(percentSum / history.length);
-    summary.last = history[history.length - 1].percent;
-    if (history.length >= 2) {
-        summary.delta = summary.last - history[history.length - 2].percent;
+    // Best, average and the change are comparisons, so they only use
+    // finished sessions. A session ended after three questions is not
+    // the same achievement as one played to the end.
+    const completed = history.filter(function (s) { return !s.abandoned; });
+    summary.completed = completed.length;
+
+    if (completed.length === 0) return summary;
+
+    let percentSum = 0;
+    completed.forEach(function (s) {
+        percentSum += s.percent;
+        if (s.percent > summary.best) summary.best = s.percent;
+    });
+
+    summary.average = Math.round(percentSum / completed.length);
+    summary.last = completed[completed.length - 1].percent;
+    if (completed.length >= 2) {
+        summary.delta = summary.last - completed[completed.length - 2].percent;
     }
 
     return summary;

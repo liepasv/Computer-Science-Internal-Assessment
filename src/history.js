@@ -141,8 +141,15 @@ function renderStatTiles(summary) {
         totalsText += " · " + formatDuration(summary.totalSeconds) + " of timed practice";
     }
 
+    // Best and average only use finished sessions, so say how many those
+    // are whenever some were ended early
+    const completedHTML = summary.completed === summary.sessions
+        ? ""
+        : '<div class="text-xs mt-0.5 text-gray-400 whitespace-nowrap">' +
+          summary.completed + " completed</div>";
+
     return '<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-2">' +
-               tile("Sessions", summary.sessions) +
+               tile("Sessions", summary.sessions, completedHTML) +
                tile("Best", summary.best + "%") +
                tile("Average", summary.average + "%") +
                tile("Last", summary.last + "%", deltaHTML) +
@@ -159,10 +166,12 @@ function renderStatTiles(summary) {
 // above every column would be unreadable, and the session list below
 // already shows every value.
 function renderProgressChart(history) {
-    const recent = history.slice(-12);
+    // Sessions ended early only cover part of a bank, so plotting them
+    // beside full ones would compare two different things
+    const recent = history.filter(function (s) { return !s.abandoned; }).slice(-12);
 
     if (recent.length < 2) {
-        return '<p class="text-sm text-gray-400">Finish at least two sessions to see your progress here.</p>';
+        return '<p class="text-sm text-gray-400">Complete at least two sessions to see your progress here.</p>';
     }
 
     let columnsHTML = "";
@@ -275,13 +284,24 @@ function renderDrillButton(history) {
 function renderSessionList(history) {
     // Rows are built oldest-first so each one can be compared with the
     // session before it, then reversed so the newest appears at the top
+    // The change is measured against the previous finished session, so a
+    // session ended early neither carries a change nor breaks the chain
+    const completed = history.filter(function (s) { return !s.abandoned; });
+
     const rows = history.map(function (session, index) {
-        const delta = index > 0 ? session.percent - history[index - 1].percent : null;
+        let delta = null;
+        if (!session.abandoned) {
+            const position = completed.indexOf(session);
+            if (position > 0) delta = session.percent - completed[position - 1].percent;
+        }
 
         const mistakes = (session.answers || []).filter(function (a) { return !a.ok; });
 
         const metaParts = [session.correct + "/" + session.total + " correct",
                            session.score + "/" + session.maxScore + " pts"];
+        if (session.abandoned) {
+            metaParts.push("ended early" + (session.planned ? " of " + session.planned : ""));
+        }
         if (session.timerEnabled) metaParts.push(formatTime(session.seconds || 0));
         if (session.mode === "mistakes") metaParts.push("mistakes drill");
         // Name the source only when it is not the built-in bank, so the

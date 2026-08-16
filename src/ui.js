@@ -232,13 +232,30 @@ function showResults() {
 
     // Compare against the previous stored session, captured before this
     // one was saved. Nothing is shown when this is the first session.
+    // A part-played session is not comparable with a full one, so the
+    // change line is left out for it
     let changeRowHTML = "";
-    if (previousPercent !== null) {
+    if (previousPercent !== null && !sessionAbandoned) {
         const delta = scorePercent - previousPercent;
         changeRowHTML =
             '<div class="flex justify-between items-center py-2 border-b border-gray-100">' +
             '<span class="text-sm text-gray-600">Change since last session</span>' +
             '<span class="text-sm font-medium ' + deltaColour(delta) + '">' + formatDelta(delta) + "</span>" +
+            "</div>";
+    }
+
+    // Say plainly that this session was not played to the end, and adjust
+    // the heading so the screen does not claim otherwise
+    let endedEarlyHTML = "";
+    document.getElementById("results-title").textContent =
+        sessionAbandoned ? "Session Ended" : "Session Complete";
+
+    if (sessionAbandoned) {
+        endedEarlyHTML =
+            '<div class="mb-6 text-sm rounded-xl px-4 py-3 bg-gray-50 text-gray-600">' +
+            "Ended after " + sessionAnswers.length + " of " + sessionQuestions.length + " questions. " +
+            "The score covers only what was answered, and this session is left out of your best " +
+            "and average so it cannot distort them." +
             "</div>";
     }
 
@@ -259,6 +276,7 @@ function showResults() {
             '<div class="text-sm text-gray-400">out of ' + maxScore + " possible points (" + scorePercent + "%)</div>" +
         "</div>" +
 
+        endedEarlyHTML +
         saveWarningHTML +
 
         '<div class="bg-gray-50 rounded-xl p-4 mb-6">' +
@@ -274,7 +292,7 @@ function showResults() {
             timerRowHTML +
             '<div class="flex justify-between items-center py-2">' +
                 '<span class="text-sm text-gray-600">Questions answered</span>' +
-                '<span class="text-sm font-medium">' + sessionQuestions.length + "</span>" +
+                '<span class="text-sm font-medium">' + sessionAnswers.length + "</span>" +
             "</div>" +
         "</div>" +
 

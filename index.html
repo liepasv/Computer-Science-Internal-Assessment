@@ -166,7 +166,8 @@
                 <kbd class="bg-gray-100 px-1 rounded">B</kbd>
                 <kbd class="bg-gray-100 px-1 rounded">C</kbd>
                 <kbd class="bg-gray-100 px-1 rounded">D</kbd> to answer,
-                <kbd class="bg-gray-100 px-1 rounded">Enter</kbd> to continue
+                <kbd class="bg-gray-100 px-1 rounded">Enter</kbd> to continue,
+                <kbd class="bg-gray-100 px-1 rounded">Esc</kbd> to end
             </p>
         </div>
 
@@ -219,11 +220,21 @@
                     Next Question →
                 </button>
             </div>
+
+            <!-- Escape hatch, available at any point in the session -->
+            <div class="mt-6 text-center">
+                <button
+                    id="quit-btn"
+                    class="text-sm text-gray-400 hover:text-red-600 transition-colors"
+                >
+                    End session early
+                </button>
+            </div>
         </div>
 
         <!-- ===== SCREEN 3: Results ===== -->
         <div id="screen-results" class="hidden bg-white rounded-2xl shadow-md p-8">
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-1">Session Complete</h2>
+            <h2 id="results-title" class="text-2xl font-bold text-center text-gray-800 mb-1">Session Complete</h2>
             <p class="text-center text-sm text-gray-400 mb-8">Here is how you did</p>
 
             <!-- Results content injected by JavaScript -->

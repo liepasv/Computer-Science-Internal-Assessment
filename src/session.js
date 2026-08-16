@@ -71,10 +71,13 @@ function buildMistakePool() {
     return pool;
 }
 
-// Total points available in the current session, used for the percentage
+// Total points available for the questions that were actually answered.
+// In a finished session that is every question; in one ended early it is
+// only the part that was played, so the percentage stays fair instead of
+// being measured against questions the user never saw.
 function getMaxScore() {
-    return sessionQuestions.reduce(function (sum, q) {
-        return sum + DIFFICULTY_POINTS[q.difficulty];
+    return sessionAnswers.reduce(function (sum, a) {
+        return sum + DIFFICULTY_POINTS[a.difficulty];
     }, 0);
 }
 
@@ -107,15 +110,18 @@ function startSession(mode) {
     elapsedSeconds = 0;
     sessionAnswers = [];
     saveFailed = false;
+    sessionAbandoned = false;
     diffStats = {
         1: { correct: 0, total: 0 },
         2: { correct: 0, total: 0 },
         3: { correct: 0, total: 0 }
     };
 
-    // Remember the last score now, so the results screen can show the change
-    const history = loadHistory(activeProfile);
-    previousPercent = history.length > 0 ? history[history.length - 1].percent : null;
+    // Remember the last score now, so the results screen can show the
+    // change. Only finished sessions are comparable, so ones that were
+    // ended early are skipped.
+    const completed = loadHistory(activeProfile).filter(function (s) { return !s.abandoned; });
+    previousPercent = completed.length > 0 ? completed[completed.length - 1].percent : null;
 
     // Read the timer checkbox and start the timer if it is enabled
     timerEnabled = document.getElementById("timer-toggle").checked;
@@ -135,6 +141,33 @@ function nextQuestion() {
     } else {
         renderQuestion();
     }
+}
+
+// Lets the user stop part-way through. Answers already given are worth
+// keeping — they hold the mistakes the whole statistics side is built
+// on — so they are stored, but marked as an unfinished session.
+function quitSession() {
+    const answered = sessionAnswers.length;
+
+    const message = answered === 0
+        ? "End this session? Nothing has been answered yet, so no result will be saved."
+        : "End this session now? Your " + answered + " answer" + (answered !== 1 ? "s" : "") +
+          " will be saved to your history and marked as ended early.";
+
+    if (!confirm(message)) return;
+
+    if (timerEnabled) stopTimer();
+
+    // With nothing answered there is no result worth storing
+    if (answered === 0) {
+        refreshStartScreen();
+        showScreen("load");
+        return;
+    }
+
+    sessionAbandoned = true;
+    saveFailed = !saveSessionRecord(activeProfile, buildSessionRecord());
+    showResults();
 }
 
 // Ends the session: stops the timer, stores the result, shows the summary
@@ -167,7 +200,10 @@ function buildSessionRecord() {
         percent: maxScore > 0 ? Math.round((score / maxScore) * 100) : 0,
         correct: correctCount,
         incorrect: incorrectCount,
-        total: sessionQuestions.length,
+        // How many were answered, and how many the session set out to ask
+        total: sessionAnswers.length,
+        planned: sessionQuestions.length,
+        abandoned: sessionAbandoned,
         timerEnabled: timerEnabled,
         seconds: elapsedSeconds,
         // Copied rather than referenced, so the next session cannot alter it
