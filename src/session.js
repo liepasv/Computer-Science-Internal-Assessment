@@ -46,8 +46,57 @@ function formatTime(totalSeconds) {
     return minutes + ":" + String(seconds).padStart(2, "0");
 }
 
-// Resets all session counters and starts a new practice session
-function startSession() {
+// Finds a loaded question by the id stored in a past result.
+// Returns null when the current CSV does not contain that question.
+function findQuestionById(qid) {
+    for (let i = 0; i < questions.length; i++) {
+        if (questions[i].id === qid) return questions[i];
+    }
+    return null;
+}
+
+// Builds the question list for a "practise my mistakes" session.
+// getWeakQuestions returns the most frequently missed questions first,
+// and ids that are not in the loaded bank are skipped.
+function buildMistakePool() {
+    const weak = getWeakQuestions(loadHistory(activeProfile));
+    const pool = [];
+
+    weak.forEach(function (stat) {
+        const question = findQuestionById(stat.qid);
+        if (question) pool.push(question);
+    });
+
+    return pool;
+}
+
+// Total points available in the current session, used for the percentage
+function getMaxScore() {
+    return sessionQuestions.reduce(function (sum, q) {
+        return sum + DIFFICULTY_POINTS[q.difficulty];
+    }, 0);
+}
+
+// Resets all session counters and starts a new practice session.
+// mode is "all" for the whole bank or "mistakes" for past mistakes only.
+function startSession(mode) {
+    sessionMode = mode === "mistakes" ? "mistakes" : "all";
+
+    if (sessionMode === "mistakes") {
+        // Take the 30 most-missed questions, then shuffle so the order
+        // is not the same predictable list every time
+        const pool = buildMistakePool();
+        if (pool.length === 0) {
+            alert("There are no past mistakes to practise yet. Finish a session first.");
+            return;
+        }
+        sessionQuestions = shuffle(pool.slice(0, 30));
+    } else {
+        // Shuffle all loaded questions and take up to 30 for this session
+        const shuffled = shuffle(questions);
+        sessionQuestions = shuffled.slice(0, Math.min(30, shuffled.length));
+    }
+
     // Reset all session state variables before starting
     currentIndex = 0;
     score = 0;
@@ -55,15 +104,17 @@ function startSession() {
     incorrectCount = 0;
     answered = false;
     elapsedSeconds = 0;
+    sessionAnswers = [];
+    saveFailed = false;
     diffStats = {
         1: { correct: 0, total: 0 },
         2: { correct: 0, total: 0 },
         3: { correct: 0, total: 0 }
     };
 
-    // Shuffle all loaded questions and take up to 30 for this session
-    const shuffled = shuffle(questions);
-    sessionQuestions = shuffled.slice(0, Math.min(30, shuffled.length));
+    // Remember the last score now, so the results screen can show the change
+    const history = loadHistory(activeProfile);
+    previousPercent = history.length > 0 ? history[history.length - 1].percent : null;
 
     // Read the timer checkbox and start the timer if it is enabled
     timerEnabled = document.getElementById("timer-toggle").checked;
@@ -79,10 +130,48 @@ function startSession() {
 function nextQuestion() {
     currentIndex++;
     if (currentIndex >= sessionQuestions.length) {
-        // All questions answered — stop timer and show the results screen
-        if (timerEnabled) stopTimer();
-        showResults();
+        finishSession();
     } else {
         renderQuestion();
     }
+}
+
+// Ends the session: stops the timer, stores the result, shows the summary
+function finishSession() {
+    if (timerEnabled) stopTimer();
+
+    // saveSessionRecord returns false if the browser refuses to store,
+    // which the results screen then tells the user about
+    saveFailed = !saveSessionRecord(activeProfile, buildSessionRecord());
+
+    showResults();
+}
+
+// Packs everything worth keeping about the finished session into one
+// plain object. It has to be plain data because it is stored as JSON.
+function buildSessionRecord() {
+    const maxScore = getMaxScore();
+
+    return {
+        // Time plus a random part, so two records can never share an id
+        id: "s-" + Date.now() + "-" + Math.floor(Math.random() * 100000),
+        date: new Date().toISOString(),
+        profile: activeProfile,
+        mode: sessionMode,
+        score: score,
+        maxScore: maxScore,
+        percent: maxScore > 0 ? Math.round((score / maxScore) * 100) : 0,
+        correct: correctCount,
+        incorrect: incorrectCount,
+        total: sessionQuestions.length,
+        timerEnabled: timerEnabled,
+        seconds: elapsedSeconds,
+        // Copied rather than referenced, so the next session cannot alter it
+        diffStats: {
+            1: { correct: diffStats[1].correct, total: diffStats[1].total },
+            2: { correct: diffStats[2].correct, total: diffStats[2].total },
+            3: { correct: diffStats[3].correct, total: diffStats[3].total }
+        },
+        answers: sessionAnswers
+    };
 }

@@ -3,11 +3,12 @@
 // All functions that read session state and update the DOM.
 // ============================================================
 
-// Shows one screen and hides the other two
+// Shows one screen and hides all the others
 function showScreen(name) {
     document.getElementById("screen-load").classList.add("hidden");
     document.getElementById("screen-quiz").classList.add("hidden");
     document.getElementById("screen-results").classList.add("hidden");
+    document.getElementById("screen-history").classList.add("hidden");
     document.getElementById("screen-" + name).classList.remove("hidden");
 }
 
@@ -101,6 +102,23 @@ function handleAnswer(selectedIndex) {
     // Update per-difficulty stats for the results breakdown
     diffStats[q.difficulty].total++;
 
+    // Record the answer so the session can be stored and reviewed later.
+    // Text snippets are kept only for mistakes: that is all the review
+    // needs, and it keeps every stored session small.
+    const answerRecord = {
+        qid: q.id,
+        chosen: selectedIndex,
+        correct: q.correct,
+        difficulty: q.difficulty,
+        ok: isCorrect
+    };
+    if (!isCorrect) {
+        answerRecord.text        = truncate(q.text, SNIPPET_QUESTION);
+        answerRecord.chosenText  = truncate(q.options[selectedIndex - 1], SNIPPET_OPTION);
+        answerRecord.correctText = truncate(q.options[q.correct - 1], SNIPPET_OPTION);
+    }
+    sessionAnswers.push(answerRecord);
+
     // Add points based on difficulty level if the answer is correct
     if (isCorrect) {
         score += DIFFICULTY_POINTS[q.difficulty];
@@ -174,11 +192,16 @@ function showResults() {
     showScreen("results");
 
     // Calculate the maximum possible score for the questions in this session
-    const maxScore = sessionQuestions.reduce(function (sum, q) {
-        return sum + DIFFICULTY_POINTS[q.difficulty];
-    }, 0);
-
+    const maxScore = getMaxScore();
     const scorePercent = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+
+    // Only offer the mistakes drill when this session produced mistakes
+    const drillBtn = document.getElementById("results-drill-btn");
+    if (incorrectCount > 0) {
+        drillBtn.classList.remove("hidden");
+    } else {
+        drillBtn.classList.add("hidden");
+    }
 
     // Build the performance breakdown rows for each difficulty level
     let diffRowsHTML = "";
@@ -203,6 +226,28 @@ function showResults() {
             "</div>";
     }
 
+    // Compare against the previous stored session, captured before this
+    // one was saved. Nothing is shown when this is the first session.
+    let changeRowHTML = "";
+    if (previousPercent !== null) {
+        const delta = scorePercent - previousPercent;
+        changeRowHTML =
+            '<div class="flex justify-between items-center py-2 border-b border-gray-100">' +
+            '<span class="text-sm text-gray-600">Change since last session</span>' +
+            '<span class="text-sm font-medium ' + deltaColour(delta) + '">' + formatDelta(delta) + "</span>" +
+            "</div>";
+    }
+
+    // Tell the user if the result could not be stored, rather than
+    // letting them believe it was added to their history
+    let saveWarningHTML = "";
+    if (saveFailed) {
+        saveWarningHTML =
+            '<div class="mb-6 text-sm rounded-xl px-4 py-3 bg-yellow-50 text-yellow-800">' +
+            "This result could not be saved to your history — the browser is blocking local storage." +
+            "</div>";
+    }
+
     // Inject the full results layout into the results container
     document.getElementById("results-content").innerHTML =
         '<div class="text-center mb-8">' +
@@ -210,7 +255,10 @@ function showResults() {
             '<div class="text-sm text-gray-400">out of ' + maxScore + " possible points (" + scorePercent + "%)</div>" +
         "</div>" +
 
+        saveWarningHTML +
+
         '<div class="bg-gray-50 rounded-xl p-4 mb-6">' +
+            changeRowHTML +
             '<div class="flex justify-between items-center py-2 border-b border-gray-100">' +
                 '<span class="text-sm text-gray-600">Correct answers</span>' +
                 '<span class="text-sm font-medium text-green-600">' + correctCount + "</span>" +
