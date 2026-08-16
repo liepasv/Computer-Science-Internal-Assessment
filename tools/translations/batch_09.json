@@ -1,0 +1,107 @@
+{
+  "201": {
+    "q": "The legal basis for road traffic safety in the Republic of Lithuania is laid down by:",
+    "o": ["The Civil Code of the Republic of Lithuania.", "The Criminal Code of the Republic of Lithuania.", "The Code of Administrative Offences of the Republic of Lithuania.", "The Law on Road Traffic Safety of the Republic of Lithuania."],
+    "e": "Law on Road Traffic Safety, Article 1. Purpose and scope of the Law. 1. This Law lays down the legal basis for road traffic safety in the Republic of Lithuania, the duties of state and municipal institutions and bodies in implementing road safety policy, the training of road users, the main rights and duties of road users, of the persons responsible for road maintenance, of the police, of customs officers and of other inspecting officers, and also the main requirements relating to the technical condition of vehicles, the checking of that condition and the registration of vehicles, and the road safety requirements for roads, with the aim of protecting the life, health and property of road users and other people and of improving conditions for vehicle and pedestrian traffic."
+  },
+  "202": {
+    "q": "What is a \"level crossing\"?",
+    "o": ["A place where the road crosses railway tracks at a height of 5 m.", "A crossing of a road and a railway on the same level."],
+    "e": "3.5. Level crossing — a crossing of a road and a railway on the same level."
+  },
+  "203": {
+    "q": "What counts as scheduled public transport?",
+    "o": ["Taxis.", "Public transport vehicles (buses, trolleybuses, route taxis) that carry passengers regularly along a set route with specified stopping places.", "Minibuses."],
+    "e": "A minibus is a vehicle with no more than 8 passenger seats (not counting the driver's seat) and a maximum authorised mass not exceeding 3.5 t. It can be either a private or a commercial vehicle.\nA route taxi (or route minibus) is a public transport vehicle that runs along a set route, with set stops and a \"Scheduled public transport\" sign."
+  },
+  "204": {
+    "q": "Which vehicle will cross the junction last?",
+    "o": ["The bicycle.", "The quadricycle.", "The car."],
+    "e": "The cyclist goes first, because they have no obstacle on their right. The car goes second, because once the bicycle has passed it no longer has an obstacle on its right. The driver of the quadricycle goes last, because once the car has passed there is no longer an obstacle on its right either."
+  },
+  "205": {
+    "q": "Before moving off from a stop, must the driver of a scheduled public transport vehicle make sure that way is being given to them?",
+    "o": ["Yes, they must.", "No, they do not have to.", "Scheduled public transport always has priority over other vehicles."],
+    "e": "Road Traffic Rules, clause 180. Before moving off from a stop, the driver of a scheduled public transport vehicle must make sure that way is being given to them."
+  },
+  "206": {
+    "q": "To be able to start learning to drive a category B car on the road, you must be at least:",
+    "o": ["16 years old.", "17 years old.", "18 years old."],
+    "e": "Category B may be driven from the age of 18, and learning may be started a year earlier, from the age of 17."
+  },
+  "207": {
+    "q": "Which driver of a horse-drawn vehicle is travelling correctly on a road with shoulders?",
+    "o": ["A.", "B.", "Both are travelling incorrectly."],
+    "e": "Road Traffic Rules, clause 68. Driving animal-drawn vehicles, herding animals or birds and horse riding are allowed only on the right-hand shoulder, or, where there is none, along the right-hand edge of the carriageway, as close as possible to the edge of the carriageway and without endangering other road users.\nRoad Traffic Rules, clause 69. Animal-drawn carts or sledges must carry white reflectors at the front, amber at the sides and red at the rear, fixed in clearly visible places and marking the outermost points of the cart or sledge."
+  },
+  "208": {
+    "q": "What must the driver of a motor vehicle bring with them after receiving a police summons to attend the police at a stated time?",
+    "o": ["An identity document in all cases; the roadworthiness test document, the compulsory motor third party liability insurance document and the driving licence if the summons says so.", "The driving licence in all cases.", "A valid medical certificate of the driver's health check.", "A certificate of first aid training showing that the compulsory first aid course has been completed."],
+    "e": "8. On receiving a police summons, a road user must attend the police station at the stated time. They must bring with them an identity document and the other documents stated in the summons."
+  },
+  "209": {
+    "q": "Are winter or all-season tyres needed in winter on a single-axle car trailer without a braking system?",
+    "o": ["Yes.", "No."],
+    "e": "Between 10 November and 31 March it is prohibited to operate motor vehicles and trailers with summer tyres (the tread depth must be at least 3.0 mm). Summer tyres are therefore prohibited during the winter season, but there is no need to fit winter tyres specifically — all-season tyres may be used as well."
+  },
+  "210": {
+    "q": "The roadworthiness test for cars must be carried out:",
+    "o": ["Every 12 months.", "3 years after the date of first registration, and every 12 months after that.", "2 years after the date of first registration, and every 24 months after that.", "3 years after the date of first registration, and every 24 months after that."],
+    "e": "\"From first registration\" means from when the car was still new."
+  },
+  "211": {
+    "q": "What does the octane number of petrol, 95 or 98, describe?",
+    "o": ["The engine's resistance to knocking.", "The petrol's resistance to low temperatures.", "The petrol's resistance to knocking."],
+    "e": "The octane number describes the ability of petrol to burn in an internal combustion engine without knocking. Knocking is the spontaneous and premature ignition of the mixture of petrol vapour and air, not by the spark plug but by compression and by hot parts of the cylinder. The resistance of that mixture to spontaneous knocking is expressed by the octane number."
+  },
+  "212": {
+    "q": "Is it allowed to switch on the main beam headlights in the dark on an unlit road in a built-up area?",
+    "o": ["It is allowed.", "It is prohibited."],
+    "e": "Switching on the main beam headlights in a built-up area on an unlit road is allowed if:\nthe road in the built-up area is unlit,\nand you do not dazzle other drivers."
+  },
+  "213": {
+    "q": "Is a person herding animals along the road considered to be a driver?",
+    "o": ["Yes.", "No."],
+    "e": "Law on Road Traffic Safety, Article 2, clause 92. A driver is a person driving a vehicle. Persons taking part in traffic under the additional requirements laid down in this Law are treated as drivers as well (drivers of animal-drawn vehicles, riders, persons herding animals or birds along the road), as are persons giving driving instruction."
+  },
+  "214": {
+    "q": "How long does it take for 1.5 per mille of alcohol to leave the human body?",
+    "o": ["The alcohol is broken down after only 1 hour.", "The alcohol is broken down after only 6 hours.", "The alcohol is broken down after only 12 hours."],
+    "e": "The question asks how long it takes for 1.5 per mille of alcohol to leave the body, not the blood.\nThe amount of alcohol falls very slowly, at a rate that is known in advance, because a person's liver breaks down a certain amount of it every hour. In removing alcohol from the body the liver does 90% of the work, and the lungs and kidneys 10%. A healthy person's liver breaks down between 0.15 and 0.20 ‰ per hour. Removing 1 ‰ will therefore take about 6 hours on average.\nIf you drank 200 g of vodka during the evening, you must not get behind the wheel for at least another 10–12 hours.\nAlcohol can be detected in urine for three to five days, in blood for 10 to 12 hours, in hair for up to 90 days, and in exhaled air for up to 24 hours.\nIf there was heavy drinking in the evening and a person wants to drive in the morning, they should note when the last drink was finished. For most people 12 hours must pass after the last drink for the alcohol really to be broken down, and in some cases even more time may be needed."
+  },
+  "215": {
+    "q": "At what speed is it allowed to drive an animal-drawn vehicle on the road?",
+    "o": ["No faster than 5 km/h.", "No faster than 20 km/h.", "At a safe speed, without endangering other road users.", "At the maximum speed permitted on that stretch of road."],
+    "e": "The Road Traffic Rules do not set an exact speed for driving animals, because this is not a vehicle.\nMovement is allowed only on the right-hand shoulder or along the edge of the carriageway, at a safe speed, so as not to endanger other road users.\n\"The maximum permitted speed\" is therefore not right here — that idea applies to vehicles, not to animal-drawn traffic."
+  },
+  "216": {
+    "q": "Which children must be carried in special seats suited to their height and weight?",
+    "o": ["Only children under 3 years old, regardless of height.", "Only children under 12 years old, regardless of height.", "Children under 150 cm tall.", "Children under 135 cm tall."],
+    "e": "Road Traffic Rules, clause 199. Children under 135 cm tall who are carried in a car or a lorry must be restrained by child restraint systems suited to their height and weight, according to the size range and maximum child weight stated by the manufacturer, or according to these groups:\n199.1. group 0 is for children weighing less than 10 kg;\n\n199.2. group 0+ is for children weighing less than 13 kg;\n\n199.3. group I is for children weighing between 9 and 18 kg;\n\n199.4. group II is for children weighing between 15 and 25 kg;\n\n199.5. group III is for children weighing between 22 and 36 kg."
+  },
+  "217": {
+    "q": "How many motor vehicles may be towed at the same time?",
+    "o": ["One.", "Two.", "Three."],
+    "e": "Road Traffic Rules, clause 217. Towing or carrying vehicles is prohibited:\n217.6. towing more than one motor vehicle, tractor or self-propelled machine;"
+  },
+  "218": {
+    "q": "Is the place where a road is joined from an adjacent car park a junction?",
+    "o": ["Yes.", "No."],
+    "e": "Places where a road is left for premises beside it, or where a road is joined from premises beside it, are not treated as junctions. The yellow car is parked incorrectly, but that has no bearing on the answer to the question."
+  },
+  "219": {
+    "q": "Is a junction shown in this picture?",
+    "o": ["Yes.", "No."],
+    "e": "Places where a road is left for premises beside it, or where a road is joined from premises beside it, are not treated as junctions. In this case a surfaced road crosses a field road, so this crossing is treated as a junction."
+  },
+  "220": {
+    "q": "What is \"the hours of darkness\"?",
+    "o": ["When the road is visible for less than 300 metres.", "The time from the end of dusk until the beginning of morning twilight.", "The time from sunset until sunrise.", "When the road is visible for less than 200 metres."],
+    "e": "Law on Road Traffic Safety, Article 2, clause 69. The hours of darkness — the time from sunset until sunrise."
+  },
+  "221": {
+    "q": "What is the minimum age for starting to learn to drive tricycles with a power output of more than 15 kW?",
+    "o": ["20 years.", "21 years.", "23 years.", "24 years."],
+    "e": "Learning may be started one year earlier (from the age of 20) than the age at which a driving licence of this category may be obtained (from the age of 21)."
+  }
+}

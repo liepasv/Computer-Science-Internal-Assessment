@@ -26,12 +26,12 @@ function renderQuestion() {
 
     // Update progress label and current score
     document.getElementById("question-progress").textContent =
-        "Question " + (currentIndex + 1) + " of " + sessionQuestions.length;
-    document.getElementById("score-display").textContent = "Score: " + score;
+        t("quiz.progress", { n: currentIndex + 1, total: sessionQuestions.length });
+    document.getElementById("score-display").textContent = t("quiz.score", { n: score });
 
     // Update the difficulty badge colour and label
     const badge = document.getElementById("difficulty-badge");
-    badge.textContent = DIFFICULTY_NAMES[q.difficulty];
+    badge.textContent = t("difficulty." + q.difficulty);
     badge.className = "text-xs font-semibold px-2 py-1 rounded-full " + getDifficultyColour(q.difficulty);
 
     // Show the question image if the question has one, otherwise hide the container
@@ -133,7 +133,7 @@ function handleAnswer(selectedIndex) {
     }
 
     // Update score display immediately after answering
-    document.getElementById("score-display").textContent = "Score: " + score;
+    document.getElementById("score-display").textContent = t("quiz.score", { n: score });
 
     // Apply colour highlighting to all answer buttons
     const buttons = document.getElementById("answer-buttons").querySelectorAll("button");
@@ -164,10 +164,10 @@ function handleAnswer(selectedIndex) {
     // Show the correct/incorrect feedback message
     const feedbackMsg = document.getElementById("feedback-message");
     if (isCorrect) {
-        feedbackMsg.textContent = "✓ Correct!";
+        feedbackMsg.textContent = t("quiz.correct");
         feedbackMsg.className = "font-semibold text-base mb-2 text-green-600";
     } else {
-        feedbackMsg.textContent = "✗ Incorrect";
+        feedbackMsg.textContent = t("quiz.incorrect");
         feedbackMsg.className = "font-semibold text-base mb-2 text-red-600";
     }
 
@@ -183,9 +183,9 @@ function handleAnswer(selectedIndex) {
     // Change the Next button label on the very last question
     const nextBtn = document.getElementById("next-btn");
     if (currentIndex === sessionQuestions.length - 1) {
-        nextBtn.textContent = "See Results →";
+        nextBtn.textContent = t("quiz.seeResults");
     } else {
-        nextBtn.textContent = "Next Question →";
+        nextBtn.textContent = t("quiz.next");
     }
 
     document.getElementById("feedback-area").classList.remove("hidden");
@@ -215,7 +215,7 @@ function showResults() {
         const pct = Math.round((stat.correct / stat.total) * 100);
         diffRowsHTML +=
             '<div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">' +
-            '<span class="text-sm text-gray-600">' + DIFFICULTY_NAMES[d] + "</span>" +
+            '<span class="text-sm text-gray-600">' + t("difficulty." + d) + "</span>" +
             '<span class="text-sm font-medium">' + stat.correct + "/" + stat.total + " (" + pct + "%)</span>" +
             "</div>";
     });
@@ -225,7 +225,7 @@ function showResults() {
     if (timerEnabled) {
         timerRowHTML =
             '<div class="flex justify-between items-center py-2 border-b border-gray-100">' +
-            '<span class="text-sm text-gray-600">Time taken</span>' +
+            '<span class="text-sm text-gray-600">' + t("results.time") + "</span>" +
             '<span class="text-sm font-medium">' + formatTime(elapsedSeconds) + "</span>" +
             "</div>";
     }
@@ -239,7 +239,7 @@ function showResults() {
         const delta = scorePercent - previousPercent;
         changeRowHTML =
             '<div class="flex justify-between items-center py-2 border-b border-gray-100">' +
-            '<span class="text-sm text-gray-600">Change since last session</span>' +
+            '<span class="text-sm text-gray-600">' + t("results.change") + "</span>" +
             '<span class="text-sm font-medium ' + deltaColour(delta) + '">' + formatDelta(delta) + "</span>" +
             "</div>";
     }
@@ -248,14 +248,12 @@ function showResults() {
     // the heading so the screen does not claim otherwise
     let endedEarlyHTML = "";
     document.getElementById("results-title").textContent =
-        sessionAbandoned ? "Session Ended" : "Session Complete";
+        sessionAbandoned ? t("results.ended") : t("results.complete");
 
     if (sessionAbandoned) {
         endedEarlyHTML =
             '<div class="mb-6 text-sm rounded-xl px-4 py-3 bg-gray-50 text-gray-600">' +
-            "Ended after " + sessionAnswers.length + " of " + sessionQuestions.length + " questions. " +
-            "The score covers only what was answered, and this session is left out of your best " +
-            "and average so it cannot distort them." +
+            t("results.endedEarly", { n: sessionAnswers.length, total: sessionQuestions.length }) +
             "</div>";
     }
 
@@ -265,7 +263,7 @@ function showResults() {
     if (saveFailed) {
         saveWarningHTML =
             '<div class="mb-6 text-sm rounded-xl px-4 py-3 bg-yellow-50 text-yellow-800">' +
-            "This result could not be saved to your history — the browser is blocking local storage." +
+            t("results.saveFailed") +
             "</div>";
     }
 
@@ -273,7 +271,7 @@ function showResults() {
     document.getElementById("results-content").innerHTML =
         '<div class="text-center mb-8">' +
             '<div class="text-5xl font-bold text-blue-600 mb-1">' + score + "</div>" +
-            '<div class="text-sm text-gray-400">out of ' + maxScore + " possible points (" + scorePercent + "%)</div>" +
+            '<div class="text-sm text-gray-400">' + t("results.outOf", { max: maxScore, pct: scorePercent }) + "</div>" +
         "</div>" +
 
         endedEarlyHTML +
@@ -282,22 +280,22 @@ function showResults() {
         '<div class="bg-gray-50 rounded-xl p-4 mb-6">' +
             changeRowHTML +
             '<div class="flex justify-between items-center py-2 border-b border-gray-100">' +
-                '<span class="text-sm text-gray-600">Correct answers</span>' +
+                '<span class="text-sm text-gray-600">' + t("results.correct") + "</span>" +
                 '<span class="text-sm font-medium text-green-600">' + correctCount + "</span>" +
             "</div>" +
             '<div class="flex justify-between items-center py-2 border-b border-gray-100">' +
-                '<span class="text-sm text-gray-600">Incorrect answers</span>' +
+                '<span class="text-sm text-gray-600">' + t("results.incorrect") + "</span>" +
                 '<span class="text-sm font-medium text-red-500">' + incorrectCount + "</span>" +
             "</div>" +
             timerRowHTML +
             '<div class="flex justify-between items-center py-2">' +
-                '<span class="text-sm text-gray-600">Questions answered</span>' +
+                '<span class="text-sm text-gray-600">' + t("results.answered") + "</span>" +
                 '<span class="text-sm font-medium">' + sessionAnswers.length + "</span>" +
             "</div>" +
         "</div>" +
 
-        '<h3 class="text-sm font-semibold text-gray-700 mb-3">Performance by difficulty</h3>' +
+        '<h3 class="text-sm font-semibold text-gray-700 mb-3">' + t("results.byDifficulty") + "</h3>" +
         '<div class="bg-gray-50 rounded-xl p-4">' +
-            (diffRowsHTML || '<p class="text-sm text-gray-400">No data available</p>') +
+            (diffRowsHTML || '<p class="text-sm text-gray-400">' + t("results.noData") + "</p>") +
         "</div>";
 }

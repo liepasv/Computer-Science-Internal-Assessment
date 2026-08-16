@@ -1,0 +1,127 @@
+{
+  "101": {
+    "q": "May you drive on if the coupling device between the vehicle and the trailer has failed?",
+    "o": ["Yes.", "No."],
+    "e": "It is prohibited to drive a motor vehicle, a tractor or a self-propelled machine if: the service brake does not work (the driver cannot stop the vehicle with it); the steering mechanism does not work (the driver cannot control the vehicle with it); the coupling device between the vehicle and the trailer is faulty; the windscreen wiper on the driver's side does not work in rain, snow or fog; in the dark or in poor visibility no front left lamp (dipped beam or fog lamp) is lit, or, if at least one rear side light has failed, the hazard warning lights do not work (are not switched on) or no warning triangle is fixed to the rear of the vehicle."
+  },
+  "102": {
+    "q": "Must a vehicle being used for work on the road switch on its amber beacons if it is not obstructing traffic?",
+    "o": ["No.", "Yes."],
+    "e": "A vehicle's amber beacon must be switched on when traffic is being obstructed (because the vehicle, with or without a load, is larger than permitted, when working on the road, when stopped or standing, when moving slowly, when escorting an organised group of cyclists, or when carrying dangerous goods). A lit amber beacon does not give priority; it only draws attention and warns other road users of a possible hazard. Drivers of vehicles with amber beacons switched on must make sure, while driving, standing and/or carrying out work, that this does not endanger road safety.\n\nWhen road infrastructure or environmental maintenance work is being carried out on a contractual basis and under the conditions set by the road owner, a vehicle with an amber beacon switched on that is needed to carry out the work at that place may drive on grass verges, pavements, footpaths and/or cycle tracks, cycle lanes, central reservations, embankment or cutting slopes and ditches, and may also stop or stand in those places."
+  },
+  "103": {
+    "q": "The traffic light or the traffic controller's signals prohibit crossing the pedestrian crossing. Where must you stop?",
+    "o": ["No closer than 3 metres before the crossing.", "No closer than 5 metres before the crossing.", "Before the \"Stop\" sign or the stop line, or the traffic light, and if there are none — before the controlled pedestrian crossing."],
+    "e": "If the traffic light or the traffic controller's signals prohibit movement, the driver must stop before the \"Stop line\" road sign and/or the \"Stop\" line, or the traffic light, and if there are none — before the controlled pedestrian crossing. Drivers who, when the amber (or white horizontal bar) traffic light comes on or the traffic controller raises their arm, could stop at those places only by braking sharply are allowed to drive on."
+  },
+  "104": {
+    "q": "Does incorrect wheel alignment increase fuel consumption?",
+    "o": ["Yes.", "No."],
+    "e": "Incorrect wheel alignment increases rolling resistance, and fuel consumption therefore rises."
+  },
+  "105": {
+    "q": "Which road sign means a vehicle repair workshop?",
+    "o": ["1", "2", "3", "4"],
+    "e": "1. Mandatory road sign. Stop (a stopping place for scheduled public transport).\n\n2. Service road sign. Rural tourism homestead.\n\n3. Service road sign. Bus station (a place for serving passengers travelling on scheduled local, long-distance and international routes).\n\n4. Service road sign. Workshop (a vehicle repair workshop)."
+  },
+  "106": {
+    "q": "A tyre is marked 195/55 R15. What does the number 15 indicate?",
+    "o": ["The width of the tyre.", "The ratio of the tyre's height to its width.", "The diameter of the rim.", "The tyre's permitted load index."],
+    "e": "\"R\" means that the tyre is radial (in practice cross-ply tyres are sometimes used as well; radial tyres differ from cross-ply ones in their construction and radial tyres are the better ones. Modern cars use radial tyres. Cross-ply tyres are used on slow-moving vehicles such as agricultural machinery and special vehicles). \"195\" is the width of the tyre and \"55\" is its height.\n\n\"15\" means that the diameter of the tyre is 15 inches (the wheel diameter of cars can be from 12 to 17 inches, while the wheels of heavier vehicles reach 25 inches or more).\n\n\"M+S\" means that the tyre can also be used in winter.\n\n\"TUBELESS\" means that the tyre has no inner tube (because of the way it is built, the tyre fits tightly against the rim and holds the air inside itself. In tyres with a tube, an inner tube is fitted inside the tyre and is filled with air, giving the tyre its proper shape)."
+  },
+  "107": {
+    "q": "Why is it dangerous to drive fast on an asphalt road in heavy rain?",
+    "o": ["The windscreen wipers will fail.", "Water will get onto the engine and it will cut out.", "Aquaplaning (a wedge of water) may occur and the car will become uncontrollable."],
+    "e": "It is dangerous to drive at high speed on an asphalt road in heavy rain, because a wedge of water (aquaplaning) forms under the car's wheels and the car becomes hard to control. The wedge of water is a thin gap of water between the carriageway and the tyre. It forms because of high speed and worn tyre tread."
+  },
+  "108": {
+    "q": "What must the driver on whose side the obstruction lies do if it is difficult to pass an oncoming vehicle?",
+    "o": ["They must give way to the oncoming vehicle.", "Speed up and pass the obstruction, because they have priority."],
+    "e": "If it is difficult to pass an oncoming vehicle, the driver on whose side the obstruction lies must give way."
+  },
+  "109": {
+    "q": "Are pedestrians allowed to walk along the edge of the carriageway?",
+    "o": ["It is allowed in two rows, facing the direction of traffic.", "It is allowed, if there is no pavement, footpath or shoulder or they cannot be used, in single file facing the direction of traffic.", "It is prohibited.", "It is allowed, if there is no pavement, footpath or shoulder or they cannot be used, in single file in the same direction as the traffic."],
+    "e": "Pedestrians must use pavements, footpaths, or shared footpaths and cycle tracks (on the side intended for pedestrians), and where there are none — the shoulder. If there is no pavement, footpath, shared footpath and cycle track or shoulder, or they cannot be used, walking in single file along the edge of the carriageway is allowed. Pedestrians moving along the shoulder or the edge of the carriageway, and those using roller skates, skateboards or non-powered scooters on the shoulder, must move facing the direction of traffic."
+  },
+  "110": {
+    "q": "How must a load be marked if it projects 0.2 m beyond the sides of the vehicle?",
+    "o": ["With squares carrying alternating reflective diagonal white and red stripes.", "With brightly coloured flags.", "No marking is needed.", "With squares carrying alternating reflective diagonal white and orange stripes."],
+    "e": "If a load projects more than 1 m beyond the vehicle at the front or the rear, or if its side edge projects at all beyond the side of the vehicle, it must be marked as set out in Annex 4 to the Rules.\n\nThe outermost points of a load projecting more than 1 m beyond the vehicle at the front or the rear, or projecting at all to the side, and the outer points of vehicles wider than 2.6 m, must be marked with distinguishing signs — squares with 400 mm sides carrying alternating reflective diagonal white and red stripes 50 mm wide. These signs must be fixed to the vehicle no lower than 0.4 m and no higher than 1.6 m above the ground. In the dark or in poor visibility, lamps must be lit at those points on the vehicle — white at the front, amber at the sides and red at the rear."
+  },
+  "111": {
+    "q": "What is the best way to brake on a slippery road?",
+    "o": ["Brake in pulses, with frequent presses of the service brake, without locking the wheels and without disengaging the clutch and the gear.", "Disengage the gear and brake with the parking (hand) brake."],
+    "e": "A car is more stable when it is driven in gear, because this allows the engine's torque to be controlled more effectively. When the engine is running it passes turning force through the gearbox, which changes the speed and the torque. In gear, the engine works at a steady torque, which makes it easier to control the car's stability and its driving force. Using the gears effectively also reduces the risk of skidding, especially in difficult weather or when you need to stop quickly. It is therefore recommended to drive in gear and to use the gear change properly, so that driving stays safe and predictable.\n\nWith the clutch and the gear still engaged the car is more stable, because the driven wheels meet resistance from the engine and so help to brake and steady the car.\n\nWhen braking with intermittent presses of the brake pedal the car does not lose grip on the road surface and stays more stable than when the wheels are locked completely, because then the wheels start to slide and the car becomes uncontrollable."
+  },
+  "112": {
+    "q": "On which side of the carriageway may people on roller skates, skateboards or non-powered scooters travel?",
+    "o": ["Along the edge of the carriageway in the direction of traffic.", "Along the edge of the carriageway facing the direction of traffic.", "It is prohibited, except in residential zones."],
+    "e": "Pedestrians are prohibited from using roller skates, skateboards or non-powered scooters on the carriageway, except in a residential zone."
+  },
+  "113": {
+    "q": "Traffic in the picture is controlled by traffic lights. The pedestrian must:",
+    "o": ["Carry on across the road.", "Wait on the safety island until the traffic light allows them to continue.", "Turn round and go back."],
+    "e": "Pedestrians must not linger or stand about on the carriageway. Those who have not managed to cross the carriageway must wait on a safety island or on the marked or imaginary line separating the traffic flows of opposing directions. They may finish crossing the carriageway only after making sure that it is safe to do so."
+  },
+  "114": {
+    "q": "When must a cyclist crossing the point where a cycle track meets a road give way to other vehicles?",
+    "o": ["In all cases.", "They do not have to give way, because they have priority.", "Where the cycle track meets the road away from a junction and traffic is not controlled.", "When a vehicle is approaching from the right."],
+    "e": "A cyclist intending to cross the carriageway where traffic is not controlled, or where there are no road signs establishing priority, must give way to vehicles travelling on the carriageway, except when crossing exits from premises beside the road, from a residential zone, a yard or a car park, and when crossing a carriageway into which other drivers are turning."
+  },
+  "115": {
+    "q": "At what distance before the start of their zone of validity are the road signs shown placed in a built-up area?",
+    "o": ["50–100 m.", "100–150 m.", "150–200 m.", "150–300 m."],
+    "e": "The dangerous section of road marked by warning signs Nos 101–137, 150 and 151 starts 50–100 m beyond the place where the warning sign is installed in a built-up area, and 150–300 m beyond it outside a built-up area. If those warning signs are installed together with the supplementary plate \"Distance to object\", the dangerous section starts at the distance given on that plate. If they are installed together with the supplementary plate \"Zone of validity ahead\", that plate indicates the length of the dangerous section, which starts 50–100 m beyond the warning sign in built-up areas and 150–300 m beyond it outside built-up areas."
+  },
+  "116": {
+    "q": "At what distance from a bus stop is it prohibited to leave a motor vehicle standing if it obstructs scheduled public transport?",
+    "o": ["10 m.", "15 m.", "20 m.", "23 m."],
+    "e": "Stopping and standing are prohibited in the stopping bays of scheduled public transport and closer than 15 m to them (where there is no bay — closer than 15 m to the \"Stop\" road sign), if this would obstruct the movement of scheduled public transport; standing is prohibited within the zone of validity of the \"Taxi rank\" road sign."
+  },
+  "117": {
+    "q": "Is it allowed to cross the solid road marking line in this situation?",
+    "o": ["Yes.", "No."],
+    "e": "If the requirements of a road sign and of the road markings differ, the road sign must be followed. In this case, following the road sign, the obstruction must be passed on the left, even though the narrow solid white line says otherwise.\n\nA narrow solid line separates traffic flows of opposing directions and prohibits driving in the oncoming lane on the marked section of road; it marks the edges of lanes, sections of the carriageway that must not be entered, the boundaries of parking spaces and the edge of the carriageway; where road sign No 413 \"Footpath and cycle track\" is used, it separates the part of the track intended for cyclists from the part intended for pedestrians. Crossing this line is prohibited, except where it marks the edge of the carriageway or a parking space."
+  },
+  "118": {
+    "q": "Must a driver wear a seat belt when reversing in a built-up area?",
+    "o": ["Yes.", "No."],
+    "e": "In built-up areas a driver is allowed not to wear a seat belt when reversing or in car parks."
+  },
+  "119": {
+    "q": "When does the centrifugal force decrease in a turn?",
+    "o": ["When the speed is increased.", "When the speed is reduced.", "When the radius of the turn is reduced."],
+    "e": "The centrifugal force acting on a car is greater in a sharp turn. In a sharp turn the centrifugal force will be smaller if the turn is taken slowly."
+  },
+  "120": {
+    "q": "If the speed increases from 15 km/h to 45 km/h, the braking distance increases:",
+    "o": ["Three times.", "Six times.", "Nine times.", "Twelve times."],
+    "e": "The higher the speed, the longer the braking distance (the relationship is a square one): that is, if you double the speed, the braking distance becomes four times longer."
+  },
+  "121": {
+    "q": "Which driver is breaking the Road Traffic Rules in the situation shown (the yellow and the black car are on a two-way road)?",
+    "o": ["The driver of the black car.", "The driver of the yellow car.", "The driver of the blue car."],
+    "e": "Overtaking at junctions is prohibited."
+  },
+  "122": {
+    "q": "A lorry with a maximum authorised mass of 3 t is allowed to go:",
+    "o": ["Left only.", "In all directions.", "Left and make a U-turn."],
+    "e": "Lorries of up to 3.5 tonnes are treated as cars (category B)."
+  },
+  "123": {
+    "q": "What should you do if the right-hand wheels of the car drift off the asphalt onto a gravel shoulder?",
+    "o": ["Without braking, steer the car back onto the carriageway by turning the steering wheel slowly to the left.", "Braking sharply, steer the car back onto the carriageway.", "Stop and then move off again."],
+    "e": "In this case the car can be brought back onto the carriageway safely without braking, by turning the steering wheel slowly to the left. If you tried to bring the car back onto the carriageway without braking but by turning the steering wheel sharply to the left, the increased centrifugal force could make the car skid or roll over. Braking sharply in this situation could take the car off its path, because during braking the grip of the right-hand wheels on the shoulder would be much lower than the grip of the left-hand wheels on the asphalt."
+  },
+  "124": {
+    "q": "Is it allowed to stop on the shoulder at this spot?",
+    "o": ["It is allowed.", "It is prohibited."],
+    "e": "A sign prohibiting stopping and standing applies only as far as the end of the built-up area. In this situation, therefore, the car is allowed to stand like this."
+  },
+  "125": {
+    "q": "Which driver has priority? The driver of the blue car is making a U-turn at the junction.",
+    "o": ["The driver of the yellow car.", "The driver of the blue car."],
+    "e": "In this case the drivers of the blue and the yellow car are in an equal position, because they are at a junction of equal-priority roads. The blue car is making a U-turn at the junction, so before it finishes turning round an obstacle appears on its right — the yellow car — and the blue car must therefore give way to the yellow one."
+  }
+}

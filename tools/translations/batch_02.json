@@ -1,0 +1,127 @@
+{
+  "26": {
+    "q": "In what order will the vehicles cross the junction (the white car has blue and red beacons and its siren switched on)?",
+    "o": ["Emergency vehicle, red car, blue car, yellow car.", "Emergency vehicle, blue car, red car, yellow car.", "Emergency vehicle, blue car, yellow car, red car.", "Emergency vehicle, yellow car, blue car, red car."],
+    "e": "This is a junction of equal-priority roads, so drivers must give way to vehicles approaching from the right if their paths cross. Because the white car has blue and red beacons and a siren switched on, it has priority and goes first. The remaining cars then follow the give-way-to-the-right rule. The red car crosses second, because once the white car has passed it no longer has an obstacle on its right. The blue car goes next, because once the red car has passed there is no longer an obstacle on its right, and finally the yellow car goes."
+  },
+  "27": {
+    "q": "What does this road sign indicate?",
+    "o": ["It recommends driving no faster than 40 km/h beyond the sign.", "It prohibits driving faster than 40 km/h on all roads in the area beyond the sign.", "It prohibits driving faster than 40 km/h only as far as the nearest junction."],
+    "e": "\"Speed limit zone\". On all roads in the area beyond the sign it is prohibited to drive faster (in km/h) than shown on the sign. Where a time is given, the sign applies only during that time."
+  },
+  "28": {
+    "q": "Is it compulsory to stop at the STOP line when turning right in this situation?",
+    "o": ["It is compulsory.", "It is not compulsory."],
+    "e": "You must stop only where a plate with a green arrow on a white background is fitted. Here there is an additional signal section with a green arrow to the right, so you do not have to stop."
+  },
+  "29": {
+    "q": "What do this road sign and the plates indicate?",
+    "o": ["The bends will start in 400 m and continue for 100 m.", "The bends will start in 100 m and continue for 400 m."],
+    "e": "Road Traffic Rules, Annex 1, sign 116. \"Bends\". A section of road with bends of small radius or limited visibility. The first bend is to the left/right.\nRoad Traffic Rules, Annex 1, plate 805. \"Zone of validity ahead\". It indicates the length of the zone beyond the sign in which the dangerous section of road, or the other road signs it is used with, apply.\nRoad Traffic Rules, Annex 1, plate 801. \"Distance to object\". It indicates the direction of, and the distance to, an object or the start of a dangerous section of road. The direction of the object (section) shown on the plate is straight ahead."
+  },
+  "30": {
+    "q": "What speed is the driver of a heavy quadricycle allowed to drive at on the stretch of road beyond these signs?",
+    "o": ["90 km/h.", "80 km/h.", "70 km/h."],
+    "e": "Outside built-up areas the permitted speeds are:\n131.6. quadricycles and heavy quadricycles — no more than 70 km/h;"
+  },
+  "31": {
+    "q": "Is the driver of the yellow car allowed to make a U-turn at this junction?",
+    "o": ["It is allowed.", "It is prohibited."],
+    "e": "To make a U-turn, the driver of the yellow car should have moved into the far left-hand lane in good time and turned from there."
+  },
+  "32": {
+    "q": "The police car's siren is switched on. Car \"2\" will cross the junction:",
+    "o": ["First.", "Third.", "Second.", "Last."],
+    "e": "The police car goes first, because its beacons and siren are switched on, so everyone must give way to it.\nCars 1 and 2 are on the major road and car 4 is on the minor road, so car 4 will go last.\nBetween cars 1 and 2 the give-way-to-the-right rule applies: car 2 must give way to car 1, because car 1 is on its right."
+  },
+  "33": {
+    "q": "Which group of child seat is intended for children weighing between 22 and 36 kg?",
+    "o": ["III", "I", "II"],
+    "e": "Children under 135 cm tall who are carried in a car or a lorry must be restrained by child restraint systems suited to their height and weight, according to the size range and maximum child weight stated by the manufacturer, or according to these groups:\n199.1. group 0 is for children weighing less than 10 kg;\n199.2. group 0+ is for children weighing less than 13 kg;\n199.3. group I is for children weighing between 9 and 18 kg;\n199.4. group II is for children weighing between 15 and 25 kg;\n199.5. group III is for children weighing between 22 and 36 kg."
+  },
+  "34": {
+    "q": "What effect does wheel locking have on the braking distance?",
+    "o": ["The braking distance gets longer.", "It has no effect.", "The braking distance gets shorter."],
+    "e": "When a car's wheels lock during braking they lose grip on the road surface. This sliding means that the braking friction becomes lower than when the wheels are still rolling. As a result the car slows down more slowly and the braking distance gets longer. The driver also loses the ability to steer the car, which makes sudden manoeuvres dangerous. Modern vehicles use an ABS system, which prevents the wheels from locking and ensures effective and safe braking."
+  },
+  "35": {
+    "q": "How can you tell while driving whether your car's main beam headlights are switched on?",
+    "o": ["By a green warning light.", "By a yellow warning light.", "By a blue warning light.", "By a red warning light."],
+    "e": "When the main beam headlights are switched on, a blue warning light normally comes on in the instrument panel. This lets the driver see easily that the lights are on, even when they cannot see the beams directly."
+  },
+  "36": {
+    "q": "How long does it take for 1.0 per mille of alcohol to leave the blood?",
+    "o": ["3 hours.", "6 hours.", "10 hours."],
+    "e": "The body removes about 0.1–0.15 per mille per hour on average. Bringing 1.0 per mille down to 0 can therefore often take about 10 hours if the concentration was high."
+  },
+  "37": {
+    "q": "What will you do in this situation (a trolleybus is standing before the crossing)?",
+    "o": ["On reaching the pedestrian crossing you will reduce speed and, seeing no pedestrians, drive on.", "On reaching the pedestrian crossing you will stop and, having made sure there are no pedestrians, drive on.", "You will drive at the same speed as before, paying no attention to the stopped trolleybus."],
+    "e": "In a situation like this, pedestrians walking out from behind the trolleybus may not be visible, so if you drive on without stopping you could knock them down. You must therefore stop at the crossing and drive on only after letting the pedestrians pass or making sure that there are none."
+  },
+  "38": {
+    "q": "Placed in a built-up area, this road sign warns that:",
+    "o": ["The dangerous section with bends will start 50–100 m beyond the sign.", "The dangerous section with bends will start immediately beyond the sign.", "The dangerous section with bends will start 150–300 m beyond the sign."],
+    "e": "Outside built-up areas, warning signs 101–137 and 150 are placed 150–300 m before the start of the dangerous section of road, and in built-up areas 50–100 m before it."
+  },
+  "39": {
+    "q": "If a vehicle with its siren and beacons (blue and red) switched on approaches the junction in this situation, the driver of the red car:",
+    "o": ["Will drive on without giving way to anyone, because the traffic light is green for them.", "Must give way to the emergency vehicle."],
+    "e": "Road users must give way immediately to approaching emergency vehicles with blue and red (or only blue) beacons and sirens switched on, and to the vehicles they are escorting."
+  },
+  "40": {
+    "q": "What is the maximum speed allowed beyond this sign at 6 o'clock in the morning?",
+    "o": ["90 km/h.", "70 km/h.", "60 km/h."],
+    "e": "The road sign applies from 21:00 in the evening until 07:00 in the morning (all night). It therefore applies at 6 o'clock in the morning as well."
+  },
+  "41": {
+    "q": "The driver of which vehicle will cross the junction second?",
+    "o": ["The lorry.", "The yellow car.", "The red car."],
+    "e": "The yellow and the red car, both travelling on the major road, must follow the rules for crossing junctions of equal-priority roads in relation to each other. The yellow car therefore goes first, because the red car has an obstacle on its right (the yellow car). The red car goes next, and finally the lorry."
+  },
+  "42": {
+    "q": "When the green traffic light comes on, may you make a U-turn?",
+    "o": ["Yes, if you are in the second lane.", "No."],
+    "e": "If the road signs and/or road markings allow it, you may turn left or make a U-turn on a general green traffic light, but only after giving way to oncoming cars and to pedestrians and cyclists crossing the road you are turning into."
+  },
+  "43": {
+    "q": "Which driver has priority?",
+    "o": ["The driver of the blue car.", "The driver of the red car."],
+    "e": "The give-way-to-the-right rule applies here. The red car has an obstacle on its right, so it goes second."
+  },
+  "44": {
+    "q": "The driver of which car will cross the junction last (the white car is turning left)?",
+    "o": ["The driver of the white car.", "The driver of the blue car.", "The driver of the green car."],
+    "e": "The green and the white car are on the major road of equal priority, so the green car goes first, because the white car has an obstacle on its right (that same green car). The white car goes next, and finally the blue car, because it is on the minor road."
+  },
+  "45": {
+    "q": "Is such an overtaking manoeuvre allowed on this stretch of road?",
+    "o": ["Yes.", "No."],
+    "e": "Because the overtaking manoeuvre is started before the level crossing and takes place on the crossing itself, such overtaking is a breach of the Road Traffic Rules."
+  },
+  "46": {
+    "q": "Which direction indicator will you use when going straight ahead at a junction of equal-priority roads outside a built-up area?",
+    "o": ["The left indicator.", "The right indicator.", "I will not use any."],
+    "e": "No direction indicator is used when going straight ahead, because the direction of travel is not being changed."
+  },
+  "47": {
+    "q": "What does an area marked with yellow lines at a carriageway intersection mean?",
+    "o": ["It marks a place you must not drive into if there is an obstruction in it or beyond it.", "It marks a pedestrian crossing.", "It marks a dangerous section of road."],
+    "e": "An area marked with yellow lines at a carriageway intersection marks a place you must not drive into if there is an obstruction in it or beyond it that would force the driver to stop at the carriageway intersection and obstruct the movement of other vehicles."
+  },
+  "48": {
+    "q": "Is a person working on the road considered to be a pedestrian?",
+    "o": ["Yes.", "No."],
+    "e": "A person working on the road is a person repairing or maintaining the road or technical traffic control devices, directing and supervising traffic, removing from the road or fencing off a vehicle forced to stop or another obstruction, dealing with the consequences of a road accident or other emergency, carrying out other rescue work, or giving medical assistance to a person injured in a road accident on the road or to another person who needs medical assistance."
+  },
+  "49": {
+    "q": "Novice drivers must mark their car with this distinguishing sign:",
+    "o": ["At the front only.", "At the rear only.", "At the front and at the rear."],
+    "e": "Novice drivers must display, on the left-hand side of the rear of the car, a white square distinguishing sign with a green border and a green maple leaf in the middle. The side of the square is between 100 mm and 150 mm long and the width of the border is 1/10 of the length of the side."
+  },
+  "50": {
+    "q": "What does this road marking indicate?",
+    "o": ["It indicates that you are approaching a \"Stop\" line, when it is used together with the \"Stop\" sign.", "It indicates that you are approaching a place where stopping is compulsory.", "It indicates a place where you must give way to pedestrians."],
+    "e": "The word \"STOP\" indicates that you are approaching marking line 1.11, when that line is used together with the road sign \"Stop\"."
+  }
+}

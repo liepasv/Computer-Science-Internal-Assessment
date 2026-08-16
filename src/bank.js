@@ -9,7 +9,13 @@
 // Identifies the bank a session was played on. Custom banks are named
 // after the file they came from, so results stay separated per bank.
 const BUILTIN_BANK = "builtin";
-const BUILTIN_CSV_PATH = "database/db.csv";
+
+// One file per language, sharing the same ids, correct answers,
+// difficulty levels and pictures. Only the wording differs, so results
+// carry across languages: question 5 is the same question in both.
+function builtinCsvPath() {
+    return "database/db." + currentLanguage + ".csv";
+}
 
 
 // ===== IMAGE RESOLUTION =====
@@ -35,7 +41,7 @@ function resolveImageSrc(picture, bank) {
 // Human-readable bank name for the history screen
 function bankLabel(bank) {
     const name = bank || BUILTIN_BANK;
-    return name === BUILTIN_BANK ? "built-in bank" : name.replace(/^custom:/, "");
+    return name === BUILTIN_BANK ? t("history.builtinBank") : name.replace(/^custom:/, "");
 }
 
 // Turns the picked image files into a name -> blob URL lookup.
@@ -72,7 +78,7 @@ function applyParsedBank(result, bank, extra) {
     if (!result || result.questions.length === 0) {
         questions = [];
         currentBank = null;
-        statusEl.textContent = "No valid questions found. Please check the CSV file format.";
+        statusEl.textContent = t("bank.noValid");
         statusEl.className = "mb-5 text-sm rounded-xl px-4 py-3 bg-red-50 text-red-700";
         document.getElementById("start-btn").disabled = true;
         refreshStartScreen();
@@ -82,13 +88,13 @@ function applyParsedBank(result, bank, extra) {
     questions = result.questions;
     currentBank = bank;
 
-    let message = "Loaded " + questions.length + " valid question" + (questions.length !== 1 ? "s" : "") + ".";
+    let message = t("bank.loaded", { n: questions.length });
 
     // Anything the user may want to act on turns the message amber, so a
     // skipped row or a missing picture does not read as a clean success
     let warn = result.skipped > 0;
     if (result.skipped > 0) {
-        message += " Skipped " + result.skipped + " invalid row" + (result.skipped !== 1 ? "s" : "") + ".";
+        message += " " + t("bank.skipped", { n: result.skipped });
     }
     if (extra && extra.text) {
         message += " " + extra.text;
@@ -110,7 +116,23 @@ function applyParsedBank(result, bank, extra) {
 function loadBuiltinBank() {
     const statusEl = document.getElementById("builtin-status");
 
-    return fetch(BUILTIN_CSV_PATH)
+    // The questions on screen are about to be replaced — on a language
+    // switch by the very same questions in the other language. Clearing
+    // them first means a session cannot be started in the short window
+    // before the new file arrives, which would otherwise mix a freshly
+    // translated interface with the previous language's questions.
+    questions = [];
+    currentBank = null;
+    document.getElementById("start-btn").disabled = true;
+    document.getElementById("load-status").classList.add("hidden");
+
+    statusEl.textContent = t("load.builtinLoading");
+    statusEl.className = "text-sm rounded-xl px-4 py-3 bg-gray-50 text-gray-500";
+    statusEl.classList.remove("hidden");
+
+    refreshStartScreen();
+
+    return fetch(builtinCsvPath())
         .then(function (response) {
             if (!response.ok) throw new Error("HTTP " + response.status);
             return response.text();
@@ -131,10 +153,7 @@ function loadBuiltinBank() {
         .catch(function () {
             // Offer the manual picker rather than leaving a dead screen
             statusEl.classList.remove("hidden");
-            statusEl.textContent =
-                "The built-in bank could not be loaded automatically. This happens when the page is " +
-                "opened directly from a file — serve the folder over http (python3 -m http.server) " +
-                "or pick the file below.";
+            statusEl.textContent = t("bank.builtinFailed");
             statusEl.className = "text-sm rounded-xl px-4 py-3 bg-yellow-50 text-yellow-800";
             document.getElementById("builtin-fallback").classList.remove("hidden");
         });
@@ -153,7 +172,7 @@ function loadBankFromFile(file, bank, extraMessageBuilder) {
 
     reader.onerror = function () {
         const statusEl = document.getElementById("load-status");
-        statusEl.textContent = "Could not read the file. Please try again.";
+        statusEl.textContent = t("bank.readError");
         statusEl.className = "mb-5 text-sm rounded-xl px-4 py-3 bg-red-50 text-red-700";
         statusEl.classList.remove("hidden");
     };
@@ -186,21 +205,17 @@ function findMissingImages(questionList) {
 function describeImageCoverage(questionList) {
     const withPicture = questionList.filter(function (q) { return !!q.picture; });
     if (withPicture.length === 0) {
-        return { text: "None of these questions use a picture.", warn: false };
+        return { text: t("bank.noPictures"), warn: false };
     }
 
     const missing = findMissingImages(questionList);
     if (missing.length === 0) {
-        return { text: "All " + withPicture.length + " pictures were found.", warn: false };
+        return { text: t("bank.allPictures", { n: withPicture.length }), warn: false };
     }
 
-    const shown = missing.slice(0, 5).join(", ");
-    const rest = missing.length > 5 ? " and " + (missing.length - 5) + " more" : "";
-    return {
-        text: missing.length + " image" + (missing.length !== 1 ? "s" : "") +
-              " not found among the selected files: " + shown + rest + ".",
-        warn: true
-    };
+    const shown = missing.slice(0, 5).join(", ") +
+                  (missing.length > 5 ? t("bank.andMore", { n: missing.length - 5 }) : "");
+    return { text: t("bank.missingPictures", { n: missing.length, list: shown }), warn: true };
 }
 
 // Re-reads the custom CSV and images together. Either can be picked
@@ -212,8 +227,7 @@ function refreshCustomBank() {
         // Images picked but no questions yet — say so instead of staying silent
         if (customImages.size > 0) {
             const statusEl = document.getElementById("load-status");
-            statusEl.textContent = customImages.size + " image" + (customImages.size !== 1 ? "s" : "") +
-                                   " ready. Now select your question file.";
+            statusEl.textContent = t("bank.imagesReady", { n: customImages.size });
             statusEl.className = "mb-5 text-sm rounded-xl px-4 py-3 bg-gray-50 text-gray-600";
             statusEl.classList.remove("hidden");
         }

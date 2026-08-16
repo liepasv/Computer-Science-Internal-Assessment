@@ -1,0 +1,127 @@
+{
+  "176": {
+    "q": "You have stopped on an uphill slope because of a traffic jam. What is the best way to hold the car in place?",
+    "o": ["By leaving it in gear with the engine switched off.", "With the parking brake.", "By engaging a low gear and slipping the clutch.", "With the service brake."],
+    "e": "When you stop on an uphill slope because of a traffic jam, the car must be held reliably in place so that it does not roll back. Under clause 3.7.6 of the description of the criteria for assessing motor vehicle handling skills and abilities, the parking brake is used when:\nthe vehicle has been stopped and the driver does not intend to move off straight away (for example, waiting in a jam);\nit is necessary to make sure that it does not move while standing on a slope.\nHolding the service brake down for a long time is awkward and can be dangerous (for example, a foot slipping could let the car roll away). The safest and most correct thing is therefore to apply the parking brake."
+  },
+  "177": {
+    "q": "Is it allowed to drive in the dark with only the side lights switched on?",
+    "o": ["Yes, if I am driving in a built-up area.", "Yes, if the road is visible for at least 50 m.", "It is prohibited."],
+    "e": "Road Traffic Rules, clause 94. In the dark or in poor visibility, drivers of motor vehicles, tractors and self-propelled machines must drive on roads with the dipped beam or the main beam headlights switched on."
+  },
+  "178": {
+    "q": "What can make the windows inside the car mist up?",
+    "o": ["Moisture left after washing the car.", "Too high a level of coolant.", "Too many people in the car.", "An incorrectly chosen heating and ventilation setting."],
+    "e": "The windows inside a car usually start to mist up when damp air builds up inside and condenses on the colder surface of the glass. This most often happens because of an incorrectly chosen heating and ventilation setting, when the air inside is not ventilated enough or the screen demister is not switched on. With the heating and ventilation set properly (for example, with the airflow directed at the windows and the fan or the air conditioning switched on) the moisture is removed and the windows do not mist up.\nThe other answers are wrong, because:\nMoisture left after washing the car can raise the humidity inside, but on its own it does not make the windows mist up if the ventilation is working properly. If the windows do mist up (for example after washing), it means the heating and ventilation setting is wrong.\nToo high a level of coolant has no effect on the windows misting up inside.\nA large number of people in the car can raise the humidity, but the windows start to mist up only when the ventilation is working badly or is set wrongly."
+  },
+  "179": {
+    "q": "It is prohibited to drive a vehicle:",
+    "o": ["If its roadworthiness test has expired.", "If the number plate is bent (but still readable).", "If the car's door is dented.", "If the horn does not work."],
+    "e": "If you notice that the horn does not work, you are allowed to drive only as far as a parking or repair place. However, it is prohibited to operate (that is, to use regularly) a car that does not meet the technical requirements, for example one whose horn does not work.\nDriving is prohibited in the cases set out in clause 234 of the Road Traffic Rules."
+  },
+  "180": {
+    "q": "Is it allowed in Lithuania to use lamp glasses and bulbs that are not provided for?",
+    "o": ["It is allowed if they do not exceed the permitted power.", "It is prohibited.", "It is allowed if they are properly adjusted.", "It is allowed if they are suited to the country where the vehicle is used."],
+    "e": "Technical requirements for motor vehicles and their trailers. It is prohibited to use lighting and light signalling devices that are not provided for, or whose use is prohibited."
+  },
+  "181": {
+    "q": "Is it allowed to use fog lamps instead of dipped beam headlights?",
+    "o": ["It is allowed.", "It is prohibited.", "It is allowed if the front left dipped beam headlight is not working."],
+    "e": "Clause 98. Fog lamps may be used only in poor visibility, and front fog lamps may also be used if the front left dipped beam headlight has failed."
+  },
+  "182": {
+    "q": "The order for crossing the junction is:",
+    "o": ["Tractor, motorcycle, car.", "The car and the motorcycle at the same time, then the tractor.", "Car, tractor, motorcycle.", "The tractor and the car at the same time, then the motorcycle."],
+    "e": "In this situation the tractor and the car may go first at the same time in the directions shown, because the car is the only one with no obstacle on its right and the paths of the tractor and the car do not cross. The motorcyclist can only go second, after letting the tractor approaching from the right pass."
+  },
+  "183": {
+    "q": "Where are U-turns prohibited?",
+    "o": ["Within 15 m of a junction.", "At pedestrian crossings.", "On roads with more than four traffic lanes.", "On rural roads."],
+    "e": "Road Traffic Rules, clause 116. U-turns are prohibited:\n116.1. at pedestrian crossings;\n116.2. at level crossings;\n116.3. in tunnels;\n116.4. on and under bridges, flyovers and viaducts;\n116.5. at places where the road is visible for less than 100 metres in at least one direction;\n116.6. on roads with a central reservation, except at turning places built for that purpose and marked with road signs, or with road signs together with road markings."
+  },
+  "184": {
+    "q": "In what order will the vehicles cross this junction?",
+    "o": ["White, black, red, blue.", "White, blue, red, black.", "White, red, black, blue.", "Black, blue, white, red."],
+    "e": "The white car is on the major road and is going straight ahead, so it goes first. Once the white car has passed, the red car no longer has an obstacle in its way and goes second. The black car goes third. The blue car crosses the junction last, because it must give way to the black car, which is travelling on a road of equal priority from the opposite direction and turning right."
+  },
+  "185": {
+    "q": "Is such a manoeuvre allowed?",
+    "o": ["Yes.", "No."],
+    "e": "Road Traffic Rules, clause 182. If a lane for scheduled public transport travelling in the same direction is at the right-hand edge of the carriageway and is not separated by a solid road marking line, drivers turning right must move into this lane before the turn, and drivers passing a vehicle that has stopped to turn left may move into it."
+  },
+  "186": {
+    "q": "How must you park your vehicle next to vehicles marked with the \"Disabled person\" distinguishing sign?",
+    "o": ["So that it does not stop a disabled person from getting in and out.", "As close as possible."],
+    "e": "Road Traffic Rules, clause 152. Next to vehicles marked with the \"Disabled person\" distinguishing sign, a driver must park their own vehicle so that it does not prevent a disabled person from getting in (or out)."
+  },
+  "187": {
+    "q": "Is it allowed to take agricultural, road, construction and other machinery that has not been specially prepared for transport across a level crossing?",
+    "o": ["No.", "No, if this could damage the equipment of the crossing.", "Yes, if permission has been obtained from the owner of the railway."],
+    "e": "Clause 173. A road user is prohibited from:\n173.1. crossing the railway at places not intended for it;\n173.2. passing other vehicles that have stopped before a level crossing to let a rail vehicle pass;\n173.3. driving or walking onto a level crossing when the barrier is down or is starting to come down, raising the barrier without authorisation, or driving (or walking) around it;\n173.4. driving onto a level crossing if there is an obstruction beyond it that would force the driver to stop on the crossing;\n173.5. taking agricultural, road, construction and other machinery that has not been specially prepared for transport across a level crossing, if this could damage the equipment of the level crossing;\n173.6. crossing a level crossing in a wheelchair without an accompanying person;\n173.7. lingering or standing about on a level crossing, or taking longer than is needed to walk or drive across it."
+  },
+  "188": {
+    "q": "Is the driver of the green car allowed to manoeuvre like this?",
+    "o": ["Yes.", "No.", "Yes, if they are sure the manoeuvre is safe."],
+    "e": "Road Traffic Rules, clause 110. If traffic is very heavy and all the lanes are occupied, changing lanes is allowed only when it is necessary in order to turn, make a U-turn or stop."
+  },
+  "189": {
+    "q": "In what order will the cars cross the junction?",
+    "o": ["Green, yellow, red, blue.", "Red, green, yellow, blue.", "The red, the yellow and the green together, then the blue."],
+    "e": "At this junction of equal-priority roads the green, red and yellow cars are all turning right and their paths do not cross anything, so they can all go at the same time. The blue car is turning left, so it must give way to the yellow car coming from the opposite direction and turning right. The blue car crosses the junction last."
+  },
+  "190": {
+    "q": "Which driver has priority?",
+    "o": ["The driver of the blue car.", "The driver of the red car."],
+    "e": "The red car is going downhill (this is shown by the sign \"Steep descent\" rather than \"Steep ascent\"), so it must give way to the blue car coming uphill."
+  },
+  "191": {
+    "q": "Is the driver of the green car allowed to go straight ahead in this situation (continuing round the roundabout)?",
+    "o": ["It is allowed.", "It is prohibited."],
+    "e": "Road Traffic Rules, Annex 1, sign 507. It indicates the number of lanes and the directions in which each lane may be used. Where a left turn is allowed, a U-turn is also allowed from the far left lane."
+  },
+  "192": {
+    "q": "When the paths of vehicles cross within a yard, who must give way?",
+    "o": ["The driver who has a vehicle approaching from the left.", "The driver who has a vehicle approaching from the right."],
+    "e": "Road Traffic Rules, clause 115. Where the paths of vehicles cross and the order of movement is not covered by the Rules, the driver who has a vehicle approaching from the right must give way."
+  },
+  "193": {
+    "q": "What must you do first before starting to overtake?",
+    "o": ["Make sure that the road ahead is clear.", "Change down to a lower gear.", "Increase speed.", "Reduce speed."],
+    "e": "Road Traffic Rules, clause 136. Drivers are advised to avoid unnecessary overtaking manoeuvres. Before starting to overtake, a driver must take additional precautions and make sure that:\n136.1. none of the drivers following behind has started to overtake them;\n136.2. the driver of the vehicle to be overtaken is not signalling a left turn;\n136.3. the part of the lane needed for overtaking is clear and that oncoming vehicles, or pedestrians moving on the carriageway, will not be obstructed;\n136.4. a safe distance from the overtaken vehicle will be kept during the overtake;\n136.5. on finishing the overtake they will be able to return to their own lane without obstructing the overtaken vehicle."
+  },
+  "194": {
+    "q": "What will you do if the rear axle of your car starts to slide sideways in a bend, when the car is rear-wheel drive?",
+    "o": ["Brake sharply and steer into the skid.", "Ease off the accelerator and steer against the skid.", "Brake sharply and steer against the skid.", "Ease off the accelerator and steer into the skid."],
+    "e": "What you should do in this case:\nEase off the accelerator so that the rear wheels stop sliding.\nSteer quickly into the skid (that is, if the rear end is sliding to the right, turn the wheel to the right).\nOnce the wheels regain grip, bring the steering back to the path you want to follow.\nIn this way grip is restored first and the car's course is then steadied."
+  },
+  "195": {
+    "q": "What should a driver do on seeing a pothole in the road that cannot be avoided, when the car's speed is high?",
+    "o": ["Stop braking just before entering the pothole.", "Increase speed just before entering the pothole."],
+    "e": "On seeing a pothole you should reduce speed and try to drive round it. If that is not possible and the impact cannot be avoided, you should release the brake just before it and straighten the steering — this reduces the chance of damaging both the tyre and the suspension parts."
+  },
+  "196": {
+    "q": "Do you have to stop and give way to a pedestrian who has stepped onto an uncontrolled pedestrian crossing (into the first lane of the oncoming direction), when there is one lane in your direction of travel and two in the oncoming direction?",
+    "o": ["Yes.", "No."],
+    "e": "Because the road has one lane in your direction of travel and two in the oncoming direction (three lanes in all), you must give way to the pedestrian only once they step into the lane of your direction of travel. If the pedestrian is still in the oncoming lanes (of which there are two), you do not have to stop and give way under this clause, because the requirement to give way to a pedestrian across the whole width of the crossing applies only where the road has one lane in each direction.\nA driver must give way to a pedestrian who is in any lane of their direction of travel when there is one lane in each direction."
+  },
+  "197": {
+    "q": "You and a lorry coming the other way both want to turn left, but the lorry is blocking your view. What will you do?",
+    "o": ["Go, because I have priority.", "Go only once I have made sure that it is safe.", "Go, because the traffic light is green for me."],
+    "e": "A green traffic light allows you to proceed, but when turning left the driver must still give way to oncoming vehicles that are going straight ahead or turning right.\nIn this situation the lorry may be blocking the view, so the driver should not hurry. The safest thing is to wait, let the lorry pass, and only then, when it is clearly visible that nothing is coming the other way, complete the left turn."
+  },
+  "198": {
+    "q": "In this situation priority belongs to:",
+    "o": ["The driver of the white car, who is going straight ahead.", "The driver of the blue car, who is moving into the adjacent lane."],
+    "e": "Road Traffic Rules, clause 104. When changing lanes, a driver must give way to vehicles travelling in the adjacent lane in the same direction. If vehicles travelling in the same direction change lanes at the same time, the driver must give way to the vehicle on the right, except in the cases set out in clause 112 of the Rules.\nRoad Traffic Rules, clause 112. Where there is an acceleration lane for joining a road, the driver must use it and merge into the traffic flow (move into the adjacent lane), giving way to vehicles travelling in that lane or moving into the deceleration lane."
+  },
+  "199": {
+    "q": "Water that has got onto the brake pads reduces the effectiveness of the brakes. What will you do?",
+    "o": ["I will brake many times while standing still.", "I will pay no attention to it, because they will dry out in a few minutes.", "I will brake gently several times while driving slowly."],
+    "e": "After driving through deep water you should drive slowly for a while and press the brake pedal several times, drying the brake discs or drums and the pads or shoes. They dry out because of the rise in temperature as the pads rub against the brake discs, or the shoes against the brake drums."
+  },
+  "200": {
+    "q": "Must you take all necessary measures not to endanger the safety of other road users, if doing so would endanger your own life or health?",
+    "o": ["Yes, you must.", "You do not have to.", "The Road Traffic Rules do not cover this."],
+    "e": "Under the Road Traffic Rules a driver is not obliged to take measures that would endanger their own life or health."
+  }
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="lt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,21 +11,31 @@
 
         <!-- ===== SCREEN 1: Load / Start ===== -->
         <div id="screen-load" class="bg-white rounded-2xl shadow-md p-8">
-            <h1 class="text-2xl font-bold text-center text-gray-800 mb-1">Driving Theory Practice</h1>
-            <p class="text-center text-sm text-gray-400 mb-8">Lithuanian learner driver exam preparation</p>
+
+            <!-- Language switch. It lives on this screen only: changing
+                 language swaps the question bank, which must not happen
+                 underneath a session that is already running. -->
+            <div class="flex justify-end mb-3">
+                <div class="inline-flex rounded-lg border border-gray-200 overflow-hidden">
+                    <button id="lang-lt" class="px-3 py-1 text-xs font-semibold transition-colors">LT</button>
+                    <button id="lang-en" class="px-3 py-1 text-xs font-semibold transition-colors">EN</button>
+                </div>
+            </div>
+
+            <h1 data-i18n="app.title" class="text-2xl font-bold text-center text-gray-800 mb-1"></h1>
+            <p data-i18n="app.subtitle" class="text-center text-sm text-gray-400 mb-8"></p>
 
             <!-- Profile name: lets several people share one browser without
                  mixing up their saved results. No account is involved. -->
             <div class="mb-5">
-                <label for="profile-input" class="block text-sm font-medium text-gray-700 mb-2">
-                    Profile
-                </label>
+                <label for="profile-input" data-i18n="load.profile"
+                       class="block text-sm font-medium text-gray-700 mb-2"></label>
                 <input
                     type="text"
                     id="profile-input"
                     list="profile-list"
                     maxlength="30"
-                    placeholder="Your name"
+                    data-i18n-placeholder="load.profilePlaceholder"
                     class="block w-full text-sm text-gray-700 border border-gray-200 rounded-xl px-4 py-2.5
                            focus:outline-none focus:border-blue-400"
                 >
@@ -35,29 +45,25 @@
             <!-- Question source: the bank shipped with the app, or the
                  user's own CSV together with their own images -->
             <div class="mb-5">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Questions</label>
+                <label data-i18n="load.questions" class="block text-sm font-medium text-gray-700 mb-2"></label>
                 <div class="grid grid-cols-2 gap-2">
-                    <button id="mode-builtin" class="py-2.5 px-4 text-sm font-medium rounded-xl border transition-colors">
-                        Built-in bank
-                    </button>
-                    <button id="mode-custom" class="py-2.5 px-4 text-sm font-medium rounded-xl border transition-colors">
-                        My own questions
-                    </button>
+                    <button id="mode-builtin" data-i18n="load.builtin"
+                            class="py-2.5 px-4 text-sm font-medium rounded-xl border transition-colors"></button>
+                    <button id="mode-custom" data-i18n="load.custom"
+                            class="py-2.5 px-4 text-sm font-medium rounded-xl border transition-colors"></button>
                 </div>
             </div>
 
             <!-- Panel: built-in bank (loaded automatically on start-up) -->
             <div id="source-builtin" class="mb-5">
-                <div id="builtin-status" class="text-sm rounded-xl px-4 py-3 bg-gray-50 text-gray-500">
-                    Loading the built-in question bank…
-                </div>
+                <div id="builtin-status" data-i18n="load.builtinLoading"
+                     class="text-sm rounded-xl px-4 py-3 bg-gray-50 text-gray-500"></div>
 
                 <!-- Shown only if the automatic load fails, e.g. when the page
                      was opened straight from disk instead of a local server -->
                 <div id="builtin-fallback" class="hidden mt-3">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Select database/db.csv manually
-                    </label>
+                    <label data-i18n="load.builtinManual"
+                           class="block text-sm font-medium text-gray-700 mb-2"></label>
                     <input
                         type="file"
                         id="builtin-csv-input"
@@ -75,9 +81,7 @@
 
             <!-- Panel: the user's own questions -->
             <div id="source-custom" class="hidden mb-5">
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Question file (.csv)
-                </label>
+                <label data-i18n="load.customCsv" class="block text-sm font-medium text-gray-700 mb-2"></label>
                 <input
                     type="file"
                     id="custom-csv-input"
@@ -92,7 +96,8 @@
                 >
 
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Images <span class="font-normal text-gray-400">— optional, select them all at once</span>
+                    <span data-i18n="load.customImages"></span>
+                    <span data-i18n="load.customImagesHint" class="font-normal text-gray-400"></span>
                 </label>
                 <input
                     type="file"
@@ -107,10 +112,7 @@
                            hover:file:bg-blue-100
                            border border-gray-200 rounded-xl p-2 cursor-pointer"
                 >
-                <p class="text-xs text-gray-400 mt-2">
-                    The <code class="bg-gray-100 px-1 rounded">picture</code> column holds the file name
-                    (e.g. <code class="bg-gray-100 px-1 rounded">12.jpg</code>) or a full https:// link.
-                </p>
+                <p data-i18n-html="load.pictureHelp" class="text-xs text-gray-400 mt-2"></p>
             </div>
 
             <!-- Load status message -->
@@ -119,24 +121,22 @@
             <!-- Timer toggle -->
             <div class="mb-6 flex items-center gap-3">
                 <input type="checkbox" id="timer-toggle" class="w-4 h-4 accent-blue-600 cursor-pointer">
-                <label for="timer-toggle" class="text-sm text-gray-700 cursor-pointer">
-                    Enable timer
-                </label>
+                <label for="timer-toggle" data-i18n="load.timer"
+                       class="text-sm text-gray-700 cursor-pointer"></label>
             </div>
 
-            <!-- Start button (disabled until CSV is loaded) -->
+            <!-- Start button (disabled until a bank is loaded) -->
             <button
                 id="start-btn"
                 disabled
+                data-i18n="load.start"
                 class="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-xl
                        disabled:opacity-40 disabled:cursor-not-allowed
                        hover:bg-blue-700 transition-colors"
-            >
-                Start Session
-            </button>
+            ></button>
 
             <!-- Practise only the questions answered wrongly before.
-                 Disabled until a bank is loaded and mistakes exist. -->
+                 Its label carries a count, so JavaScript fills it in. -->
             <button
                 id="drill-btn"
                 disabled
@@ -144,31 +144,20 @@
                        border border-blue-200
                        disabled:opacity-40 disabled:cursor-not-allowed
                        hover:bg-blue-50 transition-colors"
-            >
-                Practise my mistakes
-            </button>
+            ></button>
 
             <!-- History screen -->
             <button
                 id="history-btn"
                 class="w-full mt-3 py-3 px-6 text-gray-600 font-medium rounded-xl
                        border border-gray-200 hover:bg-gray-50 transition-colors"
-            >
-                View history
-            </button>
+            ></button>
 
             <!-- Shown only when the browser refuses to store anything -->
             <div id="storage-warning" class="hidden mt-5 text-sm rounded-xl px-4 py-3 bg-yellow-50 text-yellow-800"></div>
 
             <!-- Keyboard hint -->
-            <p class="text-center text-xs text-gray-400 mt-4">
-                Tip: use keys <kbd class="bg-gray-100 px-1 rounded">A</kbd>
-                <kbd class="bg-gray-100 px-1 rounded">B</kbd>
-                <kbd class="bg-gray-100 px-1 rounded">C</kbd>
-                <kbd class="bg-gray-100 px-1 rounded">D</kbd> to answer,
-                <kbd class="bg-gray-100 px-1 rounded">Enter</kbd> to continue,
-                <kbd class="bg-gray-100 px-1 rounded">Esc</kbd> to end
-            </p>
+            <p data-i18n-html="load.tip" class="text-center text-xs text-gray-400 mt-4"></p>
         </div>
 
         <!-- ===== SCREEN 2: Quiz ===== -->
@@ -176,15 +165,11 @@
 
             <!-- Header row: progress, timer, score -->
             <div class="flex justify-between items-center mb-5">
-                <span id="question-progress" class="text-sm text-gray-500 font-medium">
-                    Question 1 of 30
-                </span>
+                <span id="question-progress" class="text-sm text-gray-500 font-medium"></span>
                 <span id="timer-display" class="hidden text-sm font-mono text-gray-600 bg-gray-100 px-3 py-1 rounded-lg">
                     0:00
                 </span>
-                <span id="score-display" class="text-sm font-semibold text-blue-600">
-                    Score: 0
-                </span>
+                <span id="score-display" class="text-sm font-semibold text-blue-600"></span>
             </div>
 
             <!-- Difficulty badge -->
@@ -197,7 +182,7 @@
                 <img
                     id="question-image"
                     src=""
-                    alt="Question illustration"
+                    data-i18n-alt="quiz.imageAlt"
                     class="max-h-52 rounded-xl mx-auto border border-gray-100"
                 >
             </div>
@@ -216,70 +201,66 @@
                     id="next-btn"
                     class="w-full py-3 px-6 bg-gray-800 text-white font-semibold rounded-xl
                            hover:bg-gray-900 transition-colors"
-                >
-                    Next Question →
-                </button>
+                ></button>
             </div>
 
             <!-- Escape hatch, available at any point in the session -->
             <div class="mt-6 text-center">
                 <button
                     id="quit-btn"
+                    data-i18n="quiz.quit"
                     class="text-sm text-gray-400 hover:text-red-600 transition-colors"
-                >
-                    End session early
-                </button>
+                ></button>
             </div>
         </div>
 
         <!-- ===== SCREEN 3: Results ===== -->
         <div id="screen-results" class="hidden bg-white rounded-2xl shadow-md p-8">
-            <h2 id="results-title" class="text-2xl font-bold text-center text-gray-800 mb-1">Session Complete</h2>
-            <p class="text-center text-sm text-gray-400 mb-8">Here is how you did</p>
+            <h2 id="results-title" class="text-2xl font-bold text-center text-gray-800 mb-1"></h2>
+            <p data-i18n="results.subtitle" class="text-center text-sm text-gray-400 mb-8"></p>
 
             <!-- Results content injected by JavaScript -->
             <div id="results-content"></div>
 
             <button
                 id="restart-btn"
+                data-i18n="results.restart"
                 class="mt-8 w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-xl
                        hover:bg-blue-700 transition-colors"
-            >
-                Start New Session
-            </button>
+            ></button>
 
             <!-- Repeat only the questions just answered wrongly -->
             <button
                 id="results-drill-btn"
+                data-i18n="load.drill"
                 class="hidden w-full mt-3 py-3 px-6 bg-white text-blue-700 font-semibold rounded-xl
                        border border-blue-200 hover:bg-blue-50 transition-colors"
-            >
-                Practise my mistakes
-            </button>
+            ></button>
 
             <button
                 id="results-history-btn"
+                data-i18n="load.history"
                 class="w-full mt-3 py-3 px-6 text-gray-600 font-medium rounded-xl
                        border border-gray-200 hover:bg-gray-50 transition-colors"
-            >
-                View history
-            </button>
+            ></button>
         </div>
 
         <!-- ===== SCREEN 4: History ===== -->
         <div id="screen-history" class="hidden bg-white rounded-2xl shadow-md p-8">
             <div class="flex items-center justify-between mb-6">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-800">Your history</h2>
-                    <p class="text-sm text-gray-400">Profile: <span id="history-profile"></span></p>
+                    <h2 data-i18n="history.title" class="text-2xl font-bold text-gray-800"></h2>
+                    <p class="text-sm text-gray-400">
+                        <span data-i18n="history.profile"></span>
+                        <span id="history-profile"></span>
+                    </p>
                 </div>
                 <button
                     id="history-back-btn"
+                    data-i18n="history.back"
                     class="text-sm text-gray-500 hover:text-gray-800 border border-gray-200
                            rounded-xl px-4 py-2 transition-colors"
-                >
-                    ← Back
-                </button>
+                ></button>
             </div>
 
             <!-- Statistics, chart, weak spots and session list injected by JavaScript -->
@@ -288,15 +269,12 @@
             <!-- Backup controls: localStorage is wiped if the user clears
                  their browser data, so results can be exported to a file -->
             <div class="mt-8 pt-6 border-t border-gray-100 grid grid-cols-3 gap-3">
-                <button id="export-btn" class="text-sm text-gray-600 border border-gray-200 rounded-xl px-3 py-2 hover:bg-gray-50 transition-colors">
-                    Export
-                </button>
-                <button id="import-btn" class="text-sm text-gray-600 border border-gray-200 rounded-xl px-3 py-2 hover:bg-gray-50 transition-colors">
-                    Import
-                </button>
-                <button id="clear-btn" class="text-sm text-red-600 border border-red-200 rounded-xl px-3 py-2 hover:bg-red-50 transition-colors">
-                    Clear
-                </button>
+                <button id="export-btn" data-i18n="history.export"
+                        class="text-sm text-gray-600 border border-gray-200 rounded-xl px-3 py-2 hover:bg-gray-50 transition-colors"></button>
+                <button id="import-btn" data-i18n="history.import"
+                        class="text-sm text-gray-600 border border-gray-200 rounded-xl px-3 py-2 hover:bg-gray-50 transition-colors"></button>
+                <button id="clear-btn" data-i18n="history.clear"
+                        class="text-sm text-red-600 border border-red-200 rounded-xl px-3 py-2 hover:bg-red-50 transition-colors"></button>
             </div>
             <input type="file" id="import-input" accept=".json,application/json" class="hidden">
             <div id="history-status" class="hidden"></div>
@@ -305,10 +283,11 @@
     </div>
 
     <!-- Load order matters: csv and storage have no dependencies,
-         session and ui use state from app, history reads storage,
-         app ties everything together -->
+         i18n reads the stored language, bank and session use that state,
+         history reads storage, app ties everything together -->
     <script src="src/csv.js"></script>
     <script src="src/storage.js"></script>
+    <script src="src/i18n.js"></script>
     <script src="src/bank.js"></script>
     <script src="src/session.js"></script>
     <script src="src/ui.js"></script>

@@ -41,26 +41,32 @@ let sessionAbandoned = false;  // true when the user ended the session early
 
 let currentBank = null;              // BUILTIN_BANK, or "custom:<file name>"
 let customImages = new Map();        // picture file name -> blob URL, for custom banks
+let currentSource = "builtin";       // which of the two sources is selected
 
-// Difficulty labels and point values used throughout the app
+// ===== LANGUAGE STATE =====
+
+let currentLanguage = "en";          // "en" or "lt"; see i18n.js
+
+// Points per difficulty level. The labels are translated, so they live
+// in i18n.js under the difficulty.* keys.
 // Easy = 1 point, Medium = 2 points, Hard = 3 points
-const DIFFICULTY_NAMES  = { 1: "Easy", 2: "Medium", 3: "Hard" };
 const DIFFICULTY_POINTS = { 1: 1, 2: 2, 3: 3 };
 
 
 // ===== START-UP =====
 
-// Restores the profile used last time and warns if nothing can be stored
+// Restores the language and profile used last time, and warns if nothing
+// can be stored
 function initialiseApp() {
+    currentLanguage = getStoredLanguage();
+    applyTranslations();
+
     activeProfile = getActiveProfile();
     rememberProfile(activeProfile);
 
     if (!isStorageAvailable()) {
         const warning = document.getElementById("storage-warning");
-        warning.textContent =
-            "This browser is not allowing local storage, so results cannot be saved. " +
-            "Private browsing blocks it, and opening the page through a local server " +
-            "(instead of straight from the file) usually fixes it.";
+        warning.textContent = t("load.storageBlocked");
         warning.classList.remove("hidden");
     }
 
@@ -72,6 +78,35 @@ function initialiseApp() {
 }
 
 initialiseApp();
+
+
+// ===== LANGUAGE =====
+
+// Switching language re-labels the interface and, for the built-in bank,
+// loads the questions again from the file of that language. A bank the
+// user supplied is left alone: only they know what language it is in.
+function setAppLanguage(lang) {
+    if (lang === currentLanguage) return;
+
+    currentLanguage = storeLanguage(lang);
+    applyTranslations();
+
+    if (currentSource === "builtin") {
+        loadBuiltinBank();
+    } else {
+        refreshCustomBank();
+    }
+
+    refreshStartScreen();
+}
+
+document.getElementById("lang-lt").addEventListener("click", function () {
+    setAppLanguage("lt");
+});
+
+document.getElementById("lang-en").addEventListener("click", function () {
+    setAppLanguage("en");
+});
 
 
 // ===== EVENT LISTENERS =====
@@ -90,6 +125,7 @@ document.getElementById("profile-input").addEventListener("change", function (e)
 // Whatever was loaded is dropped, so a half-finished switch can never
 // leave the previous bank's questions on screen.
 function setSource(source) {
+    currentSource = source === "custom" ? "custom" : "builtin";
     questions = [];
     currentBank = null;
     clearCustomImages();
@@ -207,14 +243,11 @@ document.getElementById("clear-btn").addEventListener("click", function () {
     const count = loadHistory(activeProfile).length;
     if (count === 0) return;
 
-    const message = "Delete all " + count + " saved session" + (count !== 1 ? "s" : "") +
-                    " for profile \"" + activeProfile + "\"? This cannot be undone.";
-
-    if (confirm(message)) {
+    if (confirm(t("history.confirmClear", { n: count, profile: activeProfile }))) {
         clearHistory(activeProfile);
         renderHistoryScreen();
         refreshStartScreen();
-        showHistoryStatus("History cleared.", true);
+        showHistoryStatus(t("history.cleared"), true);
     }
 });
 

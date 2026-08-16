@@ -91,7 +91,7 @@ function startSession(mode) {
         // is not the same predictable list every time
         const pool = buildMistakePool();
         if (pool.length === 0) {
-            alert("There are no past mistakes to practise yet. Finish a session first.");
+            alert(t("quiz.noMistakesYet"));
             return;
         }
         sessionQuestions = shuffle(pool.slice(0, 30));
@@ -150,9 +150,8 @@ function quitSession() {
     const answered = sessionAnswers.length;
 
     const message = answered === 0
-        ? "End this session? Nothing has been answered yet, so no result will be saved."
-        : "End this session now? Your " + answered + " answer" + (answered !== 1 ? "s" : "") +
-          " will be saved to your history and marked as ended early.";
+        ? t("quiz.confirmQuitEmpty")
+        : t("quiz.confirmQuit", { n: answered });
 
     if (!confirm(message)) return;
 

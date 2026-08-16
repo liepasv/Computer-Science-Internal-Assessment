@@ -1,0 +1,127 @@
+{
+  "76": {
+    "q": "Does the driver of the white car have priority (it is turning left)?",
+    "o": ["Yes.", "No."],
+    "e": "Both cars are on the major road, so between themselves they follow the give-way-to-the-right rule. The blue car has no obstacle on its right, so it goes first. The white car therefore does not have priority in this case."
+  },
+  "77": {
+    "q": "Which drivers, travelling in the directions of the arrows, must give way to other road users?",
+    "o": ["The red car.", "The black car.", "The blue car.", "The cyclist."],
+    "e": "The driver of the blue car is coming out of a car park (yard), so they must give way to all vehicles on the road they are entering."
+  },
+  "78": {
+    "q": "In what order will the vehicles cross the junction (the black car has amber beacons switched on, the white car is turning left)?",
+    "o": ["The white and the blue car together, then the black one.", "Black, white, blue.", "Blue, white, black.", "Black, blue, white."],
+    "e": "The white and the blue car go first, because both are on the major road and their paths do not cross. The black car goes last, because it is coming from the minor road. Amber beacons do not give priority."
+  },
+  "79": {
+    "q": "What does this sign prohibit?",
+    "o": ["Vehicles standing on even days of the month on the side where this sign is.", "Vehicles standing on odd days of the week on the side where this sign is."],
+    "e": "The even days of the month are the 2nd, 4th, 6th, 8th and so on. An even day of the month becomes an odd one at 24:00."
+  },
+  "80": {
+    "q": "Who is allowed to cross a level crossing when its red light is on?",
+    "o": ["Drivers of emergency vehicles travelling on the road with blue and red (or only blue) beacons and sirens switched on.", "Cars with amber beacons switched on.", "Road maintenance vehicles.", "All vehicles are prohibited from proceeding."],
+    "e": "Emergency service crews decide for themselves when it is safe to cross a level crossing and when it is not."
+  },
+  "81": {
+    "q": "The plate indicates that:",
+    "o": ["A section marked in this way is often slippery because of ice or snow.", "The air temperature on this section is low."],
+    "e": "Road Traffic Rules, Annex 1, plate 848. \"Icy road\". A section marked in this way is often slippery because of ice or snow."
+  },
+  "82": {
+    "q": "Who must give way?",
+    "o": ["The cyclist.", "The driver of the car."],
+    "e": "When approaching a place where the carriageway has to be crossed, a cyclist must in all cases reduce speed and may continue only after making sure that it is safe to do so. In addition, a cyclist wishing to cross the carriageway where traffic is not controlled must give way to vehicles travelling on the carriageway, except when crossing exits from premises beside the road, from a residential zone, a yard or a car park, and when crossing a carriageway into which other drivers are turning."
+  },
+  "83": {
+    "q": "In which cases is it allowed to pass this road sign?",
+    "o": ["It is not allowed in any case.", "It is allowed if the mass of your vehicle, including the trailer and the load, is not greater than the mass shown on the sign.", "It is always allowed, only at a safe speed.", "It is allowed if the load on any one axle does not exceed the figure shown on the sign."],
+    "e": "Road Traffic Rules, Annex 1, sign 314. \"Mass limit\". It is prohibited to drive vehicles, or combinations of vehicles, whose mass with or without a load is greater than the mass shown on the sign."
+  },
+  "84": {
+    "q": "What is the maximum speed beyond this road sign, on a road with an asphalt surface (not an expressway or a motorway), for a driver with less than 2 years of driving experience?",
+    "o": ["80 km/h.", "70 km/h.", "60 km/h.", "50 km/h."],
+    "e": "Road Traffic Rules, clause 131. Outside built-up areas the permitted speeds are:\n131.2. category A1, A2, A or B vehicles driven by novice drivers, by learner drivers or by people taking the practical driving test, and buses (including school buses): on motorways no more than 100 km/h, on expressways no more than 90 km/h, on roads with an asphalt or concrete surface no more than 80 km/h, and on other roads no more than 70 km/h;\nLaw on Road Traffic Safety, Article 2. Main definitions used in this Law:\n31. Learner — a person who is learning to drive a vehicle in the prescribed manner.\n52. Novice driver — a person who has acquired the right to drive a category A, A1, A2, B or B1 motor vehicle and has less than two years of driving experience."
+  },
+  "85": {
+    "q": "In what order will the cars cross the junction?",
+    "o": ["Red, yellow, blue.", "The red car together with the blue one, then the yellow one.", "Yellow, then the red car together with the blue one."],
+    "e": "Road Traffic Rules, clause 154. At a junction of roads of unequal priority, a driver travelling on the minor road must give way to vehicles approaching the junction on the major road."
+  },
+  "86": {
+    "q": "Who has priority at the junction?",
+    "o": ["The driver of the blue car.", "The cyclist."],
+    "e": "At the junction we can see road signs and a traffic light, but under the road traffic rules the traffic light takes precedence over the road signs. The traffic light is showing a green signal allowing movement in the directions indicated. The cyclist therefore follows the traffic light and crosses the junction first. The car is turning left, so it must give way to the cyclist turning right (Road Traffic Rules, clause 157)."
+  },
+  "87": {
+    "q": "Is it allowed to make a U-turn in this situation?",
+    "o": ["Yes.", "No."],
+    "e": "After turning round, the car would end up in lane A, where it is not allowed to drive."
+  },
+  "88": {
+    "q": "When does a road sign used together with this supplementary plate apply?",
+    "o": ["When the road surface is dry.", "When the road surface is damp (wet)."],
+    "e": "Road Traffic Rules, Annex 1, plate 845 \"Wet surface\". It indicates that the sign the plate is used with applies when the surface of the carriageway is damp (wet)."
+  },
+  "89": {
+    "q": "What does a horizontal solid black line mark?",
+    "o": ["It marks the side surfaces of barriers on sharp bends, steep descents and other dangerous sections.", "It marks signalling devices placed on central reservations or safety islands.", "It marks kerbs on dangerous sections and raised safety islands.", "It marks the side surfaces of barriers on other sections of road."],
+    "e": "A horizontal solid black line marks the side surfaces of barriers on other sections of road."
+  },
+  "90": {
+    "q": "What do horizontal black and white bands mark?",
+    "o": ["They mark road structures that are a hazard to moving vehicles.", "They mark the lower edge of the structures of bridges, flyovers and tunnels.", "They mark signalling devices placed on central reservations or safety islands.", "They mark marker posts, gates and barrier supports."],
+    "e": "Horizontal black and white bands mark signalling devices placed on central reservations or safety islands."
+  },
+  "91": {
+    "q": "What will you do when you are approaching a bend with limited visibility?",
+    "o": ["I will drive on without changing speed.", "I will ease off the accelerator.", "I will brake."],
+    "e": "When approaching a bend a driver must allow for the fact that it may be sharper than expected, and must therefore choose a safe speed and a suitable position on the road so as not to run into the oncoming lane. A safe speed depends on all the circumstances: the weather, the condition of the road and of the vehicle, and also the driver's experience and how they feel."
+  },
+  "92": {
+    "q": "What do vertical diagonal black and white bands on road structures mark?",
+    "o": ["They mark road structures that are a hazard to moving vehicles.", "They mark the lower edge of the structures of bridges, flyovers and tunnels.", "They mark signalling devices placed on central reservations or safety islands.", "They mark marker posts, gates and barrier supports."],
+    "e": "Diagonal black and white bands mark the vertical elements of road structures (bridges, flyover supports, the end sections of barriers and so on) where those elements are a hazard to moving vehicles, and they also mark the supports of direction signs Nos 407–409 on central reservations and at road forks."
+  },
+  "93": {
+    "q": "In which directions is movement allowed?",
+    "o": ["Movement is prohibited.", "Left and U-turn only.", "Right only.", "In all the directions shown."],
+    "e": "Traffic controller's arms stretched out to the sides or lowered: from the chest side and the back side, all vehicles and pedestrians are prohibited from moving."
+  },
+  "94": {
+    "q": "Does the pavement form part of the definition of a road?",
+    "o": ["No.", "Yes."],
+    "e": "A road is a strip of the surface of the ground or of a structure that is intended and used for traffic, over its full width, including the carriageway of the road (hereinafter — the carriageway), junctions, pavements, shoulders, footpaths and cycle tracks, and central reservations."
+  },
+  "95": {
+    "q": "Must the driver signal when turning left in this situation?",
+    "o": ["Yes.", "No."],
+    "e": "A driver must give warning with the direction indicators for the appropriate direction, or by hand if there are no indicators or they are out of order: before moving off and before stopping; before changing lanes, before starting and before finishing an overtake, before starting and before finishing passing an obstruction, before turning right or left, before making a U-turn, and when leaving a roundabout."
+  },
+  "96": {
+    "q": "Which vehicle will cross the junction first?",
+    "o": ["1", "2", "3", "4"],
+    "e": "At a junction of roads of unequal priority, a driver travelling on the minor road must give way to vehicles approaching the junction on the major road. If the direction of the major road changes at the junction, drivers travelling on the major road must follow the rules for crossing junctions of equal-priority roads in relation to each other. Drivers travelling on the minor roads must follow those same rules in relation to each other.\n\nCars 3 and 4 are on the major road. Car 3 continues along the major road while car 4 wants to leave it, so car 3 crosses the junction first and car 4 gives way to it (obstacle on the right). Car 1 goes next, since it is an obstacle on the right for car 2 — so car 2 goes last."
+  },
+  "97": {
+    "q": "What will you do in this situation?",
+    "o": ["Reduce your speed to 10 km/h so that the children have time to move away.", "Use the horn.", "Stop, switch on the hazard warning lights, and drive on only once the children have left the carriageway."],
+    "e": "The horn must not be used, so that the children are not startled and do not end up under the wheels of another car. In such a case you should stop and switch on the hazard warning lights (other drivers will not be able to overtake you, because crossing the solid line is prohibited)."
+  },
+  "98": {
+    "q": "A driver who, when the amber traffic light comes on or the traffic controller raises their arm, could only stop by braking sharply is allowed to:",
+    "o": ["Turn right only.", "Drive on.", "Brake sharply in any case."],
+    "e": "A driver who, when the amber (or white horizontal bar) traffic light comes on or the traffic controller raises their arm, could stop at the places set out in clause 165 of the Rules only by braking sharply is allowed to drive on."
+  },
+  "99": {
+    "q": "Which lane may moped riders use?",
+    "o": ["Any free lane.", "Only the first lane from the right-hand edge of the carriageway.", "Both the first and the second lane from the right-hand edge of the carriageway.", "Mopeds are prohibited from using traffic lanes."],
+    "e": "Riders of mopeds and drivers of light quadricycles must use only the first lane from the right-hand edge of the carriageway, keeping as close as possible to its right-hand edge, except when they need to turn left, make a U-turn, pass an obstruction, go straight ahead where the first lane allows only a right turn, or stop or stand on a one-way road."
+  },
+  "100": {
+    "q": "Is a pedestrian allowed to cross a road with a central reservation?",
+    "o": ["Yes.", "No."],
+    "e": "Pedestrians are prohibited from crossing the carriageway at places where there are vehicle or pedestrian barriers and, in built-up areas, also where there is a central reservation (except at pedestrian crossings and junctions)."
+  }
+}

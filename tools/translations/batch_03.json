@@ -1,0 +1,127 @@
+{
+  "51": {
+    "q": "When driving in poor visibility, a driver must choose a speed at which the stopping distance is:",
+    "o": ["Shorter than the length of road that can be seen.", "Longer than the length of road that can be seen."],
+    "e": "This makes sure that, on spotting an obstruction, the car will be able to stop safely without going beyond the visible zone."
+  },
+  "52": {
+    "q": "What does this symbol warn about when it lights up on the instrument panel?",
+    "o": ["A fuse has blown.", "The battery is not charging.", "A fault in the anti-lock braking system."],
+    "e": "The ABS (Anti-lock Braking System) symbol lighting up on the instrument panel warns of a fault in the anti-lock braking system. It means the system has detected an error and has switched the ABS function off automatically to avoid the brakes working incorrectly."
+  },
+  "53": {
+    "q": "In which of the following engine states is the battery the only source of energy for the electrical consumers?",
+    "o": ["When the crankshaft speed is medium or higher.", "When the engine is not running.", "When the crankshaft speed is low or medium."],
+    "e": "The battery is the only source of energy in ACC (accessory) mode, when the engine is not running."
+  },
+  "54": {
+    "q": "Which wheels does the parking brake act on?",
+    "o": ["The rear wheels only.", "The front wheels only.", "Both the front and the rear wheels.", "The rear or the front wheels."],
+    "e": "The parking brake acts on the front or the rear wheels, depending on how the car is built. On most cars it acts on the rear wheels, but on some older or special vehicles it may be connected to the front wheels."
+  },
+  "55": {
+    "q": "When entering a roundabout you must always:",
+    "o": ["Turn right.", "Signal a right turn.", "Turn left."],
+    "e": "When entering a roundabout you must always give way to the drivers already travelling on it. Under the Road Traffic Rules you must not signal when entering a roundabout. You must also keep to the marked lanes, obey the road signs controlling the roundabout (for example \"Give way\") and the traffic lights, and keep to a safe speed."
+  },
+  "56": {
+    "q": "You intend to turn right from an unsurfaced road onto a road with an asphalt surface. What will you do in this situation?",
+    "o": ["I will go first, because I have priority.", "I will give way to the car coming from the left."],
+    "e": "Under the Road Traffic Rules, when leaving an unsurfaced road (a gravel, field or forest road) for a surfaced road you must give way, stopping if necessary, and let all vehicles crossing your path pass, because in this case the surfaced road counts as the major road compared with the unsurfaced one."
+  },
+  "57": {
+    "q": "Why must you make sure the indicator is switched off after taking a turn?",
+    "o": ["So as not to dazzle other road users.", "So as not to drain the battery.", "So as not to damage the indicator switch (relay).", "So as not to mislead other road users."],
+    "e": "After taking a turn you must make sure the indicator is switched off so that you do not mislead other road users and cause dangerous situations. A false signal can make other drivers wrongly believe that you are turning again or stopping, which creates a hazard."
+  },
+  "58": {
+    "q": "Is it allowed to make a U-turn at this junction at 3 p.m.?",
+    "o": ["Yes.", "No."],
+    "e": "At this junction there is a road sign showing that you may go straight ahead or turn left. Below the sign is a plate with the times \"14–17 h\", which means the restriction applies during those hours. Since the sign does not allow a U-turn, you cannot turn round at 3 p.m."
+  },
+  "59": {
+    "q": "Your car has broken down while you were driving on a motorway. You have stopped on the surfaced hard shoulder. Where is the safest place to wait for help?",
+    "o": ["On the grass verge.", "Behind the car.", "In the car.", "In front of the car."],
+    "e": "The safest place to wait for help is behind the crash barrier, on the green verge, well away from the carriageway."
+  },
+  "60": {
+    "q": "What does a broken white line along the middle of the road mean?",
+    "o": ["You must watch out for oncoming vehicles.", "It may be crossed only when it is safe to do so.", "Do not overtake."],
+    "e": "A broken white line along the middle of the road marks the lane boundaries for vehicles travelling in the same direction."
+  },
+  "61": {
+    "q": "When may you bring your vehicle to a stop at a carriageway intersection?",
+    "o": ["When I am waiting for an opportunity to turn left.", "When I am turning right onto the major road in heavy traffic.", "Never."],
+    "e": "While waiting to turn left you are allowed to stop in order to let oncoming traffic pass."
+  },
+  "62": {
+    "q": "What does this sign mean?",
+    "o": ["No entry.", "Going straight ahead is prohibited.", "Ahead only."],
+    "e": "The sign means that you must go straight ahead."
+  },
+  "63": {
+    "q": "What is the maximum speed allowed in a built-up area for a lorry with a maximum authorised mass of 3.5 t towing a trailer?",
+    "o": ["40 km/h", "60 km/h", "50 km/h"],
+    "e": "The sign \"Built-up area\" (Tytuvėnai) means that you are entering a built-up area and that the rules for built-up areas start to apply. The maximum speed is 50 km/h."
+  },
+  "64": {
+    "q": "Having passed the tests at the state enterprise \"Regitra\", you may start driving on your own:",
+    "o": ["Immediately.", "Only once you have received your driving licence.", "If you have a copy of the test report."],
+    "e": "Even though the tests have been passed, you may drive only once you hold the physical licence, because it has to be produced during a check."
+  },
+  "65": {
+    "q": "Is the driver of a car allowed to stop in the right-hand lane of a road marked with this road sign?",
+    "o": ["It is allowed.", "It is prohibited."],
+    "e": "The sign shows that the right-hand lane is reserved for scheduled public transport (buses). The driver of a car may therefore not stop in it, unless additional signs allow it."
+  },
+  "66": {
+    "q": "Is it allowed to carry people in a towed caravan?",
+    "o": ["It is allowed.", "It is prohibited."],
+    "e": "A towed caravan is not intended for carrying people while on the move, so there must be no passengers in it."
+  },
+  "67": {
+    "q": "What will you do when driving up a steep hill in a car with a manual gearbox?",
+    "o": ["I will change up to a higher gear.", "I will change down to a lower gear.", "I will stay in the same gear."],
+    "e": "Driving up a steep hill with a manual gearbox calls for a lower gear, because it gives more pulling power and makes it easier for the engine to take the car uphill."
+  },
+  "68": {
+    "q": "A slow-moving vehicle ahead of you is forcing you to reduce your speed considerably. What will you do?",
+    "o": ["I will flash my headlights to urge them to go faster.", "I will drive close behind so that I can overtake as soon as possible.", "I will stay behind until an opportunity to overtake safely appears."],
+    "e": "Even if a slow-moving vehicle ahead is holding you up, you must not flash your headlights at it or drive too close. You should keep a safe distance and wait for a moment when overtaking is safe and permitted."
+  },
+  "69": {
+    "q": "You are driving on a motorway. When may you use the left-hand lane?",
+    "o": ["Until I have passed the vehicles travelling more slowly in the right-hand lane.", "I may use it all the time, even if the right-hand lane is free."],
+    "e": "On a motorway you should keep as far right as possible; the left-hand lane is for overtaking or passing. Once the manoeuvre is finished you must return to the right-hand lane."
+  },
+  "70": {
+    "q": "During the driving test:",
+    "o": ["I will drive very slowly, to impress the examiner.", "I will drive the way I usually do."],
+    "e": "During the driving test there is no need to drive unusually slowly on purpose or to try to impress in any other way. What matters is driving calmly and confidently, following the road traffic rules and the way you are used to driving safely."
+  },
+  "71": {
+    "q": "The traffic controller's arms are lowered. The traffic light at the junction is red. Are you allowed to go straight ahead?",
+    "o": ["It is allowed.", "It is prohibited."],
+    "e": "When traffic at a junction is being directed by a traffic controller, their signals take precedence over the traffic lights. If the controller's arms are lowered and they are standing sideways to you, you are allowed to go straight ahead even though the traffic light is red."
+  },
+  "72": {
+    "q": "What does this road sign mean?",
+    "o": ["End of all previous restrictions.", "End of the zone where standing is prohibited.", "End of the zone where stopping is prohibited.", "End of the major road."],
+    "e": "A yellow diamond means a major road, and when it is crossed out with diagonal black lines it shows that the major road ends. As you drive on you must watch the other signs carefully and follow the priority rules at junctions."
+  },
+  "73": {
+    "q": "You intend to turn right at the junction. What will you do in this situation?",
+    "o": ["I will turn in front of the cyclist, because I have priority.", "I will let the cyclist going straight ahead pass and then turn."],
+    "e": "When turning right you must give way to a cyclist going straight ahead in the same direction. Only once you have let them pass can you make the turn safely."
+  },
+  "74": {
+    "q": "In what order will the vehicles cross the junction (the white car has a green traffic light)?",
+    "o": ["The brown car together with the green one, then the white one.", "Green, brown, white.", "White, then the brown car together with the green one."],
+    "e": "The green traffic light is showing for all three cars. The white car will cross the junction first, because the brown and the green car, turning left, must give way to cars turning right."
+  },
+  "75": {
+    "q": "Holders of a certificate issued by an educational establishment are allowed to ride a bicycle on the road from the age of:",
+    "o": ["12.", "14.", "16."],
+    "e": "Road Traffic Rules, clause 55. Riding a bicycle on the carriageway is allowed for people aged at least 14, and for people aged at least 12 who have completed the training course set by the Ministry of Education, Science and Sport of the Republic of Lithuania and hold a certificate issued by their school. Under the supervision of an adult, riding a bicycle on the carriageway is allowed from the age of 8. In a residential zone there is no age limit for cyclists."
+  }
+}

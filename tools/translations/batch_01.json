@@ -1,0 +1,127 @@
+{
+  "1": {
+    "q": "What will you do if you are approaching a pedestrian crossing some distance ahead but are not sure that nobody is standing at it?",
+    "o": ["I will stop at the crossing when I reach it.", "I will ease off the accelerator.", "I will drive on without braking."],
+    "e": "The first answer is wrong: in the dark, if you are not sure whether anyone is standing at the crossing, you do not have to stop at every crossing. It is enough to ease off the accelerator and to stop the vehicle if that becomes necessary."
+  },
+  "2": {
+    "q": "What does this sign mean?",
+    "o": ["Cyclists.", "Children.", "Residential zone."],
+    "e": "\"Cyclists\" warns of a stretch of road that is often entered or crossed by cyclists and by riders of electric micromobility vehicles."
+  },
+  "3": {
+    "q": "If a driver has comprehensive (KASKO) insurance, is compulsory third party liability insurance also required?",
+    "o": ["It is not required.", "It is required."],
+    "e": "Compulsory third party liability insurance is always required, even if the car is covered by comprehensive (KASKO) insurance. Note that if you are the owner of the car you do not have to carry these documents with you, but after a road accident you may have to give their details to the other party involved, for example when filling in an accident declaration."
+  },
+  "4": {
+    "q": "In a residential zone, the driver of a lorry must not drive faster than:",
+    "o": ["30 km/h.", "20 km/h.", "60 km/h.", "40 km/h."],
+    "e": "In a residential zone it is prohibited to drive faster than 20 km/h."
+  },
+  "5": {
+    "q": "Is a combine harvester allowed to drive on a motorway?",
+    "o": ["It is allowed.", "It is allowed during the day.", "It is prohibited."],
+    "e": "On roads marked with the signs \"Motorway\" or \"Road for Motor Vehicles\" the following are prohibited: pedestrians, driving animal-drawn vehicles, driving or herding animals or birds, horse riding, and the movement of bicycles, electric micromobility vehicles, mopeds, quadricycles of all kinds and all other vehicles, except cars, motorcycles, tricycles, and motorcycles and cars with trailers, provided that the maximum design speed of these motor vehicles, or their speed given their technical condition, is at least 60 km/h."
+  },
+  "6": {
+    "q": "Is it allowed to carry people in the body of a lorry?",
+    "o": ["It is allowed if the body has been adapted accordingly and seats have been fitted.", "It is allowed for people accompanying the load.", "It is prohibited, except for passengers carried for the needs of the national defence system."],
+    "e": "Passengers may be carried only in vehicles intended for that purpose (or specially adapted for it) and only in the places designed for passengers. Carrying passengers in the body of a lorry is prohibited, except for passengers carried for the needs of the national defence system, where the body has been adapted for carrying passengers."
+  },
+  "7": {
+    "q": "What does this road sign mean?",
+    "o": ["A parking space for electric vehicles, for use only while they are charging.", "A parking space for cars."],
+    "e": "Road sign 854, \"Electric vehicles\". It indicates that the parking space is for electric vehicles to stand in only while they are being charged."
+  },
+  "8": {
+    "q": "What is an intersection of carriageways?",
+    "o": ["It is the area bounded by the lines imagined as extensions of the outer edges of the intersecting carriageways.", "It is the area bounded by imaginary lines joining the outer edges of the pavements or shoulders."],
+    "e": "An intersection of carriageways (hereinafter — carriageway intersection) is the area bounded by the straight lines imagined as extensions of the outer edges of the intersecting carriageways, regardless of whether those edges are widened or rounded."
+  },
+  "9": {
+    "q": "In how many rows are cars allowed to stop and stand on the carriageway?",
+    "o": ["In one row.", "In two rows.", "In three rows."],
+    "e": "Vehicles are allowed to stop and stand on the carriageway in one row only."
+  },
+  "10": {
+    "q": "Is it allowed to pass a car that has been forced to stop in this way?",
+    "o": ["It is allowed.", "It is prohibited."],
+    "e": "Solid road marking lines may be crossed in the exceptional case where it is impossible to continue without changing lane because of a stationary obstruction on the carriageway (a fallen tree, a road accident, a vehicle forced to stop or parked where it should not be, or other stationary objects that make movement impossible), provided that it is safe to do so and other road users are not obstructed."
+  },
+  "11": {
+    "q": "What do these road signs mean?",
+    "o": ["Standing is prohibited for 20 m ahead on the side of the road where the signs are placed.", "Standing is prohibited beyond 20 m on the side of the road where the signs are placed."],
+    "e": "Road sign 333 — No standing (vehicles are prohibited from standing on the side of the road where the sign is. It does not apply to vehicles marked with the \"Disabled person\" distinguishing sign or with a disabled person's parking card, nor to taxis with the taximeter switched on. If it is used together with marking line 1.9, it applies until the end of that line).\nRoad sign 806 — Zone of validity ahead (indicates the length of the zone beyond the sign in which the dangerous section of road, or the other road signs it is used with, apply)."
+  },
+  "12": {
+    "q": "Is it allowed to pass vehicles travelling in the same direction on their right while driving in a deceleration or acceleration lane?",
+    "o": ["It is prohibited in all cases.", "It is allowed only for vehicles that are turning left or making a U-turn.", "It is allowed if you do not obstruct traffic.", "It is allowed only for vehicles travelling slower than 30 km/h."],
+    "e": "Vehicles (except bicycles and electric micromobility vehicles) are prohibited from passing vehicles travelling in the same direction on their right (except for the permitted passing on the right of vehicles that are turning left or making a U-turn) while driving on the shoulder or in a deceleration or acceleration lane. Slower vehicles travelling in the same direction should be passed on the left."
+  },
+  "13": {
+    "q": "When taking part in traffic, drivers of bicycles and of other vehicles classed as powered cycles (electric scooters, electric self-balancing vehicles and similar, with a speed of up to 25 km/h and a power of up to 1 kW) must follow the Road Traffic Rules intended for:",
+    "o": ["pedestrians.", "cyclists.", "drivers of motor vehicles."],
+    "e": "The requirements laid down in the Rules for cyclists, together with the road signs and road markings, also apply to drivers of powered cycles."
+  },
+  "14": {
+    "q": "What does a white arrow-shaped traffic light signal on a black background mean?",
+    "o": ["That you may only go straight ahead.", "It warns that this street is one-way.", "It warns that you must follow the road signs.", "It permits scheduled public transport to proceed in the indicated direction."],
+    "e": "Road Traffic Rules, clause 801. White signals on a black background in traffic lights intended for scheduled public transport have the following meanings:\n801.1. an S-shaped signal prohibits the movement of scheduled public transport;\n801.2. a horizontal bar signal prohibits the movement of scheduled public transport (except in the cases set out in clauses 29 and 166 of the Rules) and indicates that the traffic light signals are about to change;\n801.3. an S-shaped signal and a horizontal bar signal switched on together prohibit the movement of scheduled public transport and indicate that an arrow-shaped signal (signals) will shortly be switched on;\n801.4. an arrow-shaped signal (signals) permits the movement of scheduled public transport in the indicated direction (directions)."
+  },
+  "15": {
+    "q": "Which group of road signs does this sign belong to?",
+    "o": ["Prohibitory signs.", "Mandatory signs.", "Vehicle distinguishing and information signs.", "Warning signs."],
+    "e": "In buses fitted with seat belts, an information sign \"Fasten your seat belt\" must be shown in front of every seat, or in a visible place on or beside the bus seat. The sign is blue and white, the diameter of its circle is 60 mm and the width of the white border is 3 mm."
+  },
+  "16": {
+    "q": "How must vehicles travel if the carriageway is divided into lanes by marking lines?",
+    "o": ["Not necessarily in the lanes, if a lane is not wide enough.", "Not necessarily in the lanes, if there are no other vehicles about.", "Only in those lanes. Driving onto a broken marking line is allowed only when changing lanes."],
+    "e": "If the carriageway is divided into lanes by road markings and/or road signs, vehicles must travel in those lanes. Driving onto broken road marking lines is allowed only when changing to another lane; solid road marking lines may be crossed only in the cases set out in Annex 3 to the Rules. Where a solid marking line (single or double) separates the lanes of opposing directions, the driver must keep to the right of it. Solid road marking lines and directional islands may also be crossed in the exceptional case where it is impossible to continue without changing lane because of a stationary obstruction on the carriageway (a fallen tree, a road accident, a vehicle forced to stop or parked where it should not be, or other stationary objects that make movement impossible), provided that it is safe to do so and other road users are not obstructed."
+  },
+  "17": {
+    "q": "What must you do if you are forced to stop on an unlit stretch of road in the dark, or in poor visibility, with the side lights and brake lights out of order?",
+    "o": ["Turn the vehicle around and switch on the dipped headlights.", "If the car cannot be parked off the road — switch on the hazard warning lights, and if there are none or they are out of order, place a warning triangle.", "Mark the car with brightly coloured flags."],
+    "e": "Road Traffic Rules, clause 92. If a vehicle has no hazard warning lights or they are out of order and it is forced to stop where stopping or standing is prohibited, or after a road accident, and also if it is forced to stop where other road users would see the stopped vehicle less than 100 m away, the driver of a motor vehicle (except a moped or a motorcycle without a sidecar), a tractor or a self-propelled machine must immediately place a warning triangle facing the direction of oncoming traffic on that side of the carriageway: in built-up areas no closer than 25 m, and outside built-up areas no closer than 50 m from the stopped vehicle. If at least one rear side light fails while driving in the dark or in poor visibility and the hazard warning lights do not work, a warning triangle must be fixed to the rear of the vehicle in order to continue.\n\nRoad Traffic Rules, clause 151. A driver forced to stop where stopping (standing) is prohibited must switch on the hazard warning lights, if fitted, and/or place a warning triangle as set out in clause 92 of the Rules, and remove the vehicle from the road as quickly as possible. If you wish to stop on an unlit stretch of road in the dark or in poor visibility and there are no hazard warning lights or they are out of order, the vehicle must be parked off the road. If that cannot be done, the place must be marked as set out in clause 92 of the Rules."
+  },
+  "18": {
+    "q": "In what order will the cars go?",
+    "o": ["Yellow, blue, red.", "Red, yellow, blue.", "Blue, yellow, red."],
+    "e": "Because this is a junction of equal-priority roads, drivers must follow the rules for crossing such junctions. The blue car goes first, because when turning left at a junction of equal-priority roads the yellow car must give way to the blue car coming from the opposite direction and going straight ahead. The yellow car goes second, because once it has entered the junction there is no longer an obstacle on its right. The red car goes last, because its obstacle on the right was the yellow car."
+  },
+  "19": {
+    "q": "The silver car is pulling out of a parking space. Which car will have priority?",
+    "o": ["The yellow car.", "The silver car."],
+    "e": "Before pulling out of the parking space the silver car must make sure that it will not obstruct other road users and, in this case, must give way to the yellow car."
+  },
+  "20": {
+    "q": "Is it allowed to turn left in the direction shown on this two-way road?",
+    "o": ["It is prohibited.", "It is allowed."],
+    "e": "The road sign \"Ahead only\". Only straight ahead is allowed. A sign placed at the beginning of a section of road applies as far as the nearest junction and does not prohibit turning right in order to enter premises beside the road. A sign placed before a junction applies only at the carriageway intersection before which it is placed. The requirements of the sign do not apply to scheduled public transport."
+  },
+  "21": {
+    "q": "This sign prohibits:",
+    "o": ["the movement of lorries and combinations of vehicles with a mass over 3.5 t, 3 km further on.", "the movement of all vehicles 3 km further on.", "the movement of lorries with a mass over 3.5 t for 3 kilometres from the sign."],
+    "e": "Road Traffic Rules, Annex 1, sign 304. Road sign \"No lorries\". It is prohibited to drive lorries and combinations of vehicles whose maximum authorised mass exceeds 3.5 t or exceeds the mass shown on the sign, and also tractors and self-propelled machines, except vehicles serving premises in the area.\nRoad Traffic Rules, Annex 1, plate 801. Plate \"Distance to object\". It indicates the direction of, and the distance to, an object or the start of a dangerous section of road. The direction of the object (section) shown on the plate is straight ahead."
+  },
+  "22": {
+    "q": "Is it allowed to stop on the shoulder at this spot?",
+    "o": ["It is prohibited.", "It is allowed."],
+    "e": "A sign prohibiting stopping and standing applies only as far as the end of the built-up area. In this situation, therefore, the car is allowed to stand like this."
+  },
+  "23": {
+    "q": "Which driver must give way in this situation on a two-way road?",
+    "o": ["The blue one.", "The green one."],
+    "e": "Because this stretch of road is marked with a broken road marking line, the driver of the green car may overtake and has priority. The marking line tells us that this is not a junction but an entrance to a yard or premises."
+  },
+  "24": {
+    "q": "Which vehicles are allowed to stand in the parking space marked by this road sign?",
+    "o": ["Vehicles marked with the \"Disabled person\" distinguishing sign.", "Only vehicles with special permits.", "Vehicles serving premises in the area.", "Scheduled public transport."],
+    "e": "\"Reserved parking space\". A parking space where vehicles may stand only with special permits. Permits that are not electronic are displayed behind the windscreen."
+  },
+  "25": {
+    "q": "When is it most appropriate for the driver of an overtaking car to return to the right-hand lane?",
+    "o": ["Immediately after finishing the overtake.", "After driving more than 100 m past the overtaken car.", "When the driver of the overtaking car can see the overtaken car in the rear-view mirror."],
+    "e": "Drivers are advised to avoid unnecessary overtaking manoeuvres. Before starting to overtake, a driver must take additional precautions and make sure that:\n136.1. none of the drivers following behind has started to overtake them;\n136.2. the driver of the vehicle to be overtaken is not signalling a left turn;\n136.3. the part of the lane needed for overtaking is clear and that oncoming vehicles, or pedestrians moving on the carriageway, will not be obstructed;\n136.4. a safe distance from the overtaken vehicle will be kept during the overtake;\n136.5. on finishing the overtake they will be able to return to their own lane without obstructing the overtaken vehicle."
+  }
+}

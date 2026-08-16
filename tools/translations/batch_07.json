@@ -1,0 +1,127 @@
+{
+  "151": {
+    "q": "Overtaking is prohibited:",
+    "o": ["Only for cars.", "For all vehicles, of all vehicles, except single vehicles travelling at less than 30 km/h.", "Only of cars and lorries with a maximum authorised mass below 3.5 tonnes."],
+    "e": "Road Traffic Rules, Annex 1, sign 325 \"No overtaking\". It is prohibited to overtake moving vehicles, except single vehicles (or single combinations of vehicles) travelling at less than 30 km/h."
+  },
+  "152": {
+    "q": "May you turn into the road on the right after seeing this road sign?",
+    "o": ["Yes.", "No."],
+    "e": "This sign shows the direction of the major road at a place with limited visibility, but it does not prohibit turning the other way if there is a road there."
+  },
+  "153": {
+    "q": "Which vehicles are allowed to stand in the parking space marked by this road sign?",
+    "o": ["Vehicles marked with the \"Disabled person\" distinguishing sign.", "Only vehicles with special permits.", "Vehicles serving premises in the area.", "Scheduled public transport."],
+    "e": "Road Traffic Rules, Annex 1, sign 531. \"Reserved parking space\". A parking space where vehicles may stand only with special permits. Permits that are not electronic are displayed behind the windscreen."
+  },
+  "154": {
+    "q": "Is it allowed to turn left in this situation if you are driving a car with a trailer?",
+    "o": ["Yes.", "No."],
+    "e": "Road Traffic Rules, Annex 1, sign 307. No vehicles with trailers (it is prohibited to drive cars, tractors and self-propelled machines with trailers)."
+  },
+  "155": {
+    "q": "The driver of a car is reversing. Who has priority in this situation?",
+    "o": ["The pedestrian.", "The driver of the car."],
+    "e": "In this situation it does not matter that the person is not using a crossing and is therefore breaking the rules. When reversing, the driver must give way to all other road users, even those who are breaking the rules."
+  },
+  "156": {
+    "q": "What do these road signs indicate?",
+    "o": ["You are approaching on a minor road a junction beyond which the one-way street ends.", "You are approaching on a minor road a junction beyond which a one-way street begins."],
+    "e": "Road Traffic Rules clauses:\nRoad Traffic Rules, Annex 1, sign 203. \"Give way\". The driver must give way to vehicles travelling on the crossing road.\nRoad Traffic Rules, Annex 1, sign 504. \"End of one-way street\"."
+  },
+  "157": {
+    "q": "Which vehicle is breaking the rules?",
+    "o": ["The driver of the first car.", "The driver of the second car.", "Both cars are standing correctly.", "Both cars are standing incorrectly."],
+    "e": "When stopping or standing beside a solid line, at least 3 m must be left up to that line. Car 2 has left only 2.5 m and is therefore breaking the rules. Car 1 has left 2 m up to the edge of the carriageway, so it is not breaking the rules."
+  },
+  "158": {
+    "q": "What path does a trailer follow when a bus goes round a bend?",
+    "o": ["It moves towards the outside of the bend.", "It follows the same path as the bus.", "It moves towards the inside of the bend.", "It moves towards the inside of the bend only at high speed."],
+    "e": "When going round a bend, the trailer's wheels always follow a smaller radius than the bus's wheels. You can see this from the tracks left by the wheels of the bus and the trailer when going round a bend on a carriageway that is covered in snow or is wet."
+  },
+  "159": {
+    "q": "What should you do in this situation?",
+    "o": ["Reduce speed and let the bus driver complete the manoeuvre.", "The bus driver is prohibited from entering the oncoming lane.", "Pass the bus by driving on the pavement."],
+    "e": "Road Traffic Rules, clause 107. Where, because of its size or for other reasons, a vehicle cannot turn (or turn round) from the outermost position, turning is also allowed from a position other than the corresponding edge of the carriageway used for that direction, provided that this will not obstruct other vehicles and will not endanger other road users.\nRoad Traffic Rules, clause 125. Vehicles (except bicycles and electric micromobility vehicles) are prohibited from passing vehicles travelling in the same direction on their right (except for the permitted passing on the right of vehicles that are turning left or making a U-turn) while driving on the shoulder or in a deceleration or acceleration lane. Slower vehicles travelling in the same direction should be passed on the left."
+  },
+  "160": {
+    "q": "Which road sign prohibits turning left (if you are not driving scheduled public transport)?",
+    "o": ["No 1.", "No 2.", "No 3.", "No 4."],
+    "e": "Road Traffic Rules, Annex 1, sign 527. Road sign \"Turning place\". A place for turning round away from a junction.\nRoad Traffic Rules, Annex 1, sign 404. Road sign \"Ahead or right only\". Movement is allowed only in the directions of the arrows. The sign applies at the carriageway intersection before which it is placed. Its requirements do not apply to scheduled public transport.\nRoad Traffic Rules, Annex 1, sign 324. Road sign \"No U-turns\". It does not apply to scheduled public transport and does not prohibit turning left.\nRoad Traffic Rules, Annex 1, sign 146. Road sign \"Direction of bend to the right\". The direction of travel on a bend of small radius with limited visibility, at a narrowing of the road, or at a place where the road is being repaired or built."
+  },
+  "161": {
+    "q": "What does this road sign indicate?",
+    "o": ["An additional lane, or the start of a deceleration lane.", "The directions of traffic at a junction.", "A road with two lanes."],
+    "e": "Road Traffic Rules, Annex 1, sign 513. Road sign \"Lane begins on the right\". An additional lane, or the start of a deceleration lane. Vehicles leaving the road must move into the deceleration lane; vehicles going uphill that cannot travel faster than those behind them must move into the additional lane."
+  },
+  "162": {
+    "q": "In a built-up area a driver will not breach the requirement of this sign by driving:",
+    "o": ["At 50 km/h as far as the nearest junction.", "At 50 km/h beyond the nearest junction.", "At no more than 40 km/h both as far as the nearest junction and beyond it."],
+    "e": "This is because the sign applies not just as far as the first junction, but throughout the area beyond it until there are road signs cancelling the restriction."
+  },
+  "163": {
+    "q": "What is the name of the road sign shown?",
+    "o": ["Junction with a major road.", "Give way.", "Junction with a minor road."],
+    "e": "Road Traffic Rules, Annex 1, sign 203. Give way (the driver must give way to vehicles travelling on the crossing or joining road and, where the supplementary plate No 843 \"Direction of the major road\" is used, to vehicles travelling on the major road)."
+  },
+  "164": {
+    "q": "Which car will cross the junction first (the traffic light next to the green car has an additional plate with a green arrow to the right that is not lit, and the red light is showing)?",
+    "o": ["The green car.", "The blue car."],
+    "e": "Explanation:\nThe driver of the blue car has priority, because they are moving on a permitting signal from the additional traffic light section. The driver of the green car must give way to the blue car, because they are moving under the additional plate with the green arrow and have no priority."
+  },
+  "165": {
+    "q": "The vehicle ahead of you is signalling a right turn as it approaches a junction with a minor road, but it does not turn. What will you do?",
+    "o": ["Start to overtake.", "Pass it on the left.", "Pass it on the right.", "Slow down and carry on behind the car."],
+    "e": "Road Traffic Rules, clause 4. The behaviour of road users is based on mutual respect and caution.\nRoad Traffic Rules, clause 9. Road users must take all necessary precautions, must not endanger the safety of other road users, of other people or of their property or the environment, must not obstruct their movement, and, in order to avoid or reduce harmful consequences, must take all necessary measures, except where this would endanger their own life or health or that of others, or where such measures would cause even more harm than could be avoided."
+  },
+  "166": {
+    "q": "While driving, two of your wheels have gone onto the shoulder. What should you do?",
+    "o": ["Without braking, turn the steering wheel sharply and return to the carriageway.", "Reduce speed gently and turn the steering wheel slowly, bringing the car back onto the carriageway.", "Stop and then move off again."],
+    "e": "In such a case the car should be brought back onto the carriageway calmly, without braking and by turning the steering wheel slowly. Turning the wheel sharply can be dangerous, because the increased sideways force may make the car start to skid or even roll over. You should also avoid braking sharply, because the wheels on the gravel grip the road less well than the wheels on the asphalt. Because of this difference in grip the car may become unstable and leave its path."
+  },
+  "167": {
+    "q": "What will you do if the road signs contradict the road marking lines?",
+    "o": ["I will follow the road signs.", "I will follow the road marking lines."],
+    "e": "Road Traffic Rules, clause 8. Traffic on roads in the Republic of Lithuania may be restricted only by the road signs listed in Annex 1 to the Rules, by variable message road signs, examples of which are given in Annex 2 to the Rules, by the road markings given in Annex 3 to the Rules, and by traffic lights and traffic controllers' signals as set out in the Rules and in other legislation in force in the Republic of Lithuania relating to traffic control. If the requirements of a road sign and of the road markings differ, the road sign must be followed. Where variable message road signs are installed on the road, those signs are followed. A traffic controller's instructions take precedence over traffic light signals, road signs and road markings, and over the requirements of the Rules. Road users must follow the road signs intended for them."
+  },
+  "168": {
+    "q": "You are driving at the maximum permitted speed. A vehicle is approaching quickly from behind and its driver is flashing the headlights. What will you do?",
+    "o": ["Keep the same speed and not let them overtake.", "Tap the brake pedal so that the brake lights come on.", "Increase speed so that the gap between the cars grows.", "Not obstruct the approaching vehicle from overtaking."],
+    "e": "It does not matter that the other car will exceed the speed limit while overtaking and will therefore break the rules. You must not create a hazard and must let the overtaking car pass."
+  },
+  "169": {
+    "q": "What will you do in this situation? The car ahead is at a safe distance, is turning into the deceleration lane and is already on that lane's line. You are travelling at 70 km/h. The permitted speed is 70 km/h.",
+    "o": ["Brake.", "Increase speed.", "Ease off the accelerator.", "Keep the same speed."],
+    "e": "If the car ahead is at a safe distance and is already on the line of the deceleration lane, you should do the following:\nKeep watching the situation: check that the car ahead really is entering the deceleration lane and is carrying on with its manoeuvre safely.\nKeep your speed: since you are travelling at the permitted 70 km/h and the car ahead is already leaving the main traffic lane, there is no need to change your speed."
+  },
+  "170": {
+    "q": "What will you do if pedestrians crossing the road are paying no attention to what is going on around them?",
+    "o": ["Brake.", "Ease off the accelerator.", "Drive on without changing speed."],
+    "e": "Explanation of the terms:\nBraking is when you press the brake, the car slows quickly and stops before the expected obstruction.\nEasing off the accelerator is when you take your foot off the throttle, the car slows down gradually by itself but does not stop before the expected obstruction and keeps moving.\nDriving on without changing speed is when you press the throttle just as much as before and the car rolls on at the same speed."
+  },
+  "171": {
+    "q": "You are driving a car with a trailer. What must you allow for when going downhill?",
+    "o": ["The trailer will help to stop the car more quickly.", "The braking distance will get shorter.", "The braking distance will get longer.", "The braking distance will not change."],
+    "e": "The braking distance gets longer, because the weight of the trailer pushes the car forwards as you go downhill. Going uphill, the braking distance gets shorter, because the weight of the trailer pulls the car back."
+  },
+  "172": {
+    "q": "What will you do if there are elderly people or other vulnerable road users beside the road?",
+    "o": ["Judge the danger and react — brake, or move smoothly to another part of the road.", "Flash the headlights.", "Drive on without changing speed."],
+    "e": "Road Traffic Rules, clause 9. Road users must take all necessary precautions, must not endanger the safety of other road users, of other people or of their property or the environment, must not obstruct their movement, and, in order to avoid or reduce harmful consequences, must take all necessary measures, except where this would endanger their own life or health or that of others, or where such measures would cause even more harm than could be avoided.\nRoad Traffic Rules, clause 128. If an obstruction appears or road safety is threatened, the driver (if they are able to notice it) must reduce speed, even bring the vehicle to a complete stop, or pass the obstruction without endangering other road users."
+  },
+  "173": {
+    "q": "Leaving a diesel car standing in gear on a downhill slope is dangerous, because:",
+    "o": ["The gear change mechanism may be damaged.", "The engine of an older model of car may start by itself.", "It is not dangerous."],
+    "e": "Older diesel engines can start by themselves when the car rolls downhill in gear."
+  },
+  "174": {
+    "q": "What must you do to park a car with an automatic gearbox on a slope?",
+    "o": ["Apply the parking brake and only then move the selector into position P.", "Move the selector into position P and then apply the parking brake.", "The parking brake does not have to be applied."],
+    "e": "When the parking place is on a slope, you must apply the parking brake and only then select the parking position (P) of the automatic gearbox, so that the car does not roll."
+  },
+  "175": {
+    "q": "Is it allowed to drive on winter tyres during the summer season?",
+    "o": ["It is allowed, but they must not be studded.", "It is prohibited."],
+    "e": "Because the Road Traffic Rules prohibit the use of vehicles with studded tyres only between 10 April and 31 October, cars with non-studded winter tyres may be used."
+  }
+}

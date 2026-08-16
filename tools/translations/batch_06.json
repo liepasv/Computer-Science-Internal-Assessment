@@ -1,0 +1,127 @@
+{
+  "126": {
+    "q": "Who is allowed to stop beyond these road signs in the situation shown (the lane is marked with the letter \"A\")?",
+    "o": ["Bicycles and mopeds.", "Motorcycles without a sidecar.", "Scheduled public transport."],
+    "e": "Scheduled public transport is allowed to stop, but not to stand. Other vehicles may not stop beyond the signs, because they are prohibited from entering the lane for scheduled public transport marked with the letter A, unless they are about to turn right."
+  },
+  "127": {
+    "q": "In which directions is a car allowed to go in the situation shown?",
+    "o": ["Straight ahead.", "To the left.", "Driving on is prohibited."],
+    "e": "The sign with its supplementary plate shows that motor vehicles are prohibited from using the street to the left. A car may therefore go straight ahead."
+  },
+  "128": {
+    "q": "Is it allowed to carry people in a car that is being towed?",
+    "o": ["No.", "Yes."],
+    "e": "Carrying people in a car that is being towed is prohibited. Only a vehicle without passengers may be towed (except the driver, if that is needed to control the vehicle)."
+  },
+  "129": {
+    "q": "The road sign indicates:",
+    "o": ["Cars are prohibited.", "The end of the expressway."],
+    "e": "Road Traffic Rules, Annex 1, sign 556. Road sign \"End of road for motor vehicles\". The end of the road on which the traffic rules laid down for expressways apply."
+  },
+  "130": {
+    "q": "Is it allowed to drive through a lit tunnel during the day with only the daytime running lights switched on?",
+    "o": ["It is allowed.", "It is prohibited."],
+    "e": "Driving through a tunnel, even a lit one, counts as driving in poor visibility. You must therefore switch on the dipped beam headlights in a tunnel; daytime running lights are not enough. Daytime running lights (for example the LEDs on modern cars) and dipped beam headlights are not the same thing."
+  },
+  "131": {
+    "q": "Does a road marking that allows a left turn from the far left lane also allow a U-turn?",
+    "o": ["Yes, it does.", "No, it does not.", "Yes, but only on working days.", "The Road Traffic Rules do not define this."],
+    "e": "Road markings:\n1.16. Arrows show the directions of travel permitted in a lane. A dead-end symbol warns that turning into the nearest carriageway is prohibited. A marking that allows a left turn from the far left lane also allows a U-turn."
+  },
+  "132": {
+    "q": "What does this road sign mean?",
+    "o": ["Speed limit zone.", "Low emission zone.", "Parking zone."],
+    "e": "Road sign 561 — \"Low emission zone\". An area of a city, established by the municipal council, in which on all roads beyond the sign the movement of motor vehicles, tractors and self-propelled machines is restricted or completely prohibited, except for zero-emission vehicles."
+  },
+  "133": {
+    "q": "What does the road sign shown prohibit?",
+    "o": ["Driving more slowly than the speed shown.", "Driving faster than the speed shown.", "Driving faster than the speed shown, except for scheduled public transport."],
+    "e": "Road Traffic Rules, Annex 1, sign 329. Road sign \"Speed limit\". It is prohibited to drive faster (in km/h) than shown on the sign."
+  },
+  "134": {
+    "q": "This road sign indicates:",
+    "o": ["The direction of travel on roads where roadworks are being carried out.", "The number of lanes and the directions of travel in each lane."],
+    "e": "The number of arrows drawn on this sign does not depend on the number of traffic lanes."
+  },
+  "135": {
+    "q": "In what order will the cars cross the junction?",
+    "o": ["Red, green, blue.", "Green, blue, red.", "Green, red, blue.", "Blue, red, green."],
+    "e": "At this junction of equal-priority roads the green car goes first, because it has no obstacle on its right. Once it has passed, the red car no longer has an obstacle on its right and so goes second. The blue car crosses the junction last, because it had an obstacle on its right — the red car."
+  },
+  "136": {
+    "q": "Which car has stopped correctly on this two-way road while waiting for the green traffic light?",
+    "o": ["The green car.", "The red car.", "Both cars have stopped incorrectly."],
+    "e": "The green car did not stop before the \"Stop\" line, and the white car is turning from the wrong lane (it is driving against the traffic)."
+  },
+  "137": {
+    "q": "Is it allowed to go straight ahead (there is a \"250 m\" plate under the sign)?",
+    "o": ["Yes.", "No."],
+    "e": "These road signs show that entry is prohibited 250 m further on, but that you may drive on for another 250 m."
+  },
+  "138": {
+    "q": "Where must you stop?",
+    "o": ["Before the sign (at point C).", "At the edge of the junction (at point B).", "Before the edge of the carriageway you are crossing (at point A)."],
+    "e": "Road Traffic Rules, Annex 1, sign 204. Road sign \"Stop\". It is prohibited to proceed without stopping before the \"Stop\" line, or, if there is none, before the road sign."
+  },
+  "139": {
+    "q": "What is marked by this distinguishing sign?",
+    "o": ["A school vehicle carrying children.", "A motor vehicle, or a combination of vehicles, used for driving instruction.", "A car with studded tyres.", "A car driven by a deaf person."],
+    "e": "Distinguishing sign 10. The front and the rear of motor vehicles and of combinations of vehicles with trailers used for driving instruction must be marked with a white equilateral triangle with a red border and a black letter \"M\" in the middle. The side of the triangle is 200–300 mm long and the width of the border is 1/10 of the length of the side."
+  },
+  "140": {
+    "q": "In what order will the vehicles cross the junction if the police car has its beacons and siren switched on?",
+    "o": ["Police car, motorcycle, yellow car.", "Police car, yellow car, motorcycle.", "Yellow car, police car, motorcycle.", "Motorcycle, yellow car, police car."],
+    "e": "Road Traffic Rules, clause 154. At a junction of roads of unequal priority, a driver travelling on the minor road must give way to vehicles approaching the junction on the major road.\nRoad Traffic Rules, clause 12. Road users must give way immediately to approaching emergency vehicles with blue and red (or only blue) beacons and sirens switched on, and to the vehicles they are escorting. Way is given to such vehicles and an emergency corridor is formed as follows:\n12.1. on a road with one lane in each direction, drivers must stop on the right-hand shoulder or, where there is none, at the right-hand edge of the carriageway;\n12.2. on a road with two or more lanes in one direction, drivers moving in that direction in the far left lane must move as far left as possible, right up to the corresponding edge of the carriageway used for that direction, and stop, while drivers moving in the same direction in the other lanes to the right of the far left lane must move as far right as possible, towards the right-hand edge of the carriageway or the shoulder, and stop;\n12.3. on a road with a central reservation, the requirements of clauses 12.1 and 12.2 of the Rules must be followed only by drivers moving in the same direction."
+  },
+  "141": {
+    "q": "Do you have priority?",
+    "o": ["Yes.", "No."],
+    "e": "Road Traffic Rules, Annex 1, sign 206. \"Priority over oncoming traffic\". A narrow section of road on which the driver travelling through it has priority over approaching oncoming traffic."
+  },
+  "142": {
+    "q": "In this situation at 10 o'clock in the morning you, in the red car, may:",
+    "o": ["Turn right.", "Make a U-turn.", "Go straight ahead.", "Go straight ahead and turn left."],
+    "e": "The driver may not turn left or make a U-turn, because at 10 o'clock the sign prohibiting the turn applies. Turning right is not allowed either, because the car is in the second lane of the carriageway. To turn right it would have to move into the first lane. Only going straight ahead is left."
+  },
+  "143": {
+    "q": "The sign indicates:",
+    "o": ["A pedestrian crossing.", "Pedestrians are prohibited from walking on the side of the road where the sign is placed.", "Only pedestrians may pass."],
+    "e": "Road Traffic Rules, Annex 1, sign 310 \"No pedestrians\". Pedestrians are prohibited from walking on the side of the road where the sign is placed."
+  },
+  "144": {
+    "q": "Which car will cross the junction third?",
+    "o": ["The green car.", "The blue car.", "The cherry-red car.", "The red car."],
+    "e": "The cherry-red car goes first, because it is on the major road. The green car goes second: it will stop in the middle of the junction and move off only after letting the cherry-red car pass. The blue car then goes third (having let the cherry-red car pass), and finally the red car, because when turning left it must give way to vehicles coming from the opposite direction that are going straight ahead or turning right (the blue car)."
+  },
+  "145": {
+    "q": "Is the cyclist allowed to go straight ahead through the junction?",
+    "o": ["It is prohibited.", "It is allowed, after letting the car pass."],
+    "e": "The cyclist must give way, because the traffic light is red for them. A green arrow in an additional traffic light section allows movement only when there is nothing in the way. Where there is no shoulder, a cyclist is allowed to ride in the far right lane of the carriageway, keeping as close as possible to its right-hand edge."
+  },
+  "146": {
+    "q": "Which road sign has the meaning \"Vehicle ferry, port or landing stage\"?",
+    "o": ["1", "2", "3"],
+    "e": "Road sign 732. \"Vehicle ferry, port or landing stage\". A floating bridge or a vessel used to carry vehicles across a sea, lake, river or other body of water. This sign may also mark a port or a landing stage."
+  },
+  "147": {
+    "q": "In which case is it allowed to pass this road sign if your vehicle is higher than the height shown on it?",
+    "o": ["If you drive at a safe speed.", "It is allowed only with a special permit.", "It is not allowed in any case."],
+    "e": "Getting a special permit does not make the vehicle smaller, nor does it make the obstacle higher. A safe speed will not get you past the obstacle either. If your vehicle is higher than the height shown on the sign, you may not proceed."
+  },
+  "148": {
+    "q": "In what order should this junction be crossed?",
+    "o": ["1, 2, 3.", "3, 2, 1.", "2, 1, 3.", "1, 3, 2."],
+    "e": "Car No 1 crosses the junction first, because it is travelling on the major road and its path stays on the major road. Car No 2 goes second, because it is also leaving the major road. Vehicle No 3 must give way to both cars, because the road sign \"Give way\" applies to it and it is on the minor road: the driver must give way to vehicles travelling on the crossing or joining road and, where the supplementary plate No 843 \"Direction of the major road\" is used, to vehicles travelling on the major road."
+  },
+  "149": {
+    "q": "Beyond the road sign shown:",
+    "o": ["Driving no faster than 70 km/h is allowed.", "Driving no slower than 70 km/h is allowed.", "The minimum speed restriction has ended."],
+    "e": "Road Traffic Rules, Annex 1, sign 415. Road sign \"End of minimum speed limit\"."
+  },
+  "150": {
+    "q": "Which road sign prohibits a vehicle from standing on working days only?",
+    "o": ["No 1 and No 5", "No 2", "No 3", "No 4"],
+    "e": "1. Road sign 333 — No standing.\n2. Road sign 334 — No standing on odd days.\n3. Road sign 335 — No standing on even days.\n4. Road sign 333 — No standing, together with plate 823 — Working days.\n5. Road sign 333 — No standing, together with plate 822 — Non-working days."
+  }
+}

@@ -20,16 +20,18 @@ function escapeHTML(text) {
 function formatDateTime(iso) {
     const date = new Date(iso);
     if (isNaN(date.getTime())) return String(iso || "Unknown date");
-    return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) +
+    const locale = currentLanguage === "lt" ? "lt-LT" : "en-GB";
+    return date.toLocaleDateString(locale, { day: "numeric", month: "short", year: "numeric" }) +
            ", " +
-           date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+           date.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" });
 }
 
 // "16 Aug" — used for the two axis labels of the progress chart
 function formatShortDate(iso) {
     const date = new Date(iso);
     if (isNaN(date.getTime())) return "";
-    return date.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+    return date.toLocaleDateString(currentLanguage === "lt" ? "lt-LT" : "en-GB",
+                                   { day: "numeric", month: "short" });
 }
 
 // Formats a percentage change as a signed string with an arrow
@@ -89,8 +91,8 @@ function renderHistoryScreen() {
     if (history.length === 0) {
         container.innerHTML =
             '<div class="text-center py-10">' +
-                '<p class="text-gray-500 mb-1">No sessions saved yet for this profile.</p>' +
-                '<p class="text-sm text-gray-400">Finish a session and your score, progress and mistakes will be collected here.</p>' +
+                '<p class="text-gray-500 mb-1">' + escapeHTML(t("history.emptyTitle")) + "</p>" +
+                '<p class="text-sm text-gray-400">' + escapeHTML(t("history.emptyHint")) + "</p>" +
             "</div>";
         return;
     }
@@ -98,14 +100,14 @@ function renderHistoryScreen() {
     container.innerHTML =
         renderStatTiles(summary) +
 
-        '<h3 class="text-sm font-semibold text-gray-700 mb-3">Score over time</h3>' +
+        '<h3 class="text-sm font-semibold text-gray-700 mb-3">' + escapeHTML(t("history.chartTitle")) + "</h3>" +
         '<div class="bg-gray-50 rounded-xl p-4 pt-6 mb-6">' + renderProgressChart(history) + "</div>" +
 
-        '<h3 class="text-sm font-semibold text-gray-700 mb-3">Questions you miss most</h3>' +
+        '<h3 class="text-sm font-semibold text-gray-700 mb-3">' + escapeHTML(t("history.weakTitle")) + "</h3>" +
         '<div class="bg-gray-50 rounded-xl px-4 py-1 mb-3">' + renderWeakQuestions(history) + "</div>" +
         renderDrillButton(history) +
 
-        '<h3 class="text-sm font-semibold text-gray-700 mb-3">All sessions</h3>' +
+        '<h3 class="text-sm font-semibold text-gray-700 mb-3">' + escapeHTML(t("history.allSessions")) + "</h3>" +
         renderSessionList(history);
 
     attachHistoryHandlers(history);
@@ -135,10 +137,9 @@ function renderStatTiles(summary) {
         ? Math.round((summary.correct / summary.answered) * 100)
         : 0;
 
-    let totalsText = summary.answered + " questions answered, " +
-                     summary.correct + " correct (" + accuracy + "%)";
+    let totalsText = t("history.totals", { answered: summary.answered, correct: summary.correct, pct: accuracy });
     if (summary.totalSeconds > 0) {
-        totalsText += " · " + formatDuration(summary.totalSeconds) + " of timed practice";
+        totalsText += t("history.practiceTime", { time: formatDuration(summary.totalSeconds) });
     }
 
     // Best and average only use finished sessions, so say how many those
@@ -146,15 +147,15 @@ function renderStatTiles(summary) {
     const completedHTML = summary.completed === summary.sessions
         ? ""
         : '<div class="text-xs mt-0.5 text-gray-400 whitespace-nowrap">' +
-          summary.completed + " completed</div>";
+          escapeHTML(t("history.completedCount", { n: summary.completed })) + "</div>";
 
     return '<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-2">' +
-               tile("Sessions", summary.sessions, completedHTML) +
-               tile("Best", summary.best + "%") +
-               tile("Average", summary.average + "%") +
-               tile("Last", summary.last + "%", deltaHTML) +
+               tile(escapeHTML(t("history.sessions")), summary.sessions, completedHTML) +
+               tile(escapeHTML(t("history.best")), summary.best + "%") +
+               tile(escapeHTML(t("history.average")), summary.average + "%") +
+               tile(escapeHTML(t("history.last")), summary.last + "%", deltaHTML) +
            "</div>" +
-           '<p class="text-xs text-gray-400 mb-6">' + totalsText + "</p>";
+           '<p class="text-xs text-gray-400 mb-6">' + escapeHTML(totalsText) + "</p>";
 }
 
 
@@ -171,7 +172,7 @@ function renderProgressChart(history) {
     const recent = history.filter(function (s) { return !s.abandoned; }).slice(-12);
 
     if (recent.length < 2) {
-        return '<p class="text-sm text-gray-400">Complete at least two sessions to see your progress here.</p>';
+        return '<p class="text-sm text-gray-400">' + escapeHTML(t("history.chartNeedsTwo")) + "</p>";
     }
 
     let columnsHTML = "";
@@ -182,7 +183,7 @@ function renderProgressChart(history) {
         const pct = Math.max(0, Math.min(100, Math.round(session.percent)));
 
         const tooltip = formatDateTime(session.date) + " — " + pct + "% (" +
-                        session.correct + "/" + session.total + " correct)";
+                        t("history.correctOf", { correct: session.correct, total: session.total }) + ")";
 
         // The label sits just above the top of its column; the padding on
         // the card leaves room for it even at 100%
@@ -233,7 +234,7 @@ function renderWeakQuestions(history) {
     const weak = getWeakQuestions(history, currentBank || null).slice(0, 8);
 
     if (weak.length === 0) {
-        return '<p class="text-sm text-gray-400 py-3">No mistakes recorded yet — well done.</p>';
+        return '<p class="text-sm text-gray-400 py-3">' + escapeHTML(t("history.weakNone")) + "</p>";
     }
 
     let rowsHTML = "";
@@ -244,14 +245,14 @@ function renderWeakQuestions(history) {
         // Prefer the full text from the loaded bank; fall back to the
         // snippet stored with the mistake when no CSV is loaded
         const question = questionFromBank(stat.qid, stat.bank);
-        const label = question ? question.text : (stat.text || "Question #" + stat.qid);
+        const label = question ? question.text : (stat.text || t("history.questionNumber", { id: stat.qid }));
 
         rowsHTML +=
             '<div class="py-3 border-b border-gray-100 last:border-0">' +
                 '<div class="flex items-start justify-between gap-3 mb-2">' +
                     '<span class="text-sm text-gray-700 leading-snug">' + escapeHTML(truncate(label, 110)) + "</span>" +
                     '<span class="text-xs text-gray-500 tabular-nums whitespace-nowrap pt-0.5">' +
-                        stat.wrong + "/" + stat.seen + " wrong</span>" +
+                        escapeHTML(t("history.weakWrong", { wrong: stat.wrong, seen: stat.seen })) + "</span>" +
                 "</div>" +
                 // Meter: the fill is the error rate, the track a lighter step of the same colour
                 '<div class="h-1.5 rounded-full bg-red-100 overflow-hidden">' +
@@ -270,11 +271,11 @@ function renderDrillButton(history) {
 
     if (available === 0) {
         if (getWeakQuestions(history, currentBank || null).length === 0) return "";
-        return '<p class="text-xs text-gray-400 mb-6">Load the matching question bank on the start screen to practise these again.</p>';
+        return '<p class="text-xs text-gray-400 mb-6">' + escapeHTML(t("history.drillNeedsBank")) + "</p>";
     }
 
     return '<button id="history-drill-btn" class="w-full mb-6 py-2.5 px-6 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-colors">' +
-               "Practise these " + available + " question" + (available !== 1 ? "s" : "") +
+               escapeHTML(t("history.drill", { n: available })) +
            "</button>";
 }
 
@@ -297,13 +298,13 @@ function renderSessionList(history) {
 
         const mistakes = (session.answers || []).filter(function (a) { return !a.ok; });
 
-        const metaParts = [session.correct + "/" + session.total + " correct",
-                           session.score + "/" + session.maxScore + " pts"];
+        const metaParts = [t("history.correctOf", { correct: session.correct, total: session.total }),
+                           t("history.points", { score: session.score, max: session.maxScore })];
         if (session.abandoned) {
-            metaParts.push("ended early" + (session.planned ? " of " + session.planned : ""));
+            metaParts.push(t("history.endedEarlyOf", { planned: session.planned || session.total }));
         }
         if (session.timerEnabled) metaParts.push(formatTime(session.seconds || 0));
-        if (session.mode === "mistakes") metaParts.push("mistakes drill");
+        if (session.mode === "mistakes") metaParts.push(t("history.mistakesDrill"));
         // Name the source only when it is not the built-in bank, so the
         // common case stays uncluttered
         if ((session.bank || BUILTIN_BANK) !== BUILTIN_BANK) metaParts.push(bankLabel(session.bank));
@@ -314,10 +315,10 @@ function renderSessionList(history) {
 
         // Sessions with no mistakes have nothing to review
         const reviewHTML = mistakes.length === 0
-            ? '<div class="px-4 pb-3 text-xs text-green-600">No mistakes in this session.</div>'
+            ? '<div class="px-4 pb-3 text-xs text-green-600">' + escapeHTML(t("history.noMistakes")) + "</div>"
             : '<button data-review="' + index + '" ' +
                       'class="w-full text-left px-4 pb-3 text-xs font-medium text-blue-600 hover:text-blue-700">' +
-                  "Review " + mistakes.length + " mistake" + (mistakes.length !== 1 ? "s" : "") + " ▼" +
+                  escapeHTML(t("history.review", { n: mistakes.length })) +
               "</button>" +
               '<div id="review-' + index + '" class="hidden px-4 pb-2 border-t border-gray-100 pt-1"></div>';
 
@@ -351,19 +352,19 @@ function renderMistakes(session) {
         // stored snippets are shortened and hold no explanation or picture
         const question = questionFromBank(answer.qid, session.bank);
 
-        const questionText = question ? question.text : (answer.text || "Question #" + answer.qid);
+        const questionText = question ? question.text : (answer.text || t("history.questionNumber", { id: answer.qid }));
         const chosenText   = question ? question.options[answer.chosen - 1]  : answer.chosenText;
         const correctText  = question ? question.options[answer.correct - 1] : answer.correctText;
 
-        const chosenLabel  = (letters[answer.chosen - 1]  || "?") + ". " + (chosenText  || "(answer not stored)");
-        const correctLabel = (letters[answer.correct - 1] || "?") + ". " + (correctText || "(answer not stored)");
+        const chosenLabel  = (letters[answer.chosen - 1]  || "?") + ". " + (chosenText  || t("history.answerNotStored"));
+        const correctLabel = (letters[answer.correct - 1] || "?") + ". " + (correctText || t("history.answerNotStored"));
 
         // A picture from a user's own bank is only available while the
         // files they picked are still selected, so this can be empty
         let imageHTML = "";
         const imageSrc = question ? resolveImageSrc(question.picture, session.bank) : "";
         if (imageSrc) {
-            imageHTML = '<img src="' + escapeHTML(imageSrc) + '" alt="Question illustration" ' +
+            imageHTML = '<img src="' + escapeHTML(imageSrc) + '" alt="' + escapeHTML(t("quiz.imageAlt")) + '" ' +
                         'data-hide-on-error class="max-h-24 rounded-lg border border-gray-100 mb-2">';
         }
 
@@ -373,15 +374,15 @@ function renderMistakes(session) {
                               escapeHTML(question.explanation) + "</p>";
         } else if (!question) {
             explanationHTML = '<p class="text-xs text-gray-400 italic mt-2">' +
-                              "Load the question bank to see the full question and its explanation.</p>";
+                              escapeHTML(t("history.loadBankForFull")) + "</p>";
         }
 
         html +=
             '<div class="py-3 border-b border-gray-100 last:border-0">' +
                 imageHTML +
                 '<p class="text-sm text-gray-700 leading-snug mb-2">' + escapeHTML(questionText) + "</p>" +
-                '<p class="text-xs text-red-600">✗ You answered: ' + escapeHTML(chosenLabel) + "</p>" +
-                '<p class="text-xs text-green-600 mt-0.5">✓ Correct answer: ' + escapeHTML(correctLabel) + "</p>" +
+                '<p class="text-xs text-red-600">' + escapeHTML(t("history.youAnswered", { answer: chosenLabel })) + "</p>" +
+                '<p class="text-xs text-green-600 mt-0.5">' + escapeHTML(t("history.correctAnswer", { answer: correctLabel })) + "</p>" +
                 explanationHTML +
             "</div>";
     });
@@ -408,10 +409,10 @@ function attachHistoryHandlers(history) {
                     hideBrokenImages(panel);
                 }
                 panel.classList.remove("hidden");
-                button.textContent = "Hide " + count + " mistake" + (count !== 1 ? "s" : "") + " ▲";
+                button.textContent = t("history.hide", { n: count });
             } else {
                 panel.classList.add("hidden");
-                button.textContent = "Review " + count + " mistake" + (count !== 1 ? "s" : "") + " ▼";
+                button.textContent = t("history.review", { n: count });
             }
         });
     });
@@ -467,15 +468,15 @@ function refreshStartScreen() {
 
     const sessionCount = loadHistory(activeProfile).length;
     document.getElementById("history-btn").textContent =
-        sessionCount === 0 ? "View history" : "View history (" + sessionCount + ")";
+        sessionCount === 0 ? t("load.history") : t("load.historyCount", { n: sessionCount });
 
     // The mistakes button needs both a loaded bank and some past mistakes
     const available = countAvailableMistakes();
     const drillBtn = document.getElementById("drill-btn");
     drillBtn.disabled = available === 0;
     drillBtn.textContent = available === 0
-        ? "Practise my mistakes"
-        : "Practise my mistakes (" + available + ")";
+        ? t("load.drill")
+        : t("load.drillCount", { n: available });
 }
 
 
@@ -505,13 +506,13 @@ function handleImportFile(file) {
         const result = importAllData(event.target.result);
 
         if (!result) {
-            showHistoryStatus("That file is not a results backup from this app.", false);
+            showHistoryStatus(t("history.notBackup"), false);
             return;
         }
 
-        let message = "Imported " + result.added + " new session" + (result.added !== 1 ? "s" : "") + ".";
+        let message = t("history.imported", { n: result.added });
         if (result.profiles.length > 0) {
-            message += " Profiles in the file: " + result.profiles.join(", ") + ".";
+            message += t("history.importedProfiles", { list: result.profiles.join(", ") });
         }
 
         showHistoryStatus(message, true);
@@ -520,7 +521,7 @@ function handleImportFile(file) {
     };
 
     reader.onerror = function () {
-        showHistoryStatus("Could not read the file. Please try again.", false);
+        showHistoryStatus(t("bank.readError"), false);
     };
 
     reader.readAsText(file, "UTF-8");
