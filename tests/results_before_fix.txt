@@ -1,4 +1,4 @@
-Structural tests run against commit 12a16ba (before the csv.js fix)
+All tests run against commit 12a16ba (before the fixes in this branch)
 PASS S1 parseCSV() — 3 questions, skipped 0, text 1 = "If a road is wet, icy or snowy, what must you do?"
 PASS S2 parseCSV() — identical
 PASS S3 parseCSV() — header only: 0/0; no final newline: 3 questions
@@ -8,7 +8,7 @@ PASS S6 isValidQuestion() — true, true
 PASS S7 isValidQuestion() — true
 PASS S8 isValidQuestion() — false, false, false, false, false, false, false
 PASS S9 shuffle() — 221 ids, same members: true, original unchanged: true
-PASS S10 shuffle() — 123: 9927, 132: 9879, 213: 10041, 231: 10060, 312: 10037, 321: 10056
+PASS S10 shuffle() — 123: 9925, 132: 9912, 213: 10032, 231: 9937, 312: 10174, 321: 10020
 PASS S11 shuffle() — [] and ["x"]
 PASS S12 startSession() — 30 questions, 30 unique ids
 PASS S13 startSession() — 10, 30, 30
@@ -30,6 +30,30 @@ PASS S28 readJSON(), loadHistory() — []
 PASS S29 getWeakQuestions() — 1 2/2; 2 2/4; 3 1/1
 PASS S30 saveHistory() — returned true; kept 6 sessions, newest s99
 PASS S31 importAllData() — first 2, second 0, non-JSON null
+PASS F1 — "Loaded 221 valid questions."; green; Start enabled
+PASS F2 — "Loaded 7 valid questions. Skipped 3 invalid rows. None of these questions use a picture."; Start enabled
+PASS F3 — 30 questions, 30 unique; "Question 1 of 30" … "Question 30 of 30"
+PASS F4 — 0 of 5 positions identical
+PASS F5 — "Question 1 of 10", 10 questions played, results shown: true
+PASS F6 — Easy +1, Medium +2, Hard +3
+PASS F7 — "✗ Incorrect"; chosen red, correct green, locked: true
+PASS F8 — "✓ Correct!"; green; explanation visible: true
+PASS F9 — 60/60 (100%); 30/60 (50%)
+PASS F10 — start 0:00; app 0:07, measured 7.72 s
+PASS F11 — timer visible: false; time row: false
+PASS F12 — score 41 of 60 (68%); correct 20 + incorrect 10; Easy 8/10 (80%), Medium 3/10 (30%), Hard 9/10 (90%)
+PASS F13 — "Question 1 of 30", score 0, timer 0:00, not reloaded: true
+PASS F14 — loaded in 17 ms (upload to message); slowest answer 0.6 ms
+FAIL F15 — Start ready after 599 ms; 1 click to start; visible on every question: false
+PASS F16 — "No valid questions found. Please check the CSV file format." (Start disabled); header only: Start disabled; retry: "Loaded 10 valid questions. None of these questions use a picture."
+PASS F17 — results "60/60/100"; start screen shown again: true
+PASS F18 — suite ran in Chromium 141.0.7390.37
+PASS F19 — edited question shown: true; source files changed: false
+PASS F20 — history shows session: true; button "Practise my mistakes (10)"; drill 10 questions, all previously missed: true
+PASS F21 — "Loaded 3 valid questions. 1 images not found among the selected files: missing.jpg."; picture shown: true
+PASS F22 — "Įkelta tinkamų klausimų: 221."; Start button "Pradėti testą"
+FAIL F24 — screens shown at start: 4; status "Loaded 221 valid questions."; feedback shown: true
+PASS F23 — true; "Ended after 3 of 30": true
 
 Structural: 30/31 passed
-Functional: 0/0 passed
+Functional: 22/24 passed

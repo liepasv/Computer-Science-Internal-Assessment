@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>
+body { font-family: "Liberation Sans", Arial, sans-serif; margin: 16px; color:#111827; width: 1180px; }
+h2 { font-size: 17px; margin: 0 0 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 12px; }
+th, td { border: 1px solid #d1d5db; padding: 4px 6px; }
+th { background: #f3f4f6; }
+td.w { width: 44px; padding: 2px; text-align: center; font-weight: 700; font-size: 11px; color:#111827; }
+td.it { background:#e5e7eb; font-weight:700; }
+.P { background:#c7d2fe; } .D { background:#bae6fd; } .B { background:#bbf7d0; } .T { background:#fde68a; } .E { background:#fbcfe8; }
+.legend span { display:inline-block; padding:2px 8px; margin-right:6px; border:1px solid #d1d5db; font-size:12px; }
+</style></head><body>
+<h2>Gantt chart — Driving Theory Practice (12 weeks, two iterations)</h2>
+<table id="g"></table>
+<p class="legend"><span class="P">P plan / research</span><span class="D">D design</span><span class="B">B build</span><span class="T">T test</span><span class="E">E evaluate</span></p>
+<script>
+// [task, success criteria, {week: stages}]
+const rows = [
+ ["Iteration 1 — core product (CfS 1–8)"],
+ ["Problem research, success criteria, plan", "all", {1:"P"}],
+ ["Research: File API, CSV format, Fisher–Yates", "1, 2", {1:"P"}],
+ ["Question bank: CSV parser + row validation", "1, Reliability", {2:"DBTE"}],
+ ["Session: shuffle, select 30, reset", "2, 8", {3:"DBTE"}],
+ ["Quiz screen: render, mouse + A–D keys", "Usability, Accessibility", {4:"DBTE"}],
+ ["Scoring + immediate feedback", "3, 4, 5", {5:"DBTE"}],
+ ["Timer + results summary", "6, 7", {6:"DBTE"}],
+ ["Restart, performance test, iteration review", "8, Performance", {7:"BTE"}],
+ ["Iteration 2 — extensions (CfS 9, 10)"],
+ ["History in localStorage, profiles", "9", {8:"PD", 9:"BTE"}],
+ ["Most-missed questions + practise my mistakes", "9", {9:"D", 10:"BTE"}],
+ ["Own question bank with own images", "10", {10:"D", 11:"BTE"}],
+ ["LT/EN interface and bank; end session early", "Usability, 7", {11:"DB", 12:"TE"}],
+ ["Full structural + functional test run, fixes", "all", {12:"T"}],
+ ["Evaluation, report, video", "all", {12:"E"}],
+];
+const weeks = 12;
+let html = "<tr><th>Task</th><th>CfS</th>";
+for (let w = 1; w <= weeks; w++) html += "<th>W" + w + "</th>";
+html += "</tr>";
+rows.forEach(r => {
+  if (r.length === 1) { html += '<tr><td class="it" colspan="' + (weeks + 2) + '">' + r[0] + "</td></tr>"; return; }
+  html += "<tr><td>" + r[0] + "</td><td>" + r[1] + "</td>";
+  for (let w = 1; w <= weeks; w++) {
+    const s = r[2][w] || "";
+    html += '<td class="w">' + s.split("").map(c => '<span class="' + c + '" style="display:inline-block;width:9px;padding:1px 0">' + c + "</span>").join("") + "</td>";
+  }
+  html += "</tr>";
+});
+document.getElementById("g").innerHTML = html;
+</script></body></html>

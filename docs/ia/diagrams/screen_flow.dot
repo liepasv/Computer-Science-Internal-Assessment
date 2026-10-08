@@ -1,0 +1,20 @@
+// User interface: the four screens and the controls that move between them
+digraph G {
+  graph [rankdir=LR, nodesep=0.5, ranksep=1.0, fontname="Liberation Sans"];
+  node  [shape=box, style="rounded,filled", fillcolor="#e0e7ff", fontname="Liberation Sans", fontsize=11, width=1.6, height=0.8];
+  edge  [fontname="Liberation Sans", fontsize=9, color="#374151"];
+  load    [label="Start screen\n(profile, LT/EN, bank,\ntimer, Start)"];
+  quiz    [label="Quiz screen\n(question i of n, timer,\nscore, A–D, feedback)"];
+  results [label="Results screen\n(score, counts,\nby difficulty, time)"];
+  hist    [label="History screen\n(tiles, chart, most-missed,\nsessions, export/import)"];
+  load -> quiz [label="Start Session /\nPractise my mistakes"];
+  quiz -> quiz [label="answer → Next Question"];
+  quiz -> results [label="last question: See Results /\nEnd session early (≥1 answer)"];
+  quiz -> load [label="End session early\n(0 answers)", style=dashed];
+  results -> load [label="Start New Session"];
+  results -> quiz [label="Practise my mistakes\n(only if mistakes)"];
+  results -> hist [label="View history"];
+  load -> hist [label="View history"];
+  hist -> load [label="← Back"];
+  hist -> quiz [label="Practise these n questions"];
+}

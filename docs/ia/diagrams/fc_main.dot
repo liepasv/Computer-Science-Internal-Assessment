@@ -1,0 +1,53 @@
+// Flowchart 1: main program flow (app.js, bank.js, session.js)
+digraph G {
+  graph [rankdir=TB, nodesep=0.35, ranksep=0.32, fontname="Liberation Sans"];
+  node  [fontname="Liberation Sans", fontsize=10, shape=box, style="filled", fillcolor="#ffffff", color="#1f2937"];
+  edge  [fontname="Liberation Sans", fontsize=9, color="#1f2937"];
+  start [label="Start\n(page opened)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  init  [label="initialiseApp():\nrestore language and profile"];
+  fetch [label="loadBuiltinBank():\nfetch database/db.<lang>.csv\nand parseCSV()"];
+  ok    [label="at least one\nvalid question?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  err   [label="show error message;\nStart stays disabled"];
+  pick  [label="user selects a\nCSV file", shape=parallelogram, fillcolor="#e0f2fe"];
+  rep   [label="show \"Loaded N valid questions.\"\n(+ \"Skipped M invalid rows.\");\nenable Start"];
+  press [label="user presses Start Session\nor Practise my mistakes", shape=parallelogram, fillcolor="#e0f2fe"];
+  mode  [label="mode =\n\"mistakes\"?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  pool  [label="pool ← buildMistakePool()"];
+  empty [label="pool empty?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  alert [label="alert: no mistakes\nto practise yet", shape=parallelogram, fillcolor="#e0f2fe"];
+  take  [label="sessionQuestions ←\nshuffle(first 30 of pool)"];
+  all   [label="sessionQuestions ←\nshuffle(questions) first min(30, n)"];
+  reset [label="reset score, counters,\ndiffStats, answers, currentIndex ← 0"];
+  tmr   [label="timer\nenabled?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  st    [label="startTimer():\nstartTime ← Date.now()"];
+  show  [label="renderQuestion()"];
+  ans   [label="user answers\n(click or key A–D)", shape=parallelogram, fillcolor="#e0f2fe"];
+  ha    [label="handleAnswer()\n(Flowchart 3)"];
+  nxt   [label="user presses Next\n(click, Enter or Space)", shape=parallelogram, fillcolor="#e0f2fe"];
+  inc   [label="currentIndex ← currentIndex + 1"];
+  more  [label="currentIndex <\nnumber of questions?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  fin   [label="finishSession(): stopTimer() if enabled;\nsaveSessionRecord()"];
+  res   [label="showResults()", shape=parallelogram, fillcolor="#e0f2fe"];
+  stop  [label="End of session", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+
+  start -> init -> fetch -> ok;
+  ok -> rep [label="yes"];
+  ok -> err [label="no"];
+  readf [label="loadBankFromFile():\nFileReader, then parseCSV()"];
+  err -> pick -> readf -> ok;
+  rep -> press -> mode;
+  mode -> pool [label="yes"];
+  mode -> all [label="no"];
+  pool -> empty;
+  empty -> alert [label="yes"];
+  alert -> press;
+  empty -> take [label="no"];
+  take -> reset; all -> reset;
+  reset -> tmr;
+  tmr -> st [label="yes"];
+  tmr -> show [label="no"];
+  st -> show -> ans -> ha -> nxt -> inc -> more;
+  more -> show [label="yes"];
+  more -> fin [label="no"];
+  fin -> res -> stop;
+}

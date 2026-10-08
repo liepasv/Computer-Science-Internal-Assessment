@@ -1,7 +1,10 @@
 # Driving Theory Practice
 
 A browser-based practice tool for the Lithuanian learner driver theory exam.
-Plain HTML, CSS (Tailwind) and JavaScript — no build step and no server-side code.
+Plain HTML, CSS (Tailwind) and JavaScript — no server-side code. The stylesheet
+`css/styles.css` is built from Tailwind once and committed, so the app works
+without an internet connection. After changing class names, rebuild it with
+`npx tailwindcss@3.4.17 -i css/input.css -o css/styles.css --minify`.
 
 ## Running it
 
@@ -45,6 +48,7 @@ a full `https://` link.
 
 ```
 index.html      four screens: start, quiz, results, history
+css/styles.css  Tailwind classes used by the app, built by tailwind.config.js
 src/csv.js      CSV parsing and question validation
 src/storage.js  localStorage: profiles, session history, statistics
 src/i18n.js     interface translations (en / lt)

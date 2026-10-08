@@ -1,0 +1,18 @@
+// Flowchart 4: shuffle(array), the Fisher–Yates shuffle (session.js)
+digraph G {
+  graph [rankdir=TB, nodesep=0.35, ranksep=0.32, fontname="Liberation Sans"];
+  node  [fontname="Liberation Sans", fontsize=10, shape=box, style="filled", fillcolor="#ffffff", color="#1f2937"];
+  edge  [fontname="Liberation Sans", fontsize=9, color="#1f2937"];
+  start [label="shuffle(array)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  copy  [label="arr ← copy of array\n(the bank itself is not changed)"];
+  i     [label="i ← length of arr − 1"];
+  loop  [label="i > 0?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  j     [label="j ← random whole number\nfrom 0 to i (inclusive)"];
+  swap  [label="swap arr[i] and arr[j]"];
+  dec   [label="i ← i − 1"];
+  ret   [label="return arr", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  start -> copy -> i -> loop;
+  loop -> j [label="yes"];
+  loop -> ret [label="no"];
+  j -> swap -> dec -> loop;
+}

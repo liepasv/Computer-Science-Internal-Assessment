@@ -1,0 +1,48 @@
+// System model: files, data stores and the calls between them (Criterion C)
+digraph G {
+  graph [rankdir=TB, nodesep=0.3, ranksep=0.55, fontname="Liberation Sans", newrank=true];
+  node  [fontname="Liberation Sans", fontsize=10];
+  edge  [fontname="Liberation Sans", fontsize=8, color="#4b5563"];
+
+  user [label="Learner\n(mouse / keyboard)", shape=box, style="rounded,filled", fillcolor="#fef3c7"];
+  html [label="index.html\n4 screens: start, quiz,\nresults, history", shape=box, style="filled", fillcolor="#f3f4f6"];
+
+  subgraph cluster_js {
+    label="JavaScript files in src/"; style="rounded,dashed"; color="#9ca3af"; fontsize=10;
+    node [shape=box, style="rounded,filled", fillcolor="#dbeafe"];
+    csv     [label="csv.js\nparseCSV()\nisValidQuestion()"];
+    storage [label="storage.js\nsaveSessionRecord()  loadHistory()\ngetWeakQuestions()  summariseHistory()\nexportAllData()  importAllData()"];
+    i18n    [label="i18n.js\nt()  applyTranslations()"];
+    bank    [label="bank.js\nloadBuiltinBank()  loadBankFromFile()\napplyParsedBank()  resolveImageSrc()"];
+    session [label="session.js\nshuffle()  startSession()  nextQuestion()\nfinishSession()  quitSession()\nstartTimer()  stopTimer()  getMaxScore()"];
+    ui      [label="ui.js\nrenderQuestion()  handleAnswer()\nshowResults()  showScreen()"];
+    history [label="history.js\nrenderHistoryScreen()\nrefreshStartScreen()"];
+    app     [label="app.js\nglobal session state\n+ all event listeners", fillcolor="#c7d2fe"];
+  }
+
+  node [shape=cylinder, style="filled", fillcolor="#dcfce7"];
+  bankfiles [label="database/db.lt.csv\ndatabase/db.en.csv\n(221 questions each)"];
+  assets    [label="assets/1–221.jpg"];
+  userfiles [label="user's own CSV\n+ image files\n(File API)"];
+  ls        [label="localStorage\ndtp.lang.v1  dtp.profiles.v1\ndtp.activeProfile.v1\ndtp.history.v1.<profile>"];
+
+  user -> html [label="clicks, keys"];
+  html -> app [label="events"];
+  app -> bank [label="setSource()"];
+  app -> session [label="startSession()\nnextQuestion()\nquitSession()"];
+  app -> ui [label="handleAnswer()"];
+  app -> history [label="showHistoryScreen()"];
+  bank -> csv [label="parseCSV()"];
+  bankfiles -> bank [label="fetch()"];
+  userfiles -> bank [label="FileReader"];
+  session -> ui [label="renderQuestion()\nshowResults()"];
+  session -> storage [label="saveSessionRecord()\ngetWeakQuestions()"];
+  history -> storage [label="loadHistory()\nsummariseHistory()"];
+  history -> session [label="startSession('mistakes')"];
+  ui -> bank [label="resolveImageSrc()"];
+  assets -> ui [label="<img src>", style=dashed];
+  storage -> ls [label="readJSON() / writeJSON()", dir=both];
+  i18n -> ls [label="language", dir=both, style=dashed];
+  ui -> html [label="updates DOM", style=dashed];
+  {ui history bank session} -> i18n [style=dotted, arrowhead=none, color="#9ca3af"];
+}

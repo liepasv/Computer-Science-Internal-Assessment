@@ -1,0 +1,27 @@
+// Flowchart 5: getWeakQuestions(history, bank) and buildMistakePool() (storage.js, session.js)
+digraph G {
+  graph [rankdir=TB, nodesep=0.35, ranksep=0.32, fontname="Liberation Sans"];
+  node  [fontname="Liberation Sans", fontsize=10, shape=box, style="filled", fillcolor="#ffffff", color="#1f2937"];
+  edge  [fontname="Liberation Sans", fontsize=9, color="#1f2937"];
+  start [label="getWeakQuestions(history, bank)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  st    [label="stats ← { } (one counter per bank + question id)"];
+  s     [label="next stored session"];
+  same  [label="no bank given, or\nsession.bank = bank?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  a     [label="for each answer: seen + 1;\nif wrong: wrong + 1 and keep\nthe newest question snippet"];
+  more  [label="another stored\nsession?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  f     [label="keep only questions with wrong > 0"];
+  sort  [label="sort: most wrong first;\nties: higher wrong ÷ seen first"];
+  ret   [label="return sorted list", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  pool  [label="buildMistakePool(): keep the entries\nwhose id is in the loaded bank"];
+  sess  [label="startSession('mistakes'):\nshuffle(first 30 of the pool)"];
+  start -> st -> more;
+  more -> s [label="yes"];
+  more -> f [label="no"];
+  s -> same;
+  same -> a [label="yes"];
+  same -> more [label="no"];
+  a -> more;
+  f -> sort -> ret;
+  ret -> pool [style=dashed, label="used by"];
+  pool -> sess;
+}

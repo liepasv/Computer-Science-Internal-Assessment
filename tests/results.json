@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-08T15:07:50.201Z",
+  "date": "2026-10-08T15:20:56.586Z",
   "browser": "Chromium 141.0.7390.37",
   "platform": "linux 6.18.44-fc-v80",
   "structural": [
@@ -90,7 +90,7 @@
       "type": "Valid",
       "data": "shuffle [1, 2, 3] 60,000 times and count the 6 orders",
       "expected": "all 6 orders appear, each 10,000 ± 3%",
-      "actual": "123: 10106, 132: 9828, 213: 9846, 231: 10080, 312: 10162, 321: 9978",
+      "actual": "123: 9928, 132: 9963, 213: 9956, 231: 9868, 312: 10132, 321: 10153",
       "pass": true
     },
     {
@@ -361,7 +361,7 @@
       "criterion": "CfS 6",
       "test": "Timer on: play small_10.csv for about 7 s, measured independently by the test script",
       "expected": "timer starts at 0:00; reported time within 1 s of the measured time",
-      "actual": "start 0:00; app 0:07, measured 7.75 s",
+      "actual": "start 0:00; app 0:07, measured 7.66 s",
       "pass": true
     },
     {
@@ -377,7 +377,7 @@
       "criterion": "CfS 7",
       "test": "Complete a session (every third answer wrong) and read the results screen",
       "expected": "total score; correct + incorrect = 30; correct/total and % for each difficulty",
-      "actual": "score 44 of 60 (73%); correct 20 + incorrect 10; Easy 5/10 (50%), Medium 6/10 (60%), Hard 9/10 (90%)",
+      "actual": "score 39 of 60 (65%); correct 20 + incorrect 10; Easy 6/10 (60%), Medium 9/10 (90%), Hard 5/10 (50%)",
       "pass": true
     },
     {
@@ -393,7 +393,7 @@
       "criterion": "Performance",
       "test": "Upload valid_500.csv, then answer 10 questions",
       "expected": "loaded in under 2 s; each answer marked in under 0.2 s",
-      "actual": "loaded in 25 ms (upload to message); slowest answer 0.6 ms",
+      "actual": "loaded in 26 ms (upload to message); slowest answer 0.5 ms",
       "pass": true
     },
     {
@@ -401,7 +401,7 @@
       "criterion": "Usability",
       "test": "Open the app with no setup and start a session; check every question screen",
       "expected": "session starts with one click after the bank loads; question number, A–D labels and key hint visible on all 30 questions",
-      "actual": "Start ready after 565 ms; 1 click to start; visible on every question: true",
+      "actual": "Start ready after 72 ms; 1 click to start; visible on every question: true",
       "pass": true
     },
     {
@@ -458,6 +458,14 @@
       "test": "Switch the interface to LT",
       "expected": "Lithuanian labels; Lithuanian bank of 221 questions loaded",
       "actual": "\"Įkelta tinkamų klausimų: 221.\"; Start button \"Pradėti testą\"",
+      "pass": true
+    },
+    {
+      "id": "F24",
+      "criterion": "Reliability (offline)",
+      "test": "Block every request that leaves the computer, open the app and answer a question",
+      "expected": "only the start screen is shown; the bank loads; a question can be answered",
+      "actual": "screens shown at start: 1; status \"Loaded 221 valid questions.\"; feedback shown: true",
       "pass": true
     },
     {

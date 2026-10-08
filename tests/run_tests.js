@@ -21,7 +21,7 @@ const PROJECT = process.argv[2] ? path.resolve(process.argv[2]) : path.resolve(_
 const DATA = path.join(__dirname, "data");
 const PORT = 8790;
 
-const TYPES = { ".html": "text/html", ".js": "text/javascript", ".csv": "text/csv",
+const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".csv": "text/csv",
                 ".jpg": "image/jpeg", ".png": "image/png", ".json": "application/json" };
 
 // Minimal static file server, so no extra tools are needed
@@ -473,6 +473,26 @@ async function runFunctional(browser, base) {
         "\"" + ltMsg + "\"; Start button \"" + ltStart + "\"", ltMsg === "Įkelta tinkamų klausimų: 221." && ltStart === "Pradėti testą");
     await page.click("#lang-en");
     await page.close();
+
+    // F24 — no internet connection: every request to another host fails
+    const offline = await browser.newContext({ viewport: { width: 900, height: 1000 } });
+    await offline.route("**/*", function (route) {
+        return route.request().url().startsWith(base) ? route.continue() : route.abort();
+    });
+    page = await offline.newPage();
+    await page.goto(base + "/index.html");
+    await page.waitForSelector("#load-status:not(.hidden)");
+    const visibleScreens = await page.$$eval("[id^=screen-]", function (s) {
+        return s.filter(function (x) { return getComputedStyle(x).display !== "none"; }).length;
+    });
+    await page.click("#start-btn");
+    await page.click("#answer-buttons button >> nth=0");
+    const offlineFeedback = await page.isVisible("#feedback-area");
+    record("F24", "Reliability (offline)", "Block every request that leaves the computer, open the app and answer a question",
+        "only the start screen is shown; the bank loads; a question can be answered",
+        "screens shown at start: " + visibleScreens + "; status \"" + (await page.textContent("#load-status")) + "\"; feedback shown: " + offlineFeedback,
+        visibleScreens === 1 && offlineFeedback);
+    await offline.close();
 
     // F23 — ending a session early
     page = await openApp(browser, base);

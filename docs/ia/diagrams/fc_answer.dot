@@ -1,0 +1,30 @@
+// Flowchart 3: handleAnswer(selectedIndex) (ui.js)
+digraph G {
+  graph [rankdir=TB, nodesep=0.35, ranksep=0.32, fontname="Liberation Sans"];
+  node  [fontname="Liberation Sans", fontsize=10, shape=box, style="filled", fillcolor="#ffffff", color="#1f2937"];
+  edge  [fontname="Liberation Sans", fontsize=9, color="#1f2937"];
+  start [label="handleAnswer(selectedIndex)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  already [label="answered?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  ign   [label="return (second answer ignored)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  set   [label="answered ← true;\nq ← sessionQuestions[currentIndex];\nisCorrect ← (selectedIndex = q.correct)"];
+  tot   [label="diffStats[q.difficulty].total + 1;\nadd answer record to sessionAnswers\n(question and option snippets only if wrong)"];
+  ok    [label="isCorrect?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  yes   [label="score ← score + DIFFICULTY_POINTS[q.difficulty]\n(1 Easy, 2 Medium, 3 Hard);\ncorrectCount + 1; diffStats[d].correct + 1"];
+  no    [label="incorrectCount + 1"];
+  btn   [label="disable all option buttons;\ncorrect option green;\nchosen wrong option red"];
+  msg   [label="show \"✓ Correct!\" or \"✗ Incorrect\"\nand the explanation; show new score", shape=parallelogram, fillcolor="#e0f2fe"];
+  lastq [label="last question\nof the session?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  see   [label="Next button ← \"See Results →\""];
+  nxt   [label="Next button ← \"Next Question →\""];
+  end   [label="return", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  start -> already;
+  already -> ign [label="yes"];
+  already -> set [label="no"];
+  set -> tot -> ok;
+  ok -> yes [label="yes"];
+  ok -> no [label="no"];
+  {yes no} -> btn -> msg -> lastq;
+  lastq -> see [label="yes"];
+  lastq -> nxt [label="no"];
+  {see nxt} -> end;
+}

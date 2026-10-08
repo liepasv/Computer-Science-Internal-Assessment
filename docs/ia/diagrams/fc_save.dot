@@ -1,0 +1,19 @@
+// Flowchart 6: saveHistory(profile, list) (storage.js)
+digraph G {
+  graph [rankdir=TB, nodesep=0.35, ranksep=0.32, fontname="Liberation Sans"];
+  node  [fontname="Liberation Sans", fontsize=10, shape=box, style="filled", fillcolor="#ffffff", color="#1f2937"];
+  edge  [fontname="Liberation Sans", fontsize=9, color="#1f2937"];
+  start [label="saveHistory(profile, list)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  lim   [label="toSave ← last 100 sessions of list\n(HISTORY_LIMIT)"];
+  loop  [label="toSave not empty?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  w     [label="writeJSON(historyKey(profile), toSave)\nsucceeded?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  ok    [label="return true", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  half  [label="toSave ← newest half of toSave"];
+  fail  [label="return false\n(results screen warns the user)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  start -> lim -> loop;
+  loop -> w [label="yes"];
+  loop -> fail [label="no"];
+  w -> ok [label="yes"];
+  w -> half [label="no (storage full\nor blocked)"];
+  half -> loop;
+}
