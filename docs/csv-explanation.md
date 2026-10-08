@@ -18,7 +18,7 @@ Windows kompiuteriai saugo eilučių pabaigą kaip `\r\n` (du simboliai), o Mac/
 
 ---
 
-### 2 žingsnis — simbolis po simbolio skaitymas (21–44 eilutės)
+### 2 žingsnis — simbolis po simbolio skaitymas (21–48 eilutės)
 
 Tai yra pagrindinis algoritmo žingsnis. Kodas **nedalina teksto pagal eilutes iš anksto** — vietoj to eina per kiekvieną simbolį po vieną, nes kai kurie CSV laukai (pvz. paaiškinimai) gali turėti `\n` viduje kabutėse.
 
@@ -35,7 +35,8 @@ Logika kiekvienam simboliui:
 
 | Simbolis | Sąlyga | Kas daroma |
 |----------|--------|------------|
-| `"` | visada | perjungia `inQuotes` (įjungia arba išjungia) |
+| `""` | kai `inQuotes = true` | dvi kabutės iš eilės lauko viduje reiškia vieną tikrą kabutę: ji pridedama prie `current`, antroji praleidžiama (24–27 eilutės) |
+| `"` | kitais atvejais | perjungia `inQuotes` (įjungia arba išjungia) |
 | `,` | kai `inQuotes = false` | baigia dabartinį lauką, įrašo į `fields` |
 | `\n` | kai `inQuotes = false` | baigia eilutę, įrašo į `rows` |
 | bet kas kitas | — | prideda prie `current` |
@@ -53,7 +54,7 @@ Logika kiekvienam simboliui:
 
 ---
 
-### 3 žingsnis — paskutinė eilutė (47–52 eilutės)
+### 3 žingsnis — paskutinė eilutė (51–56 eilutės)
 
 ```js
 if (current.length > 0 || fields.length > 0) { ... }
@@ -63,7 +64,7 @@ Jei failas baigiasi be `\n` (dažnas atvejis), paskutinis laukas ir eilutė neb�
 
 ---
 
-### 4 žingsnis — klausimų objektų kūrimas (67–87 eilutės)
+### 4 žingsnis — klausimų objektų kūrimas (71–91 eilutės)
 
 Pereina per visas eilutes, pradedant nuo `i = 1` (praleidžia pirmą — antraštę `id, question, option_a...`).
 
@@ -124,4 +125,4 @@ Paprastesnis būdas būtų:
 const lines = text.split("\n");
 ```
 
-Tačiau mūsų CSV duomenų bazėje **9 klausimai turi `\n` simbolius paaiškinimo lauke** (viduje kabutėse). `split("\n")` sulaužytų tas eilutes į kelias dalis ir duomenys sugadintų. Simbolis po simbolio metodas šią problemą išsprendžia teisingai.
+Tačiau mūsų CSV duomenų bazėje **48 eilutės turi `\n` simbolius kabutėse esančiuose laukuose** (viduje kabutėse). `split("\n")` sulaužytų tas eilutes į kelias dalis ir duomenys sugadintų. Simbolis po simbolio metodas šią problemą išsprendžia teisingai.

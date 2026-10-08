@@ -53,4 +53,13 @@ src/session.js  session logic, timer, scoring
 src/ui.js       quiz and results rendering
 src/history.js  history screen, progress chart, mistake review
 src/app.js      shared state and event listeners
+tests/          structural and functional tests (see tests/README.md)
+tools/          test-data and English-bank build scripts
+```
+
+## Tests
+
+```
+python3 tools/make_test_data.py   # rebuild the test CSV files
+node tests/run_tests.js           # run all tests (needs the playwright package)
 ```

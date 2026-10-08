@@ -71,9 +71,15 @@ function renderQuestion() {
         btn.className =
             "w-full text-left px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-700 " +
             "hover:border-blue-400 hover:bg-blue-50 transition-colors flex items-start gap-3";
-        btn.innerHTML =
-            '<span class="font-bold text-blue-600 min-w-[18px]">' + labels[index] + "</span>" +
-            "<span>" + option + "</span>";
+        // The option text comes from a CSV the user may have written, so it
+        // is set with textContent and can never be read as HTML
+        const letter = document.createElement("span");
+        letter.className = "font-bold text-blue-600 min-w-[18px]";
+        letter.textContent = labels[index];
+        const text = document.createElement("span");
+        text.textContent = option;
+        btn.appendChild(letter);
+        btn.appendChild(text);
 
         btn.addEventListener("click", function () {
             handleAnswer(index + 1); // pass 1-based index

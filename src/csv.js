@@ -21,7 +21,11 @@ function parseCSV(text) {
     for (let i = 0; i < text.length; i++) {
         const char = text[i];
 
-        if (char === '"') {
+        if (char === '"' && inQuotes && text[i + 1] === '"') {
+            // Two quotes inside a quoted field stand for one real quote mark
+            current += '"';
+            i++; // skip the second quote
+        } else if (char === '"') {
             // Toggle quote mode — content inside quotes is treated as one field
             inQuotes = !inQuotes;
         } else if (char === "," && !inQuotes) {

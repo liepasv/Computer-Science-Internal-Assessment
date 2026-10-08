@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Structural tests — Driving Theory Practice</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 24px; color: #1f2937; }
+        h1 { font-size: 20px; }
+        table { border-collapse: collapse; width: 100%; font-size: 13px; }
+        th, td { border: 1px solid #d1d5db; padding: 6px 8px; text-align: left; vertical-align: top; }
+        th { background: #f3f4f6; }
+        .pass { color: #15803d; font-weight: 600; }
+        .fail { color: #b91c1c; font-weight: 600; }
+        iframe { width: 900px; height: 600px; border: 1px solid #d1d5db; margin-top: 24px; }
+    </style>
+</head>
+<body>
+    <h1>Structural (white-box) tests</h1>
+    <p id="summary">Running…</p>
+    <table>
+        <thead>
+            <tr><th>No.</th><th>Function</th><th>Type</th><th>Test data</th><th>Expected</th><th>Actual</th><th>Result</th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+    </table>
+
+    <!-- The real application is loaded in a frame, so the tests call the
+         very functions the user runs, not copies of them -->
+    <iframe id="app" src="../index.html"></iframe>
+
+<script>
+// ============================================================
+// test.html — Structural (white-box) tests
+// Each test calls one function of the application with valid,
+// extreme or invalid data and compares the result with the
+// expected outcome planned in Criterion C.
+// ============================================================
+
+const frame = document.getElementById("app");
+const results = [];
+const TEST_PROFILE = "__structural_test__";
+
+// The app's state lives in global `let` variables, which are not
+// properties of window. Evaluating code inside the frame's global
+// scope is the only way to read and set them from outside.
+function app(code) {
+    return frame.contentWindow.eval(code);
+}
+
+function record(id, fn, type, data, expected, actual, pass) {
+    results.push({ id, fn, type, data, expected, actual: String(actual), pass: !!pass });
+}
+
+async function readData(name) {
+    const response = await fetch("data/" + name);
+    return response.text();
+}
+
+// Puts a list of questions in place as the loaded bank and clears the
+// state a previous test may have left behind
+function useBank(list) {
+    frame.contentWindow.__bank = list;
+    app("questions = window.__bank; currentBank = BUILTIN_BANK; activeProfile = '" + TEST_PROFILE + "';");
+    app("document.getElementById('timer-toggle').checked = false;");
+}
+
+function makeQuestion(id, difficulty, optionCount) {
+    const options = ["A1", "B1", "C1", "D1"].slice(0, optionCount || 4);
+    while (options.length < 4) options.push("");
+    return { id: String(id), text: "Q" + id, options: options, correct: 1,
+             difficulty: difficulty, explanation: "", picture: "" };
+}
+
+function pressKey(key) {
+    const w = frame.contentWindow;
+    w.document.dispatchEvent(new w.KeyboardEvent("keydown", { key: key, bubbles: true }));
+}
+
+function sameMembers(a, b) {
+    return JSON.stringify(a.slice().sort()) === JSON.stringify(b.slice().sort());
+}
+
+
+async function runTests() {
+    const w = frame.contentWindow;
+
+    // The app loads its built-in bank on start-up; wait for that to finish
+    // so it cannot replace the test questions half-way through a test
+    for (let i = 0; i < 100 && app("questions.length") === 0; i++) {
+        await new Promise(function (done) { setTimeout(done, 50); });
+    }
+
+    // Confirmation dialogs would stop an automated run, so they are answered "yes"
+    w.confirm = function () { return true; };
+    w.alert = function () {};
+    w.localStorage.removeItem(app("historyKey('" + TEST_PROFILE + "')"));
+
+    const quoted = await readData("quoted.csv");
+    const quotedCrlf = await readData("quoted_crlf.csv");
+    const quotedNoNewline = await readData("quoted_no_final_newline.csv");
+    const headerOnly = await readData("header_only.csv");
+    const fixed30 = app("parseCSV")(await readData("fixed_30.csv")).questions;
+    const bankText = await (await fetch("../database/db.en.csv")).text();
+    const bank = app("parseCSV")(bankText).questions;
+
+    // ----- parseCSV() -----
+    let r = app("parseCSV")(quoted);
+    record("S1", "parseCSV()", "Valid", "quoted.csv: 3 rows; a comma and a line break inside quoted fields",
+        "3 questions, skipped 0, comma and line break kept",
+        r.questions.length + " questions, skipped " + r.skipped + ", text 1 = \"" + r.questions[0].text + "\"",
+        r.questions.length === 3 && r.skipped === 0 &&
+        r.questions[0].text.includes("wet, icy") && r.questions[1].text.includes("\n"));
+
+    const crlf = app("parseCSV")(quotedCrlf);
+    record("S2", "parseCSV()", "Valid", "quoted_crlf.csv (Windows CRLF line endings)",
+        "same result as the LF file",
+        JSON.stringify(crlf.questions) === JSON.stringify(r.questions) ? "identical" : "different",
+        JSON.stringify(crlf.questions) === JSON.stringify(r.questions));
+
+    const noNl = app("parseCSV")(quotedNoNewline);
+    const ho = app("parseCSV")(headerOnly);
+    record("S3", "parseCSV()", "Extreme", "header_only.csv; quoted_no_final_newline.csv",
+        "{questions: [], skipped: 0}; last row still read (3 questions)",
+        "header only: " + ho.questions.length + "/" + ho.skipped + "; no final newline: " + noNl.questions.length + " questions",
+        ho.questions.length === 0 && ho.skipped === 0 && noNl.questions.length === 3);
+
+    record("S4", "parseCSV()", "Extreme", "escaped quotes: \"The sign \"\"Cyclists\"\" warns of what?\"",
+        "The sign \"Cyclists\" warns of what?",
+        r.questions[2].text,
+        r.questions[2].text === 'The sign "Cyclists" warns of what?');
+
+    let threw = false, empty;
+    try { empty = app("parseCSV")(""); } catch (e) { threw = true; }
+    record("S5", "parseCSV()", "Invalid", "empty string (empty.csv)",
+        "{questions: [], skipped: 0}, no exception",
+        threw ? "exception thrown" : JSON.stringify(empty),
+        !threw && empty.questions.length === 0 && empty.skipped === 0);
+
+    // ----- isValidQuestion() -----
+    const valid = app("isValidQuestion");
+    const base = function (changes) { return Object.assign(makeQuestion(1, 1), changes); };
+    const validCases = [base({ correct: 1, difficulty: 1 }), base({ correct: 4, difficulty: 3 })];
+    record("S6", "isValidQuestion()", "Valid", "correct = 1 and 4; difficulty = 1 and 3",
+        "true, true", validCases.map(valid).join(", "), validCases.every(valid));
+
+    const twoOptions = Object.assign(makeQuestion(2, 1, 2), { correct: 2 });
+    record("S7", "isValidQuestion()", "Extreme", "only 2 options (C and D empty), correct = 2",
+        "true", valid(twoOptions), valid(twoOptions) === true);
+
+    const invalidCases = [
+        base({ correct: parseInt("0.5") }), base({ correct: parseInt("B") }), base({ correct: NaN }),
+        base({ difficulty: 0 }), base({ difficulty: parseInt("Hard") }), base({ text: "" }),
+        Object.assign(makeQuestion(3, 1, 2), { correct: 3 })
+    ];
+    record("S8", "isValidQuestion()", "Invalid",
+        "correct = \"0.5\", \"B\", blank; difficulty = 0, \"Hard\"; empty text; correct = 3 pointing at an empty option C",
+        "false for all 7", invalidCases.map(valid).join(", "), invalidCases.every(function (q) { return valid(q) === false; }));
+
+    // ----- shuffle() -----
+    const shuffle = app("shuffle");
+    const ids = bank.map(function (q) { return q.id; });
+    const before = ids.slice();
+    const shuffled = shuffle(ids);
+    record("S9", "shuffle()", "Valid", "array of the 221 question ids",
+        "same length and same ids; original array unchanged",
+        shuffled.length + " ids, same members: " + sameMembers(shuffled, ids) + ", original unchanged: " + (JSON.stringify(ids) === JSON.stringify(before)),
+        shuffled.length === 221 && sameMembers(shuffled, ids) && JSON.stringify(ids) === JSON.stringify(before));
+
+    const counts = {};
+    for (let i = 0; i < 60000; i++) {
+        const key = shuffle([1, 2, 3]).join("");
+        counts[key] = (counts[key] || 0) + 1;
+    }
+    const values = Object.values(counts);
+    const minCount = Math.min.apply(null, values), maxCount = Math.max.apply(null, values);
+    record("S10", "shuffle()", "Valid", "shuffle [1, 2, 3] 60,000 times and count the 6 orders",
+        "all 6 orders appear, each 10,000 ± 3%",
+        Object.keys(counts).sort().map(function (k) { return k + ": " + counts[k]; }).join(", "),
+        values.length === 6 && minCount >= 9700 && maxCount <= 10300);
+
+    const e1 = shuffle([]), e2 = shuffle(["x"]);
+    record("S11", "shuffle()", "Extreme", "empty array []; one-element array [x]",
+        "[] and [x], no error", JSON.stringify(e1) + " and " + JSON.stringify(e2),
+        e1.length === 0 && e2.length === 1 && e2[0] === "x");
+
+    // ----- startSession() -----
+    useBank(bank);
+    app("startSession('all')");
+    const sessionIds = app("sessionQuestions.map(function (q) { return q.id; })");
+    record("S12", "startSession()", "Valid", "bank of 221 questions",
+        "30 questions, no repeated id",
+        sessionIds.length + " questions, " + new Set(sessionIds).size + " unique ids",
+        sessionIds.length === 30 && new Set(sessionIds).size === 30);
+
+    const sizes = [10, 30, 31].map(function (n) {
+        useBank(bank.slice(0, n));
+        app("startSession('all')");
+        return app("sessionQuestions.length");
+    });
+    record("S13", "startSession()", "Extreme", "banks of 10, 30 and 31 questions",
+        "sessions of 10, 30 and 30", sizes.join(", "),
+        sizes[0] === 10 && sizes[1] === 30 && sizes[2] === 30);
+
+    useBank(fixed30);
+    app("startSession('all')");
+    for (let i = 0; i < 30; i++) {
+        app("handleAnswer(sessionQuestions[currentIndex].correct); nextQuestion();");
+    }
+    app("startSession('all')");
+    const reset = app("[score, correctCount, incorrectCount, currentIndex, elapsedSeconds, " +
+                      "diffStats[1].total + diffStats[2].total + diffStats[3].total, sessionAnswers.length]");
+    record("S14", "startSession()", "Valid", "start a new session straight after a finished one",
+        "score, correctCount, incorrectCount, currentIndex, elapsedSeconds, diffStats totals and answers all 0",
+        reset.join(", "), reset.every(function (v) { return v === 0; }));
+
+    // ----- handleAnswer() -----
+    // Three hand-made questions so the difficulty of each is known
+    function threeQuestionSession() {
+        useBank([makeQuestion(1, 1), makeQuestion(2, 2), makeQuestion(3, 3)]);
+        app("startSession('all')");
+        frame.contentWindow.__fixed = [makeQuestion(1, 1), makeQuestion(2, 2), makeQuestion(3, 3)];
+        app("sessionQuestions = window.__fixed; currentIndex = 0; renderQuestion();");
+    }
+    threeQuestionSession();
+    const steps = [];
+    for (let i = 0; i < 3; i++) {
+        const beforeScore = app("score");
+        app("handleAnswer(1)");
+        steps.push(app("score") - beforeScore);
+        app("nextQuestion()");
+    }
+    const ds = app("[diffStats[1].correct, diffStats[2].correct, diffStats[3].correct, correctCount]");
+    record("S15", "handleAnswer()", "Valid", "correct answer to a difficulty 1, 2 and 3 question",
+        "score rises by 1, 2, 3; correctCount 3; diffStats[d].correct 1 each",
+        "rises: " + steps.join(", ") + "; correctCount " + ds[3] + "; diffStats correct " + ds.slice(0, 3).join("/"),
+        steps.join() === "1,2,3" && ds.join() === "1,1,1,3");
+
+    threeQuestionSession();
+    app("handleAnswer(2)");
+    const wrong = app("[score, incorrectCount, diffStats[1].total, diffStats[1].correct]");
+    record("S16", "handleAnswer()", "Invalid", "wrong answer (option 2) to an Easy question",
+        "score 0; incorrectCount 1; diffStats[1].total 1, .correct 0",
+        "score " + wrong[0] + "; incorrectCount " + wrong[1] + "; total " + wrong[2] + ", correct " + wrong[3],
+        wrong.join() === "0,1,1,0");
+
+    threeQuestionSession();
+    app("currentIndex = 2; renderQuestion(); handleAnswer(1); handleAnswer(1); handleAnswer(1); handleAnswer(1);");
+    const twice = app("[score, correctCount, sessionAnswers.length]");
+    record("S17", "handleAnswer()", "Extreme", "called 4 times on the same Hard question",
+        "points added once: score 3, correctCount 1, 1 answer stored",
+        "score " + twice[0] + ", correctCount " + twice[1] + ", answers stored " + twice[2],
+        twice.join() === "3,1,1");
+
+    // ----- keydown listener -----
+    const keyResults = [];
+    ["A", "b", "C", "d"].forEach(function (key, i) {
+        useBank([makeQuestion(1, 1)]);
+        app("startSession('all')");
+        pressKey(key);
+        keyResults.push(key + "→" + app("sessionAnswers.length ? sessionAnswers[0].chosen : 'none'"));
+    });
+    record("S18", "keydown listener", "Valid", "keys A, b, C, d on a 4-option question",
+        "A→1, b→2, C→3, d→4", keyResults.join(", "), keyResults.join() === "A→1,b→2,C→3,d→4");
+
+    useBank([makeQuestion(1, 1, 2)]);
+    app("startSession('all')");
+    ["E", "Q", "C", "D", "1"].forEach(pressKey);
+    const ignored = app("[answered, sessionAnswers.length]");
+    record("S19", "keydown listener", "Invalid", "keys E, Q, 1, and C, D on a 2-option question",
+        "all ignored: nothing answered", "answered " + ignored[0] + ", answers " + ignored[1],
+        ignored[0] === false && ignored[1] === 0);
+
+    useBank([makeQuestion(1, 1), makeQuestion(2, 1)]);
+    app("startSession('all')");
+    pressKey("Enter");
+    const afterEarlyEnter = app("currentIndex");
+    pressKey("a");
+    pressKey("Enter");
+    const afterAnswerEnter = app("currentIndex");
+    app("showScreen('results')");
+    pressKey("a");
+    const onResults = app("sessionAnswers.length");
+    record("S20", "keydown listener", "Extreme", "Enter before answering; A then Enter; A pressed on the results screen",
+        "index stays 0; then moves to 1; results-screen key ignored (1 answer)",
+        "index " + afterEarlyEnter + " → " + afterAnswerEnter + "; answers after key on results: " + onResults,
+        afterEarlyEnter === 0 && afterAnswerEnter === 1 && onResults === 1);
+
+    // ----- Timer functions -----
+    const formatTime = app("formatTime");
+    record("S21", "formatTime()", "Valid", "formatTime(75); formatTime(0)", "\"1:15\"; \"0:00\"",
+        formatTime(75) + "; " + formatTime(0), formatTime(75) === "1:15" && formatTime(0) === "0:00");
+    const ext = [59, 60, 3600].map(formatTime);
+    record("S22", "formatTime()", "Extreme", "formatTime(59), (60), (3600)", "\"0:59\", \"1:00\", \"60:00\"",
+        ext.join(", "), ext.join() === "0:59,1:00,60:00");
+    threw = false;
+    try { app("startTime = null; timerInterval = null; elapsedSeconds = 0; stopTimer();"); } catch (e) { threw = true; }
+    const elapsed = app("elapsedSeconds");
+    record("S23", "stopTimer()", "Invalid", "stopTimer() when the timer was never started",
+        "no error; elapsedSeconds stays 0", (threw ? "error" : "no error") + "; elapsedSeconds " + elapsed,
+        !threw && elapsed === 0);
+
+    // ----- Results functions -----
+    // Planned answers on fixed_30.csv: every Hard and 6 Medium questions right,
+    // everything else wrong -> 10 x 3 + 6 x 2 = 42 out of 60
+    useBank(fixed30);
+    app("startSession('all')");
+    let mediumRight = 0;
+    for (let i = 0; i < 30; i++) {
+        const q = app("sessionQuestions[currentIndex]");
+        let answerRight = q.difficulty === 3 || (q.difficulty === 2 && mediumRight < 6);
+        if (q.difficulty === 2 && answerRight) mediumRight++;
+        app("handleAnswer(" + (answerRight ? q.correct : (q.correct % 4) + 1) + "); nextQuestion();");
+    }
+    const resultText = app("document.getElementById('results-content').textContent");
+    const res = app("[score, getMaxScore()]");
+    record("S24", "getMaxScore(), showResults()", "Valid", "fixed_30.csv: all 10 Hard and 6 Medium right, rest wrong",
+        "score 42, maxScore 60, \"(70%)\" shown",
+        "score " + res[0] + ", maxScore " + res[1] + ", screen: " + (resultText.match(/out of[^)]*\)/) || ["?"])[0],
+        res.join() === "42,60" && resultText.includes("out of 60 possible points (70%)"));
+
+    // Read back straight away, before later tests add more sessions
+    const stored = app("loadHistory(activeProfile)");
+    const last = stored[stored.length - 1];
+    record("S27", "saveSessionRecord(), loadHistory()", "Valid", "read back the session just finished in S24",
+        "stored record: score 42, maxScore 60, percent 70, 30 answers",
+        "score " + last.score + ", maxScore " + last.maxScore + ", percent " + last.percent + ", answers " + last.answers.length,
+        last.score === 42 && last.maxScore === 60 && last.percent === 70 && last.answers.length === 30);
+
+    function playAll(rightFn) {
+        app("startSession('all')");
+        for (let i = 0; i < app("sessionQuestions.length"); i++) {
+            const q = app("sessionQuestions[currentIndex]");
+            app("handleAnswer(" + (rightFn(q) ? q.correct : (q.correct % 4) + 1) + "); nextQuestion();");
+        }
+        return app("document.getElementById('results-content').textContent");
+    }
+    useBank(fixed30);
+    const allWrong = playAll(function () { return false; });
+    const allRight = playAll(function () { return true; });
+    useBank(fixed30.filter(function (q) { return q.difficulty !== 3; }));
+    const noHard = playAll(function () { return true; });
+    record("S25", "showResults()", "Extreme", "all answers wrong; all right; a session with no Hard questions",
+        "0 of 60 (0%); 60 of 60 (100%); no Hard row",
+        [allWrong.includes("out of 60 possible points (0%)"), allRight.includes("out of 60 possible points (100%)"),
+         !noHard.includes("Hard")].join(", "),
+        allWrong.includes("out of 60 possible points (0%)") && allRight.includes("out of 60 possible points (100%)") &&
+        !noHard.includes("Hard"));
+
+    useBank(fixed30);
+    const savedBefore = app("loadHistory(activeProfile).length");
+    threw = false;
+    try { app("startSession('all'); quitSession();"); } catch (e) { threw = true; }
+    const quit = app("[getMaxScore(), loadHistory(activeProfile).length]");
+    record("S26", "getMaxScore(), quitSession()", "Invalid", "session quit before any answer (maxScore = 0)",
+        "no division by zero or error; maxScore 0; nothing saved",
+        (threw ? "error" : "no error") + "; maxScore " + quit[0] + "; sessions saved " + savedBefore + " → " + quit[1],
+        !threw && quit[0] === 0 && quit[1] === savedBefore);
+
+    // ----- Storage functions -----
+    w.localStorage.setItem(app("historyKey(activeProfile)"), "{broken json");
+    threw = false;
+    let corrupted;
+    try { corrupted = app("loadHistory(activeProfile)"); } catch (e) { threw = true; }
+    record("S28", "readJSON(), loadHistory()", "Invalid", "corrupted JSON stored under the history key",
+        "empty history [], no crash", threw ? "error" : JSON.stringify(corrupted), !threw && corrupted.length === 0);
+
+    // Hand-made history: q1 wrong 2 of 2, q2 wrong 2 of 4, q3 wrong 1 of 1, q4 never wrong
+    function answer(qid, ok) { return { qid: qid, chosen: 1, correct: ok ? 1 : 2, difficulty: 1, ok: ok }; }
+    frame.contentWindow.__history = [
+        { id: "a", date: "2026-01-01", percent: 50, bank: "builtin",
+          answers: [answer("2", false), answer("2", true), answer("1", false), answer("4", true)] },
+        { id: "b", date: "2026-01-02", percent: 50, bank: "builtin",
+          answers: [answer("2", false), answer("2", true), answer("1", false), answer("3", false)] }
+    ];
+    const weak = app("getWeakQuestions(window.__history, 'builtin').map(function (s) { return s.qid + ' ' + s.wrong + '/' + s.seen; })");
+    record("S29", "getWeakQuestions()", "Valid", "q1 wrong 2/2, q2 wrong 2/4, q3 wrong 1/1, q4 never wrong",
+        "order q1, q2, q3 (most mistakes, then error rate); q4 left out",
+        weak.join("; "), weak.join() === "1 2/2,2 2/4,3 1/1");
+
+    // Storage quota: make the browser refuse any value over 20,000 characters
+    const proto = w.Storage.prototype;
+    const realSetItem = proto.setItem;
+    proto.setItem = function (k, v) {
+        if (String(v).length > 20000) throw new w.DOMException("full", "QuotaExceededError");
+        return realSetItem.call(this, k, v);
+    };
+    frame.contentWindow.__big = Array.from({ length: 100 }, function (_, i) {
+        return { id: "s" + i, date: "2026-01-01", percent: 0, answers: new Array(30).fill(answer("1", false)) };
+    });
+    const ok = app("saveHistory(activeProfile, window.__big)");
+    proto.setItem = realSetItem;
+    const kept = app("loadHistory(activeProfile)");
+    record("S30", "saveHistory()", "Extreme", "100 sessions while storage refuses values over 20,000 characters",
+        "returns true; keeps only the newest sessions (last id s99)",
+        "returned " + ok + "; kept " + kept.length + " sessions, newest " + kept[kept.length - 1].id,
+        ok === true && kept.length < 100 && kept[kept.length - 1].id === "s99");
+
+    const backup = JSON.stringify({ app: "driving-theory-practice", version: 1, profiles: {
+        "__import_test__": [{ id: "x1", date: "2026-01-01", percent: 10, answers: [] },
+                            { id: "x2", date: "2026-01-02", percent: 20, answers: [] }] } });
+    const first = app("importAllData")(backup);
+    const second = app("importAllData")(backup);
+    const notOurs = app("importAllData")("hello");
+    record("S31", "importAllData()", "Invalid", "the same backup imported twice; then a file that is not JSON",
+        "first adds 2, second adds 0 (no duplicates); non-JSON file returns null",
+        "first " + first.added + ", second " + second.added + ", non-JSON " + notOurs,
+        first.added === 2 && second.added === 0 && notOurs === null);
+
+    // Leave nothing behind in the browser
+    w.localStorage.removeItem(app("historyKey('" + TEST_PROFILE + "')"));
+    w.localStorage.removeItem(app("historyKey('__import_test__')"));
+    app("showScreen('load')");
+}
+
+function showResults() {
+    const passed = results.filter(function (r) { return r.pass; }).length;
+    document.getElementById("summary").textContent = passed + " of " + results.length + " structural tests passed.";
+    document.getElementById("rows").innerHTML = results.map(function (r) {
+        const cells = [r.id, r.fn, r.type, r.data, r.expected, r.actual];
+        return "<tr>" + cells.map(function (c) {
+            const td = document.createElement("td");
+            td.textContent = c;
+            return td.outerHTML;
+        }).join("") + '<td class="' + (r.pass ? "pass" : "fail") + '">' + (r.pass ? "Pass" : "Fail") + "</td></tr>";
+    }).join("");
+    window.testResults = results;   // read by tests/run_tests.js
+    window.testsFinished = true;
+}
+
+frame.addEventListener("load", function () {
+    runTests().catch(function (e) {
+        record("ERR", "test runner", "-", "-", "no error", e.message, false);
+    }).finally(showResults);
+});
+</script>
+</body>
+</html>

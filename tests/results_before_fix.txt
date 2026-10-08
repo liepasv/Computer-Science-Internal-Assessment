@@ -1,0 +1,35 @@
+Structural tests run against commit 12a16ba (before the csv.js fix)
+PASS S1 parseCSV() — 3 questions, skipped 0, text 1 = "If a road is wet, icy or snowy, what must you do?"
+PASS S2 parseCSV() — identical
+PASS S3 parseCSV() — header only: 0/0; no final newline: 3 questions
+FAIL S4 parseCSV() — The sign Cyclists warns of what?
+PASS S5 parseCSV() — {"questions":[],"skipped":0}
+PASS S6 isValidQuestion() — true, true
+PASS S7 isValidQuestion() — true
+PASS S8 isValidQuestion() — false, false, false, false, false, false, false
+PASS S9 shuffle() — 221 ids, same members: true, original unchanged: true
+PASS S10 shuffle() — 123: 9927, 132: 9879, 213: 10041, 231: 10060, 312: 10037, 321: 10056
+PASS S11 shuffle() — [] and ["x"]
+PASS S12 startSession() — 30 questions, 30 unique ids
+PASS S13 startSession() — 10, 30, 30
+PASS S14 startSession() — 0, 0, 0, 0, 0, 0, 0
+PASS S15 handleAnswer() — rises: 1, 2, 3; correctCount 3; diffStats correct 1/1/1
+PASS S16 handleAnswer() — score 0; incorrectCount 1; total 1, correct 0
+PASS S17 handleAnswer() — score 3, correctCount 1, answers stored 1
+PASS S18 keydown listener — A→1, b→2, C→3, d→4
+PASS S19 keydown listener — answered false, answers 0
+PASS S20 keydown listener — index 0 → 1; answers after key on results: 1
+PASS S21 formatTime() — 1:15; 0:00
+PASS S22 formatTime() — 0:59, 1:00, 60:00
+PASS S23 stopTimer() — no error; elapsedSeconds 0
+PASS S24 getMaxScore(), showResults() — score 42, maxScore 60, screen: out of 60 possible points (70%)
+PASS S27 saveSessionRecord(), loadHistory() — score 42, maxScore 60, percent 70, answers 30
+PASS S25 showResults() — true, true, true
+PASS S26 getMaxScore(), quitSession() — no error; maxScore 0; sessions saved 6 → 6
+PASS S28 readJSON(), loadHistory() — []
+PASS S29 getWeakQuestions() — 1 2/2; 2 2/4; 3 1/1
+PASS S30 saveHistory() — returned true; kept 6 sessions, newest s99
+PASS S31 importAllData() — first 2, second 0, non-JSON null
+
+Structural: 30/31 passed
+Functional: 0/0 passed

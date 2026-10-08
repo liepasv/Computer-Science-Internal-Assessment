@@ -1,0 +1,472 @@
+{
+  "date": "2026-10-08T15:07:50.201Z",
+  "browser": "Chromium 141.0.7390.37",
+  "platform": "linux 6.18.44-fc-v80",
+  "structural": [
+    {
+      "id": "S1",
+      "fn": "parseCSV()",
+      "type": "Valid",
+      "data": "quoted.csv: 3 rows; a comma and a line break inside quoted fields",
+      "expected": "3 questions, skipped 0, comma and line break kept",
+      "actual": "3 questions, skipped 0, text 1 = \"If a road is wet, icy or snowy, what must you do?\"",
+      "pass": true
+    },
+    {
+      "id": "S2",
+      "fn": "parseCSV()",
+      "type": "Valid",
+      "data": "quoted_crlf.csv (Windows CRLF line endings)",
+      "expected": "same result as the LF file",
+      "actual": "identical",
+      "pass": true
+    },
+    {
+      "id": "S3",
+      "fn": "parseCSV()",
+      "type": "Extreme",
+      "data": "header_only.csv; quoted_no_final_newline.csv",
+      "expected": "{questions: [], skipped: 0}; last row still read (3 questions)",
+      "actual": "header only: 0/0; no final newline: 3 questions",
+      "pass": true
+    },
+    {
+      "id": "S4",
+      "fn": "parseCSV()",
+      "type": "Extreme",
+      "data": "escaped quotes: \"The sign \"\"Cyclists\"\" warns of what?\"",
+      "expected": "The sign \"Cyclists\" warns of what?",
+      "actual": "The sign \"Cyclists\" warns of what?",
+      "pass": true
+    },
+    {
+      "id": "S5",
+      "fn": "parseCSV()",
+      "type": "Invalid",
+      "data": "empty string (empty.csv)",
+      "expected": "{questions: [], skipped: 0}, no exception",
+      "actual": "{\"questions\":[],\"skipped\":0}",
+      "pass": true
+    },
+    {
+      "id": "S6",
+      "fn": "isValidQuestion()",
+      "type": "Valid",
+      "data": "correct = 1 and 4; difficulty = 1 and 3",
+      "expected": "true, true",
+      "actual": "true, true",
+      "pass": true
+    },
+    {
+      "id": "S7",
+      "fn": "isValidQuestion()",
+      "type": "Extreme",
+      "data": "only 2 options (C and D empty), correct = 2",
+      "expected": "true",
+      "actual": "true",
+      "pass": true
+    },
+    {
+      "id": "S8",
+      "fn": "isValidQuestion()",
+      "type": "Invalid",
+      "data": "correct = \"0.5\", \"B\", blank; difficulty = 0, \"Hard\"; empty text; correct = 3 pointing at an empty option C",
+      "expected": "false for all 7",
+      "actual": "false, false, false, false, false, false, false",
+      "pass": true
+    },
+    {
+      "id": "S9",
+      "fn": "shuffle()",
+      "type": "Valid",
+      "data": "array of the 221 question ids",
+      "expected": "same length and same ids; original array unchanged",
+      "actual": "221 ids, same members: true, original unchanged: true",
+      "pass": true
+    },
+    {
+      "id": "S10",
+      "fn": "shuffle()",
+      "type": "Valid",
+      "data": "shuffle [1, 2, 3] 60,000 times and count the 6 orders",
+      "expected": "all 6 orders appear, each 10,000 ± 3%",
+      "actual": "123: 10106, 132: 9828, 213: 9846, 231: 10080, 312: 10162, 321: 9978",
+      "pass": true
+    },
+    {
+      "id": "S11",
+      "fn": "shuffle()",
+      "type": "Extreme",
+      "data": "empty array []; one-element array [x]",
+      "expected": "[] and [x], no error",
+      "actual": "[] and [\"x\"]",
+      "pass": true
+    },
+    {
+      "id": "S12",
+      "fn": "startSession()",
+      "type": "Valid",
+      "data": "bank of 221 questions",
+      "expected": "30 questions, no repeated id",
+      "actual": "30 questions, 30 unique ids",
+      "pass": true
+    },
+    {
+      "id": "S13",
+      "fn": "startSession()",
+      "type": "Extreme",
+      "data": "banks of 10, 30 and 31 questions",
+      "expected": "sessions of 10, 30 and 30",
+      "actual": "10, 30, 30",
+      "pass": true
+    },
+    {
+      "id": "S14",
+      "fn": "startSession()",
+      "type": "Valid",
+      "data": "start a new session straight after a finished one",
+      "expected": "score, correctCount, incorrectCount, currentIndex, elapsedSeconds, diffStats totals and answers all 0",
+      "actual": "0, 0, 0, 0, 0, 0, 0",
+      "pass": true
+    },
+    {
+      "id": "S15",
+      "fn": "handleAnswer()",
+      "type": "Valid",
+      "data": "correct answer to a difficulty 1, 2 and 3 question",
+      "expected": "score rises by 1, 2, 3; correctCount 3; diffStats[d].correct 1 each",
+      "actual": "rises: 1, 2, 3; correctCount 3; diffStats correct 1/1/1",
+      "pass": true
+    },
+    {
+      "id": "S16",
+      "fn": "handleAnswer()",
+      "type": "Invalid",
+      "data": "wrong answer (option 2) to an Easy question",
+      "expected": "score 0; incorrectCount 1; diffStats[1].total 1, .correct 0",
+      "actual": "score 0; incorrectCount 1; total 1, correct 0",
+      "pass": true
+    },
+    {
+      "id": "S17",
+      "fn": "handleAnswer()",
+      "type": "Extreme",
+      "data": "called 4 times on the same Hard question",
+      "expected": "points added once: score 3, correctCount 1, 1 answer stored",
+      "actual": "score 3, correctCount 1, answers stored 1",
+      "pass": true
+    },
+    {
+      "id": "S18",
+      "fn": "keydown listener",
+      "type": "Valid",
+      "data": "keys A, b, C, d on a 4-option question",
+      "expected": "A→1, b→2, C→3, d→4",
+      "actual": "A→1, b→2, C→3, d→4",
+      "pass": true
+    },
+    {
+      "id": "S19",
+      "fn": "keydown listener",
+      "type": "Invalid",
+      "data": "keys E, Q, 1, and C, D on a 2-option question",
+      "expected": "all ignored: nothing answered",
+      "actual": "answered false, answers 0",
+      "pass": true
+    },
+    {
+      "id": "S20",
+      "fn": "keydown listener",
+      "type": "Extreme",
+      "data": "Enter before answering; A then Enter; A pressed on the results screen",
+      "expected": "index stays 0; then moves to 1; results-screen key ignored (1 answer)",
+      "actual": "index 0 → 1; answers after key on results: 1",
+      "pass": true
+    },
+    {
+      "id": "S21",
+      "fn": "formatTime()",
+      "type": "Valid",
+      "data": "formatTime(75); formatTime(0)",
+      "expected": "\"1:15\"; \"0:00\"",
+      "actual": "1:15; 0:00",
+      "pass": true
+    },
+    {
+      "id": "S22",
+      "fn": "formatTime()",
+      "type": "Extreme",
+      "data": "formatTime(59), (60), (3600)",
+      "expected": "\"0:59\", \"1:00\", \"60:00\"",
+      "actual": "0:59, 1:00, 60:00",
+      "pass": true
+    },
+    {
+      "id": "S23",
+      "fn": "stopTimer()",
+      "type": "Invalid",
+      "data": "stopTimer() when the timer was never started",
+      "expected": "no error; elapsedSeconds stays 0",
+      "actual": "no error; elapsedSeconds 0",
+      "pass": true
+    },
+    {
+      "id": "S24",
+      "fn": "getMaxScore(), showResults()",
+      "type": "Valid",
+      "data": "fixed_30.csv: all 10 Hard and 6 Medium right, rest wrong",
+      "expected": "score 42, maxScore 60, \"(70%)\" shown",
+      "actual": "score 42, maxScore 60, screen: out of 60 possible points (70%)",
+      "pass": true
+    },
+    {
+      "id": "S27",
+      "fn": "saveSessionRecord(), loadHistory()",
+      "type": "Valid",
+      "data": "read back the session just finished in S24",
+      "expected": "stored record: score 42, maxScore 60, percent 70, 30 answers",
+      "actual": "score 42, maxScore 60, percent 70, answers 30",
+      "pass": true
+    },
+    {
+      "id": "S25",
+      "fn": "showResults()",
+      "type": "Extreme",
+      "data": "all answers wrong; all right; a session with no Hard questions",
+      "expected": "0 of 60 (0%); 60 of 60 (100%); no Hard row",
+      "actual": "true, true, true",
+      "pass": true
+    },
+    {
+      "id": "S26",
+      "fn": "getMaxScore(), quitSession()",
+      "type": "Invalid",
+      "data": "session quit before any answer (maxScore = 0)",
+      "expected": "no division by zero or error; maxScore 0; nothing saved",
+      "actual": "no error; maxScore 0; sessions saved 6 → 6",
+      "pass": true
+    },
+    {
+      "id": "S28",
+      "fn": "readJSON(), loadHistory()",
+      "type": "Invalid",
+      "data": "corrupted JSON stored under the history key",
+      "expected": "empty history [], no crash",
+      "actual": "[]",
+      "pass": true
+    },
+    {
+      "id": "S29",
+      "fn": "getWeakQuestions()",
+      "type": "Valid",
+      "data": "q1 wrong 2/2, q2 wrong 2/4, q3 wrong 1/1, q4 never wrong",
+      "expected": "order q1, q2, q3 (most mistakes, then error rate); q4 left out",
+      "actual": "1 2/2; 2 2/4; 3 1/1",
+      "pass": true
+    },
+    {
+      "id": "S30",
+      "fn": "saveHistory()",
+      "type": "Extreme",
+      "data": "100 sessions while storage refuses values over 20,000 characters",
+      "expected": "returns true; keeps only the newest sessions (last id s99)",
+      "actual": "returned true; kept 6 sessions, newest s99",
+      "pass": true
+    },
+    {
+      "id": "S31",
+      "fn": "importAllData()",
+      "type": "Invalid",
+      "data": "the same backup imported twice; then a file that is not JSON",
+      "expected": "first adds 2, second adds 0 (no duplicates); non-JSON file returns null",
+      "actual": "first 2, second 0, non-JSON null",
+      "pass": true
+    }
+  ],
+  "functional": [
+    {
+      "id": "F1",
+      "criterion": "CfS 1",
+      "test": "Open the app; built-in bank loads",
+      "expected": "\"Loaded 221 valid questions.\" in green; Start enabled",
+      "actual": "\"Loaded 221 valid questions.\"; green; Start enabled",
+      "pass": true
+    },
+    {
+      "id": "F2",
+      "criterion": "CfS 1",
+      "test": "Upload mixed_10.csv (7 valid, 3 invalid rows)",
+      "expected": "7 loaded, 3 skipped, session can start",
+      "actual": "\"Loaded 7 valid questions. Skipped 3 invalid rows. None of these questions use a picture.\"; Start enabled",
+      "pass": true
+    },
+    {
+      "id": "F3",
+      "criterion": "CfS 2",
+      "test": "Full session on the built-in bank; note every question",
+      "expected": "30 questions, none repeated; \"Question 1 of 30\" … \"Question 30 of 30\"",
+      "actual": "30 questions, 30 unique; \"Question 1 of 30\" … \"Question 30 of 30\"",
+      "pass": true
+    },
+    {
+      "id": "F4",
+      "criterion": "CfS 2",
+      "test": "Start two sessions and compare their first five questions",
+      "expected": "different order",
+      "actual": "0 of 5 positions identical",
+      "pass": true
+    },
+    {
+      "id": "F5",
+      "criterion": "CfS 2",
+      "test": "Upload small_10.csv and play the session",
+      "expected": "10 questions, no crash, \"Question 1 of 10\"",
+      "actual": "\"Question 1 of 10\", 10 questions played, results shown: true",
+      "pass": true
+    },
+    {
+      "id": "F6",
+      "criterion": "CfS 3",
+      "test": "Answer an Easy, a Medium and a Hard question correctly",
+      "expected": "label shown; score rises by 1, 2, 3",
+      "actual": "Easy +1, Medium +2, Hard +3",
+      "pass": true
+    },
+    {
+      "id": "F7",
+      "criterion": "CfS 4",
+      "test": "Choose a wrong option",
+      "expected": "\"✗ Incorrect\"; chosen option red, correct option green; all options locked",
+      "actual": "\"✗ Incorrect\"; chosen red, correct green, locked: true",
+      "pass": true
+    },
+    {
+      "id": "F8",
+      "criterion": "CfS 4",
+      "test": "Choose the correct option",
+      "expected": "\"✓ Correct!\"; option green; explanation shown",
+      "actual": "\"✓ Correct!\"; green; explanation visible: true",
+      "pass": true
+    },
+    {
+      "id": "F9",
+      "criterion": "CfS 5",
+      "test": "fixed_30.csv: answer all 30 correctly; then only the 10 Hard ones",
+      "expected": "60 of 60 (100%); then 30 of 60 (50%)",
+      "actual": "60/60 (100%); 30/60 (50%)",
+      "pass": true
+    },
+    {
+      "id": "F10",
+      "criterion": "CfS 6",
+      "test": "Timer on: play small_10.csv for about 7 s, measured independently by the test script",
+      "expected": "timer starts at 0:00; reported time within 1 s of the measured time",
+      "actual": "start 0:00; app 0:07, measured 7.75 s",
+      "pass": true
+    },
+    {
+      "id": "F11",
+      "criterion": "CfS 6",
+      "test": "Timer off: complete a session",
+      "expected": "no timer during the quiz; no time row on results",
+      "actual": "timer visible: false; time row: false",
+      "pass": true
+    },
+    {
+      "id": "F12",
+      "criterion": "CfS 7",
+      "test": "Complete a session (every third answer wrong) and read the results screen",
+      "expected": "total score; correct + incorrect = 30; correct/total and % for each difficulty",
+      "actual": "score 44 of 60 (73%); correct 20 + incorrect 10; Easy 5/10 (50%), Medium 6/10 (60%), Hard 9/10 (90%)",
+      "pass": true
+    },
+    {
+      "id": "F13",
+      "criterion": "CfS 8",
+      "test": "On the results screen press \"Start New Session\", then Start",
+      "expected": "\"Question 1 of 30\", score 0, timer 0:00, page not reloaded",
+      "actual": "\"Question 1 of 30\", score 0, timer 0:00, not reloaded: true",
+      "pass": true
+    },
+    {
+      "id": "F14",
+      "criterion": "Performance",
+      "test": "Upload valid_500.csv, then answer 10 questions",
+      "expected": "loaded in under 2 s; each answer marked in under 0.2 s",
+      "actual": "loaded in 25 ms (upload to message); slowest answer 0.6 ms",
+      "pass": true
+    },
+    {
+      "id": "F15",
+      "criterion": "Usability",
+      "test": "Open the app with no setup and start a session; check every question screen",
+      "expected": "session starts with one click after the bank loads; question number, A–D labels and key hint visible on all 30 questions",
+      "actual": "Start ready after 565 ms; 1 click to start; visible on every question: true",
+      "pass": true
+    },
+    {
+      "id": "F16",
+      "criterion": "Reliability",
+      "test": "Upload empty.csv, then header_only.csv, then a valid file",
+      "expected": "error message; Start disabled; no crash; the valid file then loads",
+      "actual": "\"No valid questions found. Please check the CSV file format.\" (Start disabled); header only: Start disabled; retry: \"Loaded 10 valid questions. None of these questions use a picture.\"",
+      "pass": true
+    },
+    {
+      "id": "F17",
+      "criterion": "Accessibility",
+      "test": "Complete a session with the keyboard only (Enter on Start, A–D keys, Enter to continue, Enter on Start New Session)",
+      "expected": "no mouse needed; 60 of 60; back on the start screen",
+      "actual": "results \"60/60/100\"; start screen shown again: true",
+      "pass": true
+    },
+    {
+      "id": "F18",
+      "criterion": "Portability",
+      "test": "Run the whole suite in 141.0.7390.37 (Chromium engine, also used by Chrome and Edge)",
+      "expected": "every screen works with no installation and no server-side code",
+      "actual": "suite ran in Chromium 141.0.7390.37",
+      "pass": true
+    },
+    {
+      "id": "F19",
+      "criterion": "Maintainability",
+      "test": "Edit the text of question 1 in a copy of db.en.csv only, reload, and play until it appears",
+      "expected": "edited text appears in the app; no source file changed",
+      "actual": "edited question shown: true; source files changed: false",
+      "pass": true
+    },
+    {
+      "id": "F20",
+      "criterion": "CfS 9",
+      "test": "Miss the 10 Easy questions of fixed_30.csv; open history; then \"Practise my mistakes\"",
+      "expected": "history lists the session; drill button offers 10; drill contains exactly the 10 missed questions",
+      "actual": "history shows session: true; button \"Practise my mistakes (10)\"; drill 10 questions, all previously missed: true",
+      "pass": true
+    },
+    {
+      "id": "F21",
+      "criterion": "CfS 10",
+      "test": "Select sign1.jpg and sign2.jpg, then with_images.csv (which also names missing.jpg)",
+      "expected": "3 questions loaded; missing.jpg reported; a selected picture is shown in the quiz",
+      "actual": "\"Loaded 3 valid questions. 1 images not found among the selected files: missing.jpg.\"; picture shown: true",
+      "pass": true
+    },
+    {
+      "id": "F22",
+      "criterion": "Usability (language)",
+      "test": "Switch the interface to LT",
+      "expected": "Lithuanian labels; Lithuanian bank of 221 questions loaded",
+      "actual": "\"Įkelta tinkamų klausimų: 221.\"; Start button \"Pradėti testą\"",
+      "pass": true
+    },
+    {
+      "id": "F23",
+      "criterion": "CfS 7 (end early)",
+      "test": "Answer 3 questions, then \"End session early\"",
+      "expected": "\"Session Ended\"; results cover the 3 answered questions",
+      "actual": "true; \"Ended after 3 of 30\": true",
+      "pass": true
+    }
+  ]
+}
