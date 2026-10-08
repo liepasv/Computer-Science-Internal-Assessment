@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-08T15:20:56.586Z",
+  "date": "2026-10-08T15:30:04.903Z",
   "browser": "Chromium 141.0.7390.37",
   "platform": "linux 6.18.44-fc-v80",
   "structural": [
@@ -90,7 +90,7 @@
       "type": "Valid",
       "data": "shuffle [1, 2, 3] 60,000 times and count the 6 orders",
       "expected": "all 6 orders appear, each 10,000 ± 3%",
-      "actual": "123: 9928, 132: 9963, 213: 9956, 231: 9868, 312: 10132, 321: 10153",
+      "actual": "123: 10138, 132: 10049, 213: 10043, 231: 10010, 312: 9930, 321: 9830",
       "pass": true
     },
     {
@@ -377,7 +377,7 @@
       "criterion": "CfS 7",
       "test": "Complete a session (every third answer wrong) and read the results screen",
       "expected": "total score; correct + incorrect = 30; correct/total and % for each difficulty",
-      "actual": "score 39 of 60 (65%); correct 20 + incorrect 10; Easy 6/10 (60%), Medium 9/10 (90%), Hard 5/10 (50%)",
+      "actual": "score 39 of 60 (65%); correct 20 + incorrect 10; Easy 8/10 (80%), Medium 5/10 (50%), Hard 7/10 (70%)",
       "pass": true
     },
     {
@@ -393,7 +393,7 @@
       "criterion": "Performance",
       "test": "Upload valid_500.csv, then answer 10 questions",
       "expected": "loaded in under 2 s; each answer marked in under 0.2 s",
-      "actual": "loaded in 26 ms (upload to message); slowest answer 0.5 ms",
+      "actual": "loaded in 25 ms (upload to message); slowest answer 0.4 ms",
       "pass": true
     },
     {
@@ -401,7 +401,7 @@
       "criterion": "Usability",
       "test": "Open the app with no setup and start a session; check every question screen",
       "expected": "session starts with one click after the bank loads; question number, A–D labels and key hint visible on all 30 questions",
-      "actual": "Start ready after 72 ms; 1 click to start; visible on every question: true",
+      "actual": "Start ready after 62 ms; 1 click to start; visible on every question: true",
       "pass": true
     },
     {
@@ -423,7 +423,7 @@
     {
       "id": "F18",
       "criterion": "Portability",
-      "test": "Run the whole suite in 141.0.7390.37 (Chromium engine, also used by Chrome and Edge)",
+      "test": "Run the whole suite in Chromium 141.0.7390.37 (the engine also used by Chrome and Edge)",
       "expected": "every screen works with no installation and no server-side code",
       "actual": "suite ran in Chromium 141.0.7390.37",
       "pass": true

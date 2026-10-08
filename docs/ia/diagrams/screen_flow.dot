@@ -1,6 +1,6 @@
 // User interface: the four screens and the controls that move between them
 digraph G {
-  graph [rankdir=LR, nodesep=0.5, ranksep=1.0, fontname="Liberation Sans"];
+  graph [rankdir=TB, nodesep=0.6, ranksep=0.7, fontname="Liberation Sans"];
   node  [shape=box, style="rounded,filled", fillcolor="#e0e7ff", fontname="Liberation Sans", fontsize=11, width=1.6, height=0.8];
   edge  [fontname="Liberation Sans", fontsize=9, color="#374151"];
   load    [label="Start screen\n(profile, LT/EN, bank,\ntimer, Start)"];

@@ -1,0 +1,20 @@
+// Flowchart 1a: loading a question bank (app.js, bank.js)
+digraph G {
+  graph [rankdir=TB, nodesep=0.35, ranksep=0.32, fontname="Liberation Sans"];
+  node  [fontname="Liberation Sans", fontsize=10, shape=box, style="filled", fillcolor="#ffffff", color="#1f2937"];
+  edge  [fontname="Liberation Sans", fontsize=9, color="#1f2937"];
+  start [label="Start\n(page opened)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  init  [label="initialiseApp():\nrestore language and profile"];
+  fetch [label="loadBuiltinBank():\nfetch database/db.<lang>.csv\nand parseCSV()"];
+  ok    [label="at least one\nvalid question?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  err   [label="show error message;\nStart stays disabled"];
+  pick  [label="user selects a\nCSV file", shape=parallelogram, fillcolor="#e0f2fe"];
+  readf [label="loadBankFromFile():\nFileReader, then parseCSV()"];
+  rep   [label="show \"Loaded N valid questions.\"\n(+ \"Skipped M invalid rows.\");\nenable Start"];
+  stop  [label="wait for Start\n(Figure C10b)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  start -> init -> fetch -> ok;
+  ok -> rep [label="yes"];
+  ok -> err [label="no"];
+  err -> pick -> readf -> ok;
+  rep -> stop;
+}

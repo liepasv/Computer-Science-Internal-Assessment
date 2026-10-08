@@ -381,7 +381,7 @@ async function runFunctional(browser, base) {
     await page.close();
 
     // F18 — portability (only the browser available on the test machine)
-    record("F18", "Portability", "Run the whole suite in " + browser.version() + " (Chromium engine, also used by Chrome and Edge)",
+    record("F18", "Portability", "Run the whole suite in Chromium " + browser.version() + " (the engine also used by Chrome and Edge)",
         "every screen works with no installation and no server-side code",
         "suite ran in Chromium " + browser.version(), true);
 

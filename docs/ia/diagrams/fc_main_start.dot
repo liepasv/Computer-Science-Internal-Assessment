@@ -1,0 +1,30 @@
+// Flowchart 1b: starting a session (session.js, ui.js)
+digraph G {
+  graph [rankdir=TB, nodesep=0.35, ranksep=0.32, fontname="Liberation Sans"];
+  node  [fontname="Liberation Sans", fontsize=10, shape=box, style="filled", fillcolor="#ffffff", color="#1f2937"];
+  edge  [fontname="Liberation Sans", fontsize=9, color="#1f2937"];
+  start [label="Start screen,\nbank loaded", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  press [label="user presses Start Session\nor Practise my mistakes", shape=parallelogram, fillcolor="#e0f2fe"];
+  mode  [label="mode =\n\"mistakes\"?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  pool  [label="pool ← buildMistakePool()"];
+  empty [label="pool empty?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  alert [label="alert: no mistakes\nto practise yet", shape=parallelogram, fillcolor="#e0f2fe"];
+  take  [label="sessionQuestions ←\nshuffle(first 30 of pool)"];
+  all   [label="sessionQuestions ← first min(30, n)\nof shuffle(questions)"];
+  reset [label="reset score, counters, diffStats,\nanswers; currentIndex ← 0"];
+  tmr   [label="timer\nenabled?", shape=diamond, fillcolor="#fef3c7", fontsize=9];
+  st    [label="startTimer():\nstartTime ← Date.now()"];
+  go    [label="quiz loop\n(Figure C10c)", shape=box, style="rounded,filled", fillcolor="#e5e7eb"];
+  start -> press -> mode;
+  mode -> pool [label="yes"];
+  mode -> all [label="no"];
+  pool -> empty;
+  empty -> alert [label="yes"];
+  alert -> press;
+  empty -> take [label="no"];
+  take -> reset; all -> reset;
+  reset -> tmr;
+  tmr -> st [label="yes"];
+  tmr -> go [label="no"];
+  st -> go;
+}
