@@ -28,7 +28,7 @@ digraph G {
 
   user -> html [label="clicks, keys"];
   html -> app [label="events"];
-  app -> bank [label="setSource()"];
+  app -> bank [label="loadBuiltinBank()\nrefreshCustomBank()"];
   app -> session [label="startSession()\nnextQuestion()\nquitSession()"];
   app -> ui [label="handleAnswer()"];
   app -> history [label="showHistoryScreen()"];
@@ -42,7 +42,7 @@ digraph G {
   ui -> bank [label="resolveImageSrc()"];
   assets -> ui [label="<img src>", style=dashed];
   storage -> ls [label="readJSON() / writeJSON()", dir=both];
-  i18n -> ls [label="language", dir=both, style=dashed];
+  i18n -> storage [label="readJSON() / writeJSON()\n(language)", style=dashed];
   ui -> html [label="updates DOM", style=dashed];
   {ui history bank session} -> i18n [style=dotted, arrowhead=none, color="#9ca3af"];
 }

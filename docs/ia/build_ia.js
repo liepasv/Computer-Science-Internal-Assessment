@@ -181,7 +181,7 @@ add(H2("Computational context"));
 add(P("The solution is a single-page web application written in plain JavaScript and run in a web browser (Table A1). A browser is already on every laptop, so nothing is installed, and it handles mouse and keyboard events. Everything runs on the user's device: the built-in bank is read from CSV files in the project folder, a user's own bank is read with the File API, and results are kept in the browser's localStorage, so no answers leave the computer. CSV was chosen because a non-programmer can edit it in a spreadsheet."));
 add(table(["Context", "Chosen", "Alternatives considered", "Justification"], [
     ["Language", "JavaScript (ES6), HTML", "Python + Tkinter; Java + JavaFX", "Runs in any browser with no installation; DOM events give mouse and keyboard input directly. Python and Java need a runtime on every laptop."],
-    ["Libraries / frameworks", "None for logic; Tailwind CSS 3.4 for styling, built into css/styles.css", "React; PapaParse for CSV", "Four screens do not need a component framework or build step. The CSV parser is written by hand so the algorithm is visible (Criterion D)."],
+    ["Libraries / frameworks", "None for logic; Tailwind CSS 3.4 for styling, built into css/styles.css", "React; PapaParse for CSV", "Four screens do not need a component framework. Tailwind is built once into css/styles.css, so the app needs no build step to run. The CSV parser is written by hand so the algorithm is visible (Criterion D)."],
     ["Software environment", "Web browser, page served by a local http server (python3 -m http.server)", "Opening index.html from disk", "Browsers block fetch() of the built-in bank from file://; the app then offers a manual file picker instead (bank.js)."],
     ["Hardware", "Any laptop that runs a current browser", "Mobile phone", "Keyboard control (A–D, Enter) suits a laptop; no special hardware is used."],
     ["Data environment", "CSV, UTF-8, 10 columns; built-in bank of 221 questions in Lithuanian and English with 221 pictures", "SQL database; JSON", "Editable in a spreadsheet; no database server. The two language files share id, correct, difficulty and picture."],
@@ -224,12 +224,12 @@ add(H2("System model"));
 add(P("Figure C1 shows the eight JavaScript files loaded by index.html, the data stores and the calls between them. The rules of interaction are: listeners for the controls in index.html are attached only in app.js, while buttons created at run time get theirs where they are created (ui.js, history.js); the session counters declared in app.js are changed only by session.js and ui.js; storage.js is the only file that reads or writes localStorage; and interface text is looked up in i18n.js, so the language can be switched."));
 add(figure("system_model.png", "Figure C1 — System model: files, data stores and the functions through which they interact", 560, 700));
 add(H2("Data"));
-add(table(["Column", "Type", "Rule (checked by isValidQuestion)"], [
+add(table(["Column", "Type", "Rule (✓ = checked by isValidQuestion)"], [
     ["id", "text", "Identifies the question; the same id in db.lt.csv and db.en.csv is the same question."],
-    ["question", "text", "Must not be empty."],
-    ["option_a … option_d", "text", "2–4 options; unused options are empty."],
-    ["correct", "integer 1–4", "Must point at a non-empty option."],
-    ["difficulty", "integer 1–3", "1 Easy, 2 Medium, 3 Hard."],
+    ["question", "text", "✓ Must not be empty."],
+    ["option_a … option_d", "text", "Up to 4 options; unused options are empty."],
+    ["correct", "integer 1–4", "✓ Must be 1–4 and point at a non-empty option."],
+    ["difficulty", "integer 1–3", "✓ Must be 1–3: 1 Easy, 2 Medium, 3 Hard."],
     ["explanation", "text", "Optional; shown after answering."],
     ["picture", "text", "Optional; a file name (assets/ or a selected image) or an https:// link."],
 ], [22, 16, 62]));
@@ -283,7 +283,7 @@ add(figure("fc_shuffle.png", "Figure C13 — shuffle(): Fisher–Yates shuffle o
 add(figure("fc_weak.png", "Figure C14 — getWeakQuestions() and the “Practise my mistakes” pool (storage.js, session.js)", 300, 640));
 add(figure("fc_save.png", "Figure C15 — saveHistory(): keeps the newest sessions when storage is full (storage.js)", 420, 300));
 add(H2("Testing strategy"));
-add(P("Testing is done at two levels. Structural (white-box) tests (Table C5) call each major function inside the running application with valid, extreme and invalid data, so that every branch, including the error paths, runs at least once. Functional (black-box) tests (Table C4) check every success criterion through the interface only, by clicking, typing and uploading files, and look up the correct answers in the CSV file rather than in the program. Generated test files (Table C6) make the expected results exact: fixed_30.csv holds ten questions of each difficulty, so its maximum score is 60 by hand calculation. Both levels are automated so that they can be repeated after every change."));
+add(P("Testing is done at two levels. Structural (white-box) tests (Table C5) call each major function inside the running application with valid, extreme and invalid data, so that the main branches and the error paths for invalid rows, corrupted storage and full storage are exercised. Functional (black-box) tests (Table C4) check every success criterion through the interface only, by clicking, typing and uploading files, and look up the correct answers in the CSV file rather than in the program. Generated test files (Table C6) make the expected results exact: fixed_30.csv holds ten questions of each difficulty, so its maximum score is 60 by hand calculation. Both levels are automated so that they can be repeated after every change."));
 add(table(["No.", "Criterion", "Test", "Expected outcome"], results.functional.slice().sort((a, b) => +a.id.slice(1) - +b.id.slice(1)).map(r => [r.id, r.criterion, r.test, r.expected]), [6, 14, 42, 38]));
 add(caption("Table C4 — Functional test plan"));
 add(table(["No.", "Function", "Type", "Test data", "Expected outcome"], results.structural.slice().sort((a, b) => +a.id.slice(1) - +b.id.slice(1)).map(r => [r.id, r.fn, r.type, r.data, r.expected]), [6, 17, 9, 36, 32]));
@@ -291,18 +291,18 @@ add(caption("Table C5 — Structural test plan (valid, extreme and invalid data)
 add(table(["File (tests/data/)", "Contents", "Used in"], [
     ["valid_500.csv", "500 valid questions", "F14"],
     ["mixed_10.csv", "7 valid rows; 3 invalid: blank question, correct = 5, difficulty “Hard”", "F2"],
-    ["fixed_30.csv", "10 Easy, 10 Medium, 10 Hard (maximum 60 points)", "F6–F9, F12, F17, F20, S24–S27"],
+    ["fixed_30.csv", "10 Easy, 10 Medium, 10 Hard (maximum 60 points)", "F6–F9, F12, F17, F20, S14, S24–S27"],
     ["small_10.csv", "10 valid questions", "F5, F10, F11, F16"],
     ["quoted.csv, quoted_crlf.csv, quoted_no_final_newline.csv", "A comma, a line break and escaped quotes inside fields; Windows line endings; no final newline", "S1–S4"],
     ["with_images.csv + images/", "3 questions; 2 of the 3 named pictures provided", "F21"],
-    ["empty.csv, header_only.csv", "0 bytes; header row only", "F16, S3, S5"],
+    ["empty.csv, header_only.csv", "0 bytes; header row only", "F16, S3 (S5 parses the same empty text directly)"],
 ], [30, 50, 20]));
 add(caption("Table C6 — Test data, generated by tools/make_test_data.py"));
 
 // ---------------- Criterion D ----------------
 add(H1("Criterion D: Development"));
 add(H2("Structure of the product"));
-add(P("The product has eight JavaScript files (Table D1): one per component of Figure B1, plus app.js for the shared state and the event listeners. This let each part be tested on its own (S1–S31)."));
+add(P("The product has eight JavaScript files (Table D1), grouped by the components of Figure B1, plus app.js for the shared state and the event listeners. This let each part be tested on its own (S1–S31)."));
 add(table(["File", "Lines", "Responsibility", "Component (Figure B1)", "CfS"], [
     ["csv.js", lineCounts["csv.js"], "Parse and validate CSV text", "1. Question bank", "1"],
     ["bank.js", lineCounts["bank.js"], "Built-in or own bank; pictures; load messages", "1. Question bank", "1, 10"],
@@ -346,7 +346,7 @@ const ifCorrect = lineOf("src/ui.js", "if (isCorrect) {", haS);
 add(code("src/ui.js", haS, ifCorrect + 6, "Code D3b — handleAnswer(), scoring part", [haS + 11, ifCorrect - 2]));
 const [gmS, gmE] = functionRange("src/session.js", "getMaxScore");
 add(P("**Technique.** The points are kept in one lookup object, `DIFFICULTY_POINTS`, keyed by the difficulty number 1–3. `handleAnswer()` adds the points, updates `diffStats` and records the answer; the `answered` flag lets it run only once per question. `getMaxScore()` (session.js, lines " + gmS + "–" + gmE + ") sums the points of the questions actually answered."));
-add(P("**Evaluation.** The plan in Criterion B used nested conditionals. The lookup table keeps the rule in one line and works on the number, not on the translated label (“Easy” or “Lengvas”). Points are whole numbers, so the total cannot contain rounding errors (CfS 5); only the percentage is rounded. Without the `answered` flag a double click, or a key pressed after a click, would score twice."));
+add(P("**Evaluation.** Nested conditionals would also work, but the lookup table keeps the rule in one line and works on the number, not on the translated label (“Easy” or “Lengvas”). Points are whole numbers, so the total cannot contain rounding errors (CfS 5); only the percentage is rounded. Without the `answered` flag a double click would score twice."));
 add(P("**Testing.** S15–S17, S24–S26, F6 and F9 (60/60 and 30/60, as calculated by hand)."));
 
 // Technique 4
@@ -363,14 +363,14 @@ const [stS] = functionRange("src/session.js", "startTimer");
 const [, spE] = functionRange("src/session.js", "stopTimer");
 add(code("src/session.js", stS, spE, "Code D5 — startTimer() and stopTimer()"));
 add(P("**Technique.** `startTimer()` stores `Date.now()`; `stopTimer()` subtracts it at the end. `setInterval` only refreshes the clock on screen."));
-add(P("**Evaluation.** Counting `setInterval` ticks would drift, because browsers delay timers in busy or background tabs [6]; subtracting timestamps does not. `Math.floor` rounds the elapsed time down, so the result can be up to one second short of the true time, whereas the criterion asks for the nearest second."));
+add(P("**Evaluation.** Counting `setInterval` ticks would drift, because browsers delay timers in busy or background tabs [6]; subtracting timestamps does not. `Math.floor` rounds down, so the time can be up to one second short instead of the nearest second."));
 add(P("**Testing.** In F10 the app showed " + f10[1] + " while the test script measured " + f10[2] + " s; S21–S23 test the formatting and stopping a timer that never started."));
 
 // Technique 6
 add(H2("Technique 6 — Local history and “Practise my mistakes” (CfS 9)"));
 const [gwS, gwE] = functionRange("src/storage.js", "getWeakQuestions");
 add(code("src/storage.js", gwS, gwE, "Code D6 — getWeakQuestions()"));
-add(P("**Technique.** Each finished or ended session is stored as one JSON record (Table C3) under a key per profile. `getWeakQuestions()` derives statistics per question from the stored sessions with map, filter and a two-key sort (Code D6, Figure C14); `buildMistakePool()` keeps those present in the loaded bank, and up to 30 of them form a “Practise my mistakes” session."));
+add(P("**Technique.** Each session with at least one answer is stored as one JSON record (Table C3) under a key per profile. `getWeakQuestions()` derives statistics per question from the stored sessions with map, filter and a two-key sort (Code D6, Figure C14); `buildMistakePool()` keeps those present in the loaded bank, and up to 30 of them form a “Practise my mistakes” session."));
 add(P("**Evaluation.** A server database would allow several devices but needs accounts and sends answers off the device; IndexedDB's asynchronous API is more than these small records need. localStorage, however, belongs to one browser and is erased with the site data, so Export and Import write and merge a JSON backup without duplicating session ids. Statistics are recalculated from the sessions, so they cannot disagree with them. Reads and writes use try/catch, and when storage is full `saveHistory()` keeps the newest half until it fits (Figure C15)."));
 add(P("**Testing.** S27–S31 and F20 (the drill held exactly the ten questions missed before)."));
 
@@ -378,12 +378,12 @@ add(P("**Testing.** S27–S31 and F20 (the drill held exactly the ten questions 
 add(H2("Technique 7 — Own question bank with own pictures (CfS 10)"));
 const [riS, riE] = functionRange("src/bank.js", "resolveImageSrc");
 add(code("src/bank.js", riS, riE, "Code D7 — resolveImageSrc()"));
-add(P("**Technique and evaluation.** Selected images become blob URLs in a Map keyed by file name, and `resolveImageSrc()` chooses between an https:// link, the assets folder and these URLs. A user's bank never falls back to assets/, where 5.jpg would show a picture of a different question; a missing picture is reported instead (F21). Results are stored per bank for the same reason."));
+add(P("**Technique and evaluation.** Selected images become blob URLs in a Map keyed by file name, and `resolveImageSrc()` chooses between an https:// link, the assets folder and these URLs. A user's bank never falls back to assets/, where 5.jpg would show a picture of a different question; a missing picture is reported instead (F21). For the same reason every record stores its bank, and statistics are kept apart by bank."));
 
 // Testing
 add(H2("Testing: deployment and effectiveness"));
 add(P("The structural tests are in tests/test.html, which loads the real application in a frame and calls its functions. tests/run_tests.js serves the project over http, runs that page and then the functional tests in " + browser + ", and writes tests/results.json. In the final run " + passS + " of " + results.structural.length + " structural and " + passF + " of " + results.functional.length + " functional tests passed (Tables D2 and D3). The test suite was written with the help of an AI tool (see the acknowledgement)."));
-add(P("The strategy was effective: it exposed three defects that normal use had not shown, all now fixed: S4 (escaped quotes), F15 (key hint missing on the quiz screen) and F24 (offline, Tailwind CSS could not load from its CDN, so all four screens appeared at once; the stylesheet is now built into css/styles.css). All three tests fail on commit 12a16ba and pass now (tests/results_before_fix.txt), which shows they detect what they claim to. Extreme and invalid data were the most productive, and randomness was tested statistically because one run proves nothing. Its limits: one browser engine on a Linux computer rather than a school laptop, and usability measured through the interface rather than with users."));
+add(P("The strategy was effective: it exposed three defects that normal use had not shown, all now fixed: S4 (escaped quotes), F15 (key hint missing on the quiz screen) and F24 (offline, Tailwind CSS could not load from its CDN, so all four screens appeared at once; the stylesheet is now built into css/styles.css). All three tests fail on commit 12a16ba and pass now (tests/results_before_fix.txt), which shows they detect what they claim to. Extreme and invalid data were the most productive, and randomness was tested statistically because one run proves nothing. Its limits: one browser engine on a Linux computer rather than a school laptop, usability measured through the interface rather than with users, and no automatic test of a failed bank download or a file-read error."));
 add(table(["No.", "Function", "Type", "Actual result", "Result"], results.structural.slice().sort((a, b) => +a.id.slice(1) - +b.id.slice(1)).map(r => [r.id, r.fn, r.type, r.actual, r.pass ? "Pass" : "Fail"]), [6, 20, 9, 56, 9]));
 add(caption("Table D2 — Structural test results (" + results.date.slice(0, 10) + ", " + browser + ")"));
 add(table(["No.", "Criterion", "Actual result", "Result"], results.functional.slice().sort((a, b) => +a.id.slice(1) - +b.id.slice(1)).map(r => [r.id, r.criterion, r.actual, r.pass ? "Pass" : "Fail"]), [6, 16, 69, 9]));

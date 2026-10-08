@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-08T15:30:04.903Z",
+  "date": "2026-10-08T15:38:35.480Z",
   "browser": "Chromium 141.0.7390.37",
   "platform": "linux 6.18.44-fc-v80",
   "structural": [
@@ -43,7 +43,7 @@
       "id": "S5",
       "fn": "parseCSV()",
       "type": "Invalid",
-      "data": "empty string (empty.csv)",
+      "data": "empty string \"\" (the content of empty.csv)",
       "expected": "{questions: [], skipped: 0}, no exception",
       "actual": "{\"questions\":[],\"skipped\":0}",
       "pass": true
@@ -90,7 +90,7 @@
       "type": "Valid",
       "data": "shuffle [1, 2, 3] 60,000 times and count the 6 orders",
       "expected": "all 6 orders appear, each 10,000 ± 3%",
-      "actual": "123: 10138, 132: 10049, 213: 10043, 231: 10010, 312: 9930, 321: 9830",
+      "actual": "123: 10140, 132: 9966, 213: 9943, 231: 10104, 312: 9943, 321: 9904",
       "pass": true
     },
     {
@@ -377,7 +377,7 @@
       "criterion": "CfS 7",
       "test": "Complete a session (every third answer wrong) and read the results screen",
       "expected": "total score; correct + incorrect = 30; correct/total and % for each difficulty",
-      "actual": "score 39 of 60 (65%); correct 20 + incorrect 10; Easy 8/10 (80%), Medium 5/10 (50%), Hard 7/10 (70%)",
+      "actual": "score 39 of 60 (65%); correct 20 + incorrect 10; Easy 7/10 (70%), Medium 7/10 (70%), Hard 6/10 (60%)",
       "pass": true
     },
     {
@@ -393,7 +393,7 @@
       "criterion": "Performance",
       "test": "Upload valid_500.csv, then answer 10 questions",
       "expected": "loaded in under 2 s; each answer marked in under 0.2 s",
-      "actual": "loaded in 25 ms (upload to message); slowest answer 0.4 ms",
+      "actual": "loaded in 26 ms (upload to message); slowest answer 0.4 ms",
       "pass": true
     },
     {
@@ -401,7 +401,7 @@
       "criterion": "Usability",
       "test": "Open the app with no setup and start a session; check every question screen",
       "expected": "session starts with one click after the bank loads; question number, A–D labels and key hint visible on all 30 questions",
-      "actual": "Start ready after 62 ms; 1 click to start; visible on every question: true",
+      "actual": "Start ready after 72 ms; 1 click to start; visible on every question: true",
       "pass": true
     },
     {
@@ -418,14 +418,6 @@
       "test": "Complete a session with the keyboard only (Enter on Start, A–D keys, Enter to continue, Enter on Start New Session)",
       "expected": "no mouse needed; 60 of 60; back on the start screen",
       "actual": "results \"60/60/100\"; start screen shown again: true",
-      "pass": true
-    },
-    {
-      "id": "F18",
-      "criterion": "Portability",
-      "test": "Run the whole suite in Chromium 141.0.7390.37 (the engine also used by Chrome and Edge)",
-      "expected": "every screen works with no installation and no server-side code",
-      "actual": "suite ran in Chromium 141.0.7390.37",
       "pass": true
     },
     {
@@ -474,6 +466,14 @@
       "test": "Answer 3 questions, then \"End session early\"",
       "expected": "\"Session Ended\"; results cover the 3 answered questions",
       "actual": "true; \"Ended after 3 of 30\": true",
+      "pass": true
+    },
+    {
+      "id": "F18",
+      "criterion": "Portability",
+      "test": "Run every other test in Chromium 141.0.7390.37 (the engine also used by Chrome and Edge), with no installation and no server-side code",
+      "expected": "all other structural and functional tests pass",
+      "actual": "all 54 other tests passed in Chromium 141.0.7390.37",
       "pass": true
     }
   ]

@@ -131,7 +131,7 @@ async function runTests() {
 
     let threw = false, empty;
     try { empty = app("parseCSV")(""); } catch (e) { threw = true; }
-    record("S5", "parseCSV()", "Invalid", "empty string (empty.csv)",
+    record("S5", "parseCSV()", "Invalid", "empty string \"\" (the content of empty.csv)",
         "{questions: [], skipped: 0}, no exception",
         threw ? "exception thrown" : JSON.stringify(empty),
         !threw && empty.questions.length === 0 && empty.skipped === 0);

@@ -380,11 +380,7 @@ async function runFunctional(browser, base) {
         grab(keyboardResults) === "60/60/100" && backOnStart);
     await page.close();
 
-    // F18 — portability (only the browser available on the test machine)
-    record("F18", "Portability", "Run the whole suite in Chromium " + browser.version() + " (the engine also used by Chrome and Edge)",
-        "every screen works with no installation and no server-side code",
-        "suite ran in Chromium " + browser.version(), true);
-
+    // F18 — portability: decided at the end, from the results of all the other tests
     // F19 — maintainability: change one cell of the CSV, no code
     const copy = fs.mkdtempSync(path.join(os.tmpdir(), "dtp-"));
     fs.cpSync(PROJECT, copy, { recursive: true, filter: function (src) { return !src.includes(path.sep + ".git"); } });
@@ -406,7 +402,8 @@ async function runFunctional(browser, base) {
         }
         if (!found) await page.click("#restart-btn");
     }
-    const srcChanged = ["src/csv.js", "src/ui.js", "index.html"].some(function (f) {
+    const sourceFiles = ["index.html", "css/styles.css"].concat(fs.readdirSync(path.join(PROJECT, "src")).map(function (f) { return "src/" + f; }));
+    const srcChanged = sourceFiles.some(function (f) {
         return fs.readFileSync(path.join(copy, f), "utf8") !== fs.readFileSync(path.join(PROJECT, f), "utf8");
     });
     record("F19", "Maintainability", "Edit the text of question 1 in a copy of db.en.csv only, reload, and play until it appears",
@@ -523,6 +520,14 @@ async function runFunctional(browser, base) {
 
     if (!process.argv.includes("--structural-only")) {
         await runFunctional(browser, base);
+        // F18 passes only if every other test ran successfully in this browser
+        const others = functional.filter(function (r) { return r.id !== "F18"; });
+        const failed = others.filter(function (r) { return !r.pass; }).map(function (r) { return r.id; })
+            .concat(structural.filter(function (r) { return !r.pass; }).map(function (r) { return r.id; }));
+        record("F18", "Portability", "Run every other test in Chromium " + browser.version() + " (the engine also used by Chrome and Edge), with no installation and no server-side code",
+            "all other structural and functional tests pass",
+            failed.length === 0 ? "all " + (others.length + structural.length) + " other tests passed in Chromium " + browser.version() : "failed: " + failed.join(", "),
+            failed.length === 0);
     }
 
     const summary = {
