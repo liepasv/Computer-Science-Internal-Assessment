@@ -66,4 +66,5 @@ tools/          test-data and English-bank build scripts
 ```
 python3 tools/make_test_data.py   # rebuild the test CSV files
 node tests/run_tests.js           # run all tests (needs the playwright package)
+node tools/record_video.js out/   # record the demonstration video (.webm)
 ```
